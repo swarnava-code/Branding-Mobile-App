@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Adosy Learn</string>
+
+    <string name="home1">Blogs</string>
+    <string name="home2">Courses</string>
+    <string name="home3">Services</string>
+    <string name="home4">Contact</string>
+
+    <string name="call_us">+91 9038026497
+        \n +91 8240892690</string>
+    <string name="location">113, Park Street, Poddar Point, Kolkata 700016</string>
+    <string name="email">akhilesh.shaw@adosy.in
+        \n gourav.kapoor@adosy.in</string>
+    <string name="working_hours">Mon-Fri: 10AM-6PM
+            \n Sat : 10AM-3PM</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+</resources>

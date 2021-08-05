@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    android:background="@drawable/shape_bg">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:src="@drawable/adosy_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TableRow
+                android:id="@+id/row1"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="200dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:elevation="30dp"
+                    android:focusable="true"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/home_btn_bg"
+                        android:gravity="center"
+                        android:onClick="blogs"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/home_img_h_w"
+                            android:layout_height="@dimen/home_img_h_w"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_twotone_library_books_24" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/home1"
+                            android:textColor="@color/home_btn_txt"
+                            android:textSize="20dp"></TextView>
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_width="200dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/home_btn_bg"
+                        android:gravity="center"
+                        android:onClick="courses"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/home_img_h_w"
+                            android:layout_height="@dimen/home_img_h_w"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_baseline_menu_book_24" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/home2"
+                            android:textColor="@color/home_btn_txt"
+                            android:textSize="20dp"></TextView>
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/row2"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:background="@drawable/custom_bg"
+                    android:layout_width="200dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/home_btn_bg"
+                        android:gravity="center"
+                        android:onClick="services"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/home_img_h_w"
+                            android:layout_height="@dimen/home_img_h_w"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_baseline_home_repair_service_24" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/home3"
+                            android:textColor="@color/home_btn_txt"
+                            android:textSize="20dp"></TextView>
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="200dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/home_btn_bg"
+                        android:gravity="center"
+                        android:onClick="contact"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/home_img_h_w"
+                            android:layout_height="@dimen/home_img_h_w"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/ic_baseline_connect_without_contact_24" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/home4"
+                            android:textColor="@color/home_btn_txt"
+                            android:textSize="20dp"></TextView>
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center"></TableRow>
+
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
