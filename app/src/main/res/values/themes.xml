@@ -25,4 +25,16 @@
         <item name="fontFamily">@font/stylescript_regular</item>
     </style>
 
+    <style name="title_list">
+        <item name="android:textColor">@color/list_title_txt</item>
+        <item name="android:textSize">@dimen/title</item>
+        <item name="fontFamily">@font/stylescript_regular</item>
+    </style>
+    <style name="body_list">
+        <item name="android:textColor">@color/list_body_txt</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/body</item>
+    </style>
+
+
 </resources>

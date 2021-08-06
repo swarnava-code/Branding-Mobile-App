@@ -8,12 +8,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="home_bg">#2196F3</color>
+    <color name="home_bg2">#FFFFFF</color>
+
     <color name="drawable_icon_color">#FFFFFF</color>
     <color name="home_btn_txt">#FFFFFF</color>
-    <color name="home_btn_bg">#9C27B0</color>
+    <color name="home_btn_bg">#3F51B5</color>
     <color name="home_btn_bg_ripple">#2196F3</color>
-    <color name="home_bg">#F6C3FF</color>
-    <color name="home_bg2">#E0F5FF</color>
     <color name="border">#67566A</color>
+
+    <color name="list_bg">#3F51B5</color>
+    <color name="list_title_txt">#FF9800</color>
+    <color name="list_body_txt">#CDDC39</color>
 
 </resources>
