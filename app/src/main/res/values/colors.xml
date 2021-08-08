@@ -18,7 +18,7 @@
     <color name="border">#67566A</color>
 
     <color name="list_bg">#3F51B5</color>
-    <color name="list_title_txt">#FF9800</color>
+    <color name="list_title_txt">#FFEB3B</color>
     <color name="list_body_txt">#CDDC39</color>
 
 </resources>

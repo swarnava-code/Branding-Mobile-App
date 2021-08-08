@@ -58,12 +58,12 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(i);
     }
     public void services(View view) {
-        Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
+        Intent i = new Intent(getApplicationContext(), ServicesActivity.class);
         startActivity(i);
     }
 
     public void contact(View view) {
-        Intent i=new Intent(getApplicationContext(), ContactActivity.class);
+        Intent i = new Intent(getApplicationContext(), ContactActivity.class);
         startActivity(i);
     }
 

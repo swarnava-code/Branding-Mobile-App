@@ -23,4 +23,36 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+
+    <string name="website_development">
+        Dynamic Website
+        \n We make websites that are actually fast and SEO-Optimized. We make sure that your website is upgraded with the latest technological updates.
+        \n
+        \n Free Domain and Hosting
+        \n 7 Pager website
+        \n SEO Optimized
+        \n 1 Business Email Id
+        \n And Many More
+    </string>
+    
+    <string-array name="digital_marketing">
+        <item>Website Development</item>
+        <item>Application Development</item>
+        <item>Social Media Marketing</item>
+        <item>Search Engine Optimization</item>
+        <item>Paid Per Click</item>
+    </string-array>
+
+    <string-array name="website_development">
+        <item>Website Development</item>
+        <item>Application Development</item>
+        <item>Social Media Marketing</item>
+        <item>Search Engine Optimization</item>
+        <item>Paid Per Click</item>
+    </string-array>
+
+    <string name="dynamic_website">
+
+    </string>
+
 </resources>

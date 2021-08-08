@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Header -->
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -19,10 +20,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_margin="5dp"
                 android:id="@+id/header_content"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:layout_margin="5dp"
                 android:src="@drawable/adosy_logo" />
         </LinearLayout>
 
@@ -34,14 +35,173 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
+            <!-- card List -->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    tools:context="com.example.test.searchview.MainActivity">
+
+                    <ListView
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:id="@+id/lv1"
+                        android:divider="#ad5"
+                        android:dividerHeight="2dp"
+                        android:layout_below="@+id/searchView"/>
+
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/searchView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:iconifiedByDefault="false"
+                        android:layout_alignParentTop="true"/>
+
+                </RelativeLayout>
+
                 <androidx.cardview.widget.CardView
-                    android:layout_margin="15dp"
-                    app:cardBackgroundColor="@color/list_bg"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp"
+                    android:background="#545454"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@drawable/list_bg"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="@dimen/list_left_margin_text_logo"
+                                android:src="@drawable/sample_logo"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                style="@style/title_list"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/list_left_margin_text_title"
+                                android:gravity="center"
+                                android:text="Digital Marketing"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageButton
+                                android:onClick="digital_marketing_btn"
+                                android:id="@+id/imageButton"
+                                style="@style/icon_button"
+                                android:layout_marginEnd="@dimen/list_left_margin_text_btn"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <LinearLayout
+                            android:padding="5dp"
+                            android:id="@+id/digital_marketing_layout"
+                            android:visibility="visible"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginStart="@dimen/list_left_margin_text_logo"
+                                    android:src="@drawable/sample_logo"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:textSize="18dp"
+                                    style="@style/title_list"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/list_left_margin_text_title"
+                                    android:gravity="center"
+                                    android:text="Website Marketing"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageButton
+                                    android:onClick="digital_marketing_btn"
+                                    style="@style/icon_button"
+                                    android:layout_marginEnd="@dimen/list_left_margin_text_btn"
+                                    android:background="?android:attr/selectableItemBackground"
+                                    android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="#ffffff"/>
+
+                            <TextView
+                                style="@style/body_list"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Website Development"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="App Dev"
+                                style="@style/body_list" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="5dp"
                     android:background="#545454"
                     android:orientation="vertical"
@@ -49,12 +209,14 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
+
                         android:animateLayoutChanges="true"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:background="@drawable/ripple_bg"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -73,8 +235,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="10dp"
-                                android:onClick="click"
-                                android:text="Digital Marketing" />
+                                android:text="Digital Sample" />
 
 
                         </LinearLayout>
@@ -82,7 +243,7 @@
 
                         <LinearLayout
                             android:padding="5dp"
-                            android:id="@+id/linear"
+                            android:id="@+id/linear2"
                             android:visibility="gone"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -114,7 +275,176 @@
                 </androidx.cardview.widget.CardView>
 
 
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
 
+                    <TableRow
+                        android:id="@+id/row1"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:visibility="gone"
+                            android:layout_width="200dp"
+                            android:layout_height="180dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+
+                            android:checkable="true"
+                            android:clickable="true"
+                            android:elevation="30dp"
+                            android:focusable="true"
+                            app:cardCornerRadius="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/home_btn_bg"
+                                android:gravity="center"
+                                android:onClick="blogs"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/home_img_h_w"
+                                    android:layout_height="@dimen/home_img_h_w"
+                                    android:layout_marginTop="20dp"
+                                    android:src="@drawable/ic_twotone_library_books_24" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="@string/home1"
+                                    android:textColor="@color/home_btn_txt"
+                                    android:textSize="20dp"></TextView>
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="200dp"
+                            android:layout_height="180dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="5dp">
+
+                            <LinearLayout
+                                android:background="@drawable/ripple_bg"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:onClick="courses"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/home_img_h_w"
+                                    android:layout_height="@dimen/home_img_h_w"
+                                    android:layout_marginTop="20dp"
+                                    android:src="@drawable/ic_baseline_menu_book_24" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="Digital Marketing"
+                                    android:textColor="@color/home_btn_txt"
+                                    android:textSize="20dp"></TextView>
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/row2"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:background="@drawable/custom_bg"
+                            android:layout_width="200dp"
+                            android:layout_height="180dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="5dp">
+
+                            <LinearLayout
+                                android:background="@drawable/ripple_bg"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:onClick="services"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/home_img_h_w"
+                                    android:layout_height="@dimen/home_img_h_w"
+                                    android:layout_marginTop="20dp"
+                                    android:src="@drawable/ic_baseline_home_repair_service_24" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="Digital Branding"
+                                    android:textColor="@color/home_btn_txt"
+                                    android:textSize="20dp"></TextView>
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:layout_width="200dp"
+                            android:layout_height="180dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="5dp"
+                            app:cardBackgroundColor="@color/home_bg">
+
+                            <LinearLayout
+                                android:background="?android:attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:onClick="digital_art"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/home_img_h_w"
+                                    android:layout_height="@dimen/home_img_h_w"
+                                    android:layout_marginTop="20dp"
+                                    android:src="@drawable/ic_baseline_connect_without_contact_24" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="Digital Art"
+                                    android:textColor="@color/home_btn_txt"
+                                    android:textSize="20dp"></TextView>
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_gravity="center"
+                        android:gravity="center"></TableRow>
+
+
+                </TableLayout>
 
                 <TextView
                     android:textSize="50dp"
@@ -153,21 +483,29 @@
                     android:layout_height="match_parent"
                     android:text="45ghEND"/>
             </LinearLayout>
+
+
+
+
+
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
+    <ImageButton
+        android:onClick="contact"
+        android:background="?android:attr/selectableItemBackground"
+        style="@style/icon_button"
+        android:src="@drawable/ic_baseline_connect_without_contact_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-
-
-
-
-
-
-
-
+    <ImageButton
+        android:onClick="back"
+        android:background="?android:attr/selectableItemBackground"
+        style="@style/icon_button"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

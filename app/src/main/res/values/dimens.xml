@@ -8,4 +8,9 @@
     <dimen name="title">20dp</dimen>
     <dimen name="body">15dp</dimen>
 
+    <dimen name="list_left_margin_text_title">50dp</dimen>
+    <dimen name="list_left_margin_text_logo">15dp</dimen>
+    <dimen name="list_left_margin_text_btn">5dp</dimen>
+
+
 </resources>

@@ -4,7 +4,7 @@
 
     <gradient
         android:endColor="@color/home_bg"
-        android:startColor="@color/home_bg2"
+        android:startColor="@color/list_bg"
         android:angle="90"/>
 
     <padding
