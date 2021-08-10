@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ContactActivity">
 
+    <ImageButton
+        android:visibility="invisible"
+        android:onClick="back_contact"
+        android:background="?android:attr/selectableItemBackground"
+        style="@style/icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_black_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,9 +37,98 @@
                 android:background="@color/border"
                 android:layout_width="match_parent"
                 android:layout_height="12dp"/>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name">
+                        <!--this is the actual edit text which takes the input-->
+                        <com.google.android.material.textfield.TextInputEditText
+
+                            android:inputType="textPersonName"
+                            android:id="@+id/first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginLeft="5dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name">
+                        <!--this is the actual edit text which takes the input-->
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:inputType="textPersonName"
+                            android:id="@+id/last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email">
+                    <!--this is the actual edit text which takes the input-->
+                    <com.google.android.material.textfield.TextInputEditText
+
+                        android:inputType="textEmailAddress"
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone">
+                    <!--this is the actual edit text which takes the input-->
+                    <com.google.android.material.textfield.TextInputEditText
+
+                        android:inputType="phone"
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:nestedScrollingEnabled="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:hint="Enter Your Message">
+                    <!--this is the actual edit text which takes the input-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:inputType="textMultiLine"
+                        android:id="@+id/edit_text_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <Button
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"/>
+            </LinearLayout>
+            <TextView
+                android:layout_marginBottom="15dp"
+                android:background="@color/border"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"/>
 
             <TextView
-                android:text="⚫ Call Us"
+                android:text="☎ Call Us"
                 style="@style/txt_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -45,7 +145,7 @@
 
 
             <TextView
-                android:text="⚫ Our Email"
+                android:text="📧 Our Email"
                 style="@style/txt_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -62,7 +162,7 @@
 
 
             <TextView
-                android:text="⚫ Our Location"
+                android:text="📍 Our Location"
                 style="@style/txt_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -79,7 +179,7 @@
 
 
             <TextView
-                android:text="⚫ Working Hours"
+                android:text="🕑 Working Hours"
                 style="@style/txt_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

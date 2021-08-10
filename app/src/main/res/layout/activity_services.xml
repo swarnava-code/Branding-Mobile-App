@@ -7,9 +7,10 @@
     tools:context=".ServicesActivity">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <!-- Header -->
         <LinearLayout
@@ -22,263 +23,60 @@
             <ImageView
                 android:id="@+id/header_content"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="110dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/adosy_logo" />
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             <!-- card List -->
             <LinearLayout
-                android:orientation="vertical"
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
-
-                <RelativeLayout
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="@dimen/activity_vertical_margin"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin"
-                    tools:context="com.example.test.searchview.MainActivity">
+                    android:layout_height="match_parent">
 
-                    <ListView
-                        android:visibility="gone"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvAnimals"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:id="@+id/lv1"
-                        android:divider="#ad5"
-                        android:dividerHeight="2dp"
-                        android:layout_below="@+id/searchView"/>
-
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/searchView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:iconifiedByDefault="false"
-                        android:layout_alignParentTop="true"/>
+                        android:layout_height="match_parent" />
 
                 </RelativeLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:background="#545454"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:background="@drawable/list_bg"
-                        android:animateLayoutChanges="true"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                                android:src="@drawable/sample_logo"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/textView2"
-                                style="@style/title_list"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/list_left_margin_text_title"
-                                android:gravity="center"
-                                android:text="Digital Marketing"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ImageButton
-                                android:onClick="digital_marketing_btn"
-                                android:id="@+id/imageButton"
-                                style="@style/icon_button"
-                                android:layout_marginEnd="@dimen/list_left_margin_text_btn"
-                                android:background="?android:attr/selectableItemBackground"
-                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                        <LinearLayout
-                            android:padding="5dp"
-                            android:id="@+id/digital_marketing_layout"
-                            android:visibility="visible"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                                    android:src="@drawable/sample_logo"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
-                                    android:textSize="18dp"
-                                    style="@style/title_list"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/list_left_margin_text_title"
-                                    android:gravity="center"
-                                    android:text="Website Marketing"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <ImageButton
-                                    android:onClick="digital_marketing_btn"
-                                    style="@style/icon_button"
-                                    android:layout_marginEnd="@dimen/list_left_margin_text_btn"
-                                    android:background="?android:attr/selectableItemBackground"
-                                    android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="#ffffff"/>
-
-                            <TextView
-                                style="@style/body_list"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Website Development"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="App Dev"
-                                style="@style/body_list" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-
-
-
-
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="5dp"
-                    android:background="#545454"
-                    android:orientation="vertical"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-
-                        android:animateLayoutChanges="true"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:background="@drawable/ripple_bg"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_marginTop="20dp"
-                                android:layout_margin="15dp"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_marginStart="5dp"
-                                android:src="@drawable/sample_logo" />
-
-                            <TextView
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                style="@style/title_list"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="10dp"
-                                android:text="Digital Sample" />
 
 
-                        </LinearLayout>
+                </LinearLayout>
 
-
-                        <LinearLayout
-                            android:padding="5dp"
-                            android:id="@+id/linear2"
-                            android:visibility="gone"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:textColor="#ffffff"/>
-
-                            <TextView
-                                style="@style/body_list"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="Web Dev"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="App Dev"
-                                style="@style/body_list" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-
-
-
-
-                </androidx.cardview.widget.CardView>
-
+                <TextView
+                    android:layout_margin="15dp"
+                    android:id="@+id/details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/stylescript_regular"
+                    android:textColor="#000000" />
 
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:visibility="gone">
 
                     <TableRow
                         android:id="@+id/row1"
@@ -286,16 +84,16 @@
                         android:gravity="center">
 
                         <com.google.android.material.card.MaterialCardView
-                            android:visibility="gone"
                             android:layout_width="200dp"
                             android:layout_height="180dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-
                             android:checkable="true"
+
                             android:clickable="true"
                             android:elevation="30dp"
                             android:focusable="true"
+                            android:visibility="gone"
                             app:cardCornerRadius="5dp">
 
                             <LinearLayout
@@ -303,7 +101,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@color/home_btn_bg"
                                 android:gravity="center"
-                                android:onClick="blogs"
+
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -333,11 +131,10 @@
                             app:cardCornerRadius="5dp">
 
                             <LinearLayout
-                                android:background="@drawable/ripple_bg"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@drawable/ripple_bg"
                                 android:gravity="center"
-                                android:onClick="courses"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -366,19 +163,18 @@
                         android:gravity="center">
 
                         <com.google.android.material.card.MaterialCardView
-                            android:background="@drawable/custom_bg"
                             android:layout_width="200dp"
                             android:layout_height="180dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:background="@drawable/custom_bg"
                             app:cardCornerRadius="5dp">
 
                             <LinearLayout
-                                android:background="@drawable/ripple_bg"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@drawable/ripple_bg"
                                 android:gravity="center"
-                                android:onClick="services"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -400,22 +196,21 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <com.google.android.material.card.MaterialCardView
-                            android:background="?android:attr/selectableItemBackground"
-                            android:clickable="true"
                             android:layout_width="200dp"
                             android:layout_height="180dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            app:cardCornerRadius="5dp"
-                            app:cardBackgroundColor="@color/home_bg">
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            app:cardBackgroundColor="@color/home_bg"
+                            app:cardCornerRadius="5dp">
 
                             <LinearLayout
-                                android:background="?android:attr/selectableItemBackground"
-                                android:clickable="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:clickable="true"
                                 android:gravity="center"
-                                android:onClick="digital_art"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -446,48 +241,132 @@
 
                 </TableLayout>
 
-                <TextView
-                    android:textSize="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="45gh"/>
-                <TextView
-                    android:textSize="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="45gh"/>
 
-                <TextView
-                    android:textSize="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="45gh"/>
-                <TextView
-                    android:textSize="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="45gh"/>
-                <TextView
-                    android:textSize="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="45gh"/>
-                <TextView
-                    android:textSize="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="45gh"/>
-                <TextView
-                    android:textSize="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="45ghEND"/>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="#545454"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/list_bg"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/digital_marketing_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="5dp"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="#ffffff" />
+
+
+                            <TextView
+                                style="@style/body_list"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Website Development" />
+
+                            <TextView
+                                style="@style/body_list"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="App Dev" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageButton
+                                    style="@style/icon_button"
+                                    android:layout_marginEnd="@dimen/list_left_margin_text_btn"
+                                    android:background="?android:attr/selectableItemBackground"
+                                    android:onClick="digital_marketing_btn"
+                                    android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginStart="@dimen/list_left_margin_text_logo"
+                                    android:src="@drawable/sample_logo"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    style="@style/title_list"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/list_left_margin_text_title"
+                                    android:gravity="center"
+                                    android:text="Website Marketing"
+                                    android:textSize="18dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageButton
+                                android:id="@+id/imageButton"
+                                style="@style/icon_button"
+                                android:layout_marginEnd="@dimen/list_left_margin_text_btn"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:onClick="digital_marketing_btn"
+                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="@dimen/list_left_margin_text_logo"
+                                android:src="@drawable/sample_logo"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                style="@style/title_list"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/list_left_margin_text_title"
+                                android:gravity="center"
+                                android:text="Digital Marketing"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
-
-
-
-
-
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
@@ -495,7 +374,7 @@
         android:onClick="contact"
         android:background="?android:attr/selectableItemBackground"
         style="@style/icon_button"
-        android:src="@drawable/ic_baseline_connect_without_contact_24"
+        android:src="@drawable/ic_baseline_attach_email_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -507,5 +386,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/shape_bg"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout3"
+        tools:context="com.example.test.searchview.MainActivity">
+
+        <AutoCompleteTextView
+            android:hint="🔍 Type Something !"
+            android:id="@+id/auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,30 +13,39 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int DELAY = 3000;//3000
+    int DELAY = 3000; //3000
 
     Animation slide_up_in;
     TextView com;
     ImageView logo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //requestWindowFeature(Window.FEATURE_NO_TITLE);//1st way
         getSupportActionBar().hide();//2nd way
-
 
         slide_up_in = AnimationUtils.loadAnimation(this, R.anim.slide_up_in_);
         com = findViewById(R.id.textView);
         logo = findViewById(R.id.imageView);
 
-
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(getApplicationContext(), LoginActivity.class); //LoginActivity
+/*
+                int resId = getResources().getIdentifier("services", "array", getPackageName());
+                String[] stringArray = getResources().getStringArray(resId);
+                Bundle b = new Bundle();
+                b.putStringArray("key", stringArray);
+                Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
+                i.putExtras(b);
+                startActivity(i);
+                finish();
+
+ */
+                Intent i=new Intent(getApplicationContext(), BlogActivity.class); //LoginActivity
                 startActivity(i);
                 finish();
             }
@@ -51,6 +60,5 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         com.startAnimation(slide_up_in);
         logo.startAnimation(slide_up_in);
-
     }
 }

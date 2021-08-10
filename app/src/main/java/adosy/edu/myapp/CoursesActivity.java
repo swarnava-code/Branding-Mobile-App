@@ -13,5 +13,9 @@ public class CoursesActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
+
+
+
+
     }
 }

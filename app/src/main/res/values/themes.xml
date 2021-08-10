@@ -18,11 +18,9 @@
 
     <style name="txt_heading">
         <item name="android:textSize">20dp</item>
-        <item name="fontFamily">@font/roboto_black</item>
-    </style>
+        <item name="fontFamily">@font/roboto_black</item>    </style>
     <style name="txt_body">
-        <item name="android:textSize">20dp</item>
-        <item name="fontFamily">@font/stylescript_regular</item>
+        <item name="android:textSize">15dp</item>
     </style>
 
     <style name="title_list">

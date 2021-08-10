@@ -16,7 +16,6 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginActivity extends AppCompatActivity {
-
     Button send_otp;
     LinearLayout form1, form2;
     TextView otp_time_disp;
@@ -31,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         form2 = findViewById(R.id.form2);
         send_otp = findViewById(R.id.otp_button);
         otp_time_disp = findViewById(R.id.otp_time_disp);
-
     }
 
     @Override
@@ -92,8 +90,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void submit(View view) {
+        /*
         Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
         startActivity(i);
+
+         */
+
+        int resId = getResources().getIdentifier("services", "array", getPackageName());
+        String[] stringArray = getResources().getStringArray(resId);
+        Bundle b = new Bundle();
+        b.putStringArray("key", stringArray);
+        Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
+        i.putExtras(b);
+        startActivity(i);
+        finish();
 
     }
 

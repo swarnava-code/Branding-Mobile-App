@@ -24,17 +24,13 @@
     <string name="login_failed">"Login failed"</string>
 
 
-    <string name="website_development">
-        Dynamic Website
-        \n We make websites that are actually fast and SEO-Optimized. We make sure that your website is upgraded with the latest technological updates.
-        \n
-        \n Free Domain and Hosting
-        \n 7 Pager website
-        \n SEO Optimized
-        \n 1 Business Email Id
-        \n And Many More
-    </string>
-    
+
+    <string-array name="services">
+        <item>Digital Marketing</item>
+        <item>Digital Branding</item>
+        <item>Digital Art</item>
+    </string-array>
+
     <string-array name="digital_marketing">
         <item>Website Development</item>
         <item>Application Development</item>
@@ -44,15 +40,20 @@
     </string-array>
 
     <string-array name="website_development">
-        <item>Website Development</item>
-        <item>Application Development</item>
-        <item>Social Media Marketing</item>
-        <item>Search Engine Optimization</item>
-        <item>Paid Per Click</item>
+        <item>Dynamic Website</item>
+        <item>E-Commerce Website</item>
+        <item>Customized Website</item>
     </string-array>
 
     <string name="dynamic_website">
-
+        Dynamic Website
+        \n We make websites that are actually fast and SEO-Optimized. We make sure that your website is upgraded with the latest technological updates.
+        \n
+        \n Free Domain and Hosting
+        \n 7 Pager website
+        \n SEO Optimized
+        \n 1 Business Email Id
+        \n And Many More
     </string>
 
 </resources>

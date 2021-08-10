@@ -21,4 +21,6 @@
     <color name="list_title_txt">#FFEB3B</color>
     <color name="list_body_txt">#CDDC39</color>
 
+    <color name="et_contact_bg">#ffffff</color>
+
 </resources>
