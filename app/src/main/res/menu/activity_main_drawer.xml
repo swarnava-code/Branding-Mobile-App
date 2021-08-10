@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+        <item
+            android:onClick="digital_marketing"
+            android:id="@+id/nav_home_"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Digital Marketing" />
+        <item
+            android:onClick="digital"
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Digital Branding" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Digital Art" />
+
+
+
+        <item
+            android:id="@+id/nav_slideshow1"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Website Marketing" />
+        <item
+            android:id="@+id/nav_slideshow2"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Application Development" />
+        <item
+            android:id="@+id/nav_slideshow3"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="etc" />
+
+</menu>

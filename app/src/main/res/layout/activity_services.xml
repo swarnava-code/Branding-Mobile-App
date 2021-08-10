@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/header_content"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/adosy_logo" />
         </LinearLayout>
@@ -388,24 +388,40 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/shape_bg"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="50dp"
+
+        android:layout_marginTop="10dp"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout3"
         tools:context="com.example.test.searchview.MainActivity">
 
-        <AutoCompleteTextView
-            android:hint="🔍 Type Something !"
-            android:id="@+id/auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="🔍 Type Something !"
+                android:visibility="gone" />
+
+            <SearchView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </androidx.cardview.widget.CardView>
+
 
     </RelativeLayout>
 

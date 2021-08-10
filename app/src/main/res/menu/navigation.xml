@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="Privacy Policy"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_terms"
+        android:orderInCategory="100"
+        android:title="Terms and Condition"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_refund"
+        android:orderInCategory="100"
+        android:title="Refund Policy"
+         />
+
+    <item
+        android:onClick="digital_marketing"
+        android:id="@+id/action_payment"
+        android:orderInCategory="100"
+        android:title="Payment Process"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_refferal"
+        android:orderInCategory="100"
+        android:title="Referral Policy"
+        app:showAsAction="never" />
+
+
+
+
+
+
+</menu>

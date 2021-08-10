@@ -19,12 +19,13 @@ public class LoginActivity extends AppCompatActivity {
     Button send_otp;
     LinearLayout form1, form2;
     TextView otp_time_disp;
-    int time=30;//30sec
+    int time=30; //30sec
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();//2nd way
 
         form1 = findViewById(R.id.form1);
         form2 = findViewById(R.id.form2);
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        AlertDialog.Builder abuilder = new AlertDialog.Builder(LoginActivity.this, R.style.Theme_AppCompat_Dialog_Alert);
+        AlertDialog.Builder abuilder = new AlertDialog.Builder(LoginActivity.this, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
         abuilder.setTitle("Location Access");
         abuilder.setIcon(R.drawable.adosy_logo);
         abuilder.setMessage("We need location access for better services !");
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         String[] stringArray = getResources().getStringArray(resId);
         Bundle b = new Bundle();
         b.putStringArray("key", stringArray);
-        Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
+        Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
         i.putExtras(b);
         startActivity(i);
         finish();

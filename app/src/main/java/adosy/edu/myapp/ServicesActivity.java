@@ -3,12 +3,15 @@ package adosy.edu.myapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.MatrixCursor;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +32,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 public class ServicesActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
@@ -42,6 +47,7 @@ public class ServicesActivity extends AppCompatActivity implements MyRecyclerVie
 
     ArrayList<String> arrList = new ArrayList<>();
     AutoCompleteTextView autoCompleteTextView;
+    SearchView searchView;
 
     //search
     /*
@@ -62,6 +68,7 @@ public class ServicesActivity extends AppCompatActivity implements MyRecyclerVie
     }
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +83,7 @@ public class ServicesActivity extends AppCompatActivity implements MyRecyclerVie
 
         imageView = findViewById(R.id.header_content);
         autoCompleteTextView = findViewById(R.id.auto);
+        searchView = findViewById(R.id.search_view);
         noOfContent = content_id.length;
 
         digital_marketing_layout = findViewById(R.id.digital_marketing_layout);
@@ -97,13 +105,63 @@ public class ServicesActivity extends AppCompatActivity implements MyRecyclerVie
 
         String[] suggestion = {"Digital Marketing", "Website Development", "Dynamic Website", "E-Commerce Website", "Customized Website"};
         try{
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, suggestion);
             autoCompleteTextView.setAdapter(adapter);
+            //searchView.setAppSearchData(bundle);//bundle
+            //searchView.setSuggestionsAdapter(adapter);
+
+
+
+/*
+            String[] columnNames = {"_id","text"};
+            MatrixCursor cursor = new MatrixCursor(columnNames);
+            String[] array = getResources().getStringArray(R.array.services); //if strings are in resources
+            String[] temp = new String[2];
+            int id = 0;
+            for(String item : array){
+                temp[0] = Integer.toString(id++);
+                temp[1] = item;
+                cursor.addRow(temp);
+            }
+            String[] from = {"text"};
+            int[] to = {R.id.name_entry};
+            CursorAdapter busStopCursorAdapter = new SimpleCursorAdapter(getApplicationContext(), R.layout.listentry, cursor, from, to);
+
+            searchView.setSuggestionsAdapter(busStopCursorAdapter);
+
+ */
+
+            //android.widget.SearchView search = findViewById(R.id.search);
+
+
+
+
+
+
+/*
+            List<String> items = Lists.newArrayList(new String[] {"aaaaa", "bbbbb", "ccccc", "ddddd"});
+            SearchView searchView = (SearchView) findViewById(R.id.search_view);
+            SearchView.SearchAutoComplete searchSrcTextView = (SearchView.SearchAutoComplete) findViewById(android.support.v7.appcompat.R.id.search_src_text);
+            searchSrcTextView.setThreshold(1);
+            searchSrcTextView.setAdapter(new SuggestionAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, items));
+            searchSrcTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    return;
+                }
+            });
+
+ */
+
+
         }
         catch(Resources.NotFoundException e){
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, suggestion);
             autoCompleteTextView.setAdapter(adapter);
+            //searchView.setSuggestionsAdapter(adapter);
         }
+
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -128,6 +186,13 @@ public class ServicesActivity extends AppCompatActivity implements MyRecyclerVie
 
         loopAnim();
     }
+
+
+
+
+
+
+
     void findResourceAndView(String stringPass){
         try{
             int resId = getResources().getIdentifier(stringPass.toLowerCase().replaceAll("\\s", "_"), "array", getPackageName());

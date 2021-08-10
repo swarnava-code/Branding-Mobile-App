@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Adosy Learn</string>
+    <string name="app_name">Adosy</string>
+    <string name="app_link">adosy.in</string>
 
     <string name="home1">Blogs</string>
     <string name="home2">Courses</string>
@@ -24,27 +25,6 @@
     <string name="login_failed">"Login failed"</string>
 
 
-
-    <string-array name="services">
-        <item>Digital Marketing</item>
-        <item>Digital Branding</item>
-        <item>Digital Art</item>
-    </string-array>
-
-    <string-array name="digital_marketing">
-        <item>Website Development</item>
-        <item>Application Development</item>
-        <item>Social Media Marketing</item>
-        <item>Search Engine Optimization</item>
-        <item>Paid Per Click</item>
-    </string-array>
-
-    <string-array name="website_development">
-        <item>Dynamic Website</item>
-        <item>E-Commerce Website</item>
-        <item>Customized Website</item>
-    </string-array>
-
     <string name="dynamic_website">
         Dynamic Website
         \n We make websites that are actually fast and SEO-Optimized. We make sure that your website is upgraded with the latest technological updates.
@@ -55,5 +35,57 @@
         \n 1 Business Email Id
         \n And Many More
     </string>
+
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">@string/app_name</string>
+    <string name="nav_header_subtitle">@string/app_link</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">@string/app_name</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="services">
+        <item>Digital Marketing</item>
+        <item>Digital Branding</item>
+        <item>Digital Art</item>
+    </string-array>
+    <string-array name="digital_marketing">
+        <item>Website Development</item>
+        <item>Application Development</item>
+        <item>Social Media Marketing</item>
+        <item>Search Engine Optimization</item>
+        <item>Paid Per Click</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="website_development">
+        <item>Dynamic Website</item>
+        <item>E-Commerce Website</item>
+        <item>Customized Website</item>
+    </string-array>
+
+    <string name="dynamic_website_list">
+        Free Domain and Hosting
+        \n 7 Pager website
+        \n SEO Optimized
+        \n 1 Business Email Id
+        \n And Many More
+    </string>
+
+    <string name="dynamic_website_desc">
+        We make websites that are actually fast and SEO-Optimized. We make sure that your website is upgraded with the latest technological updates.
+    </string>
+    
+    <string name="services_main">We always make sure that we are updated with the latest technologies and provide the same to our clients. We make sure that our clients expand in the digital world.</string>
+    <string name="digital_marketing_main">We always make sure that we are updated with the latest technologies and provide the same to our clients. We make sure that our clients expand in the digital world.</string>
+    <string name="website_development_main">
+        We excel in providing the best in class website development services globally. We are experts in making any kind of websites as per your need with a customized budget. We at first understand your business requirement and then act accordingly. For us delivering valuable service is a more important.
+    </string>
+
 
 </resources>

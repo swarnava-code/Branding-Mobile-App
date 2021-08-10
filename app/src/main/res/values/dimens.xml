@@ -11,6 +11,9 @@
     <dimen name="list_left_margin_text_title">50dp</dimen>
     <dimen name="list_left_margin_text_logo">15dp</dimen>
     <dimen name="list_left_margin_text_btn">5dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

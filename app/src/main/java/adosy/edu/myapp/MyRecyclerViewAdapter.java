@@ -1,9 +1,11 @@
 package adosy.edu.myapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +18,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
+    Context context_global;
+
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        context_global = context;
     }
 
     // inflates the row layout from xml when needed
@@ -34,6 +39,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void onBindViewHolder(ViewHolder holder, int position) {
         String animal = mData.get(position);
         holder.myTextView.setText(animal);
+
+
+        //To load image in each row
+        Resources res = holder.itemView.getContext().getResources();
+        String details = animal.toLowerCase().replaceAll("\\s", "_");
+        holder.myImageView.setImageResource(res.getIdentifier(details, "drawable", context_global.getPackageName()));
+
     }
 
     // total number of rows
@@ -46,10 +58,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextView;
+        ImageView myImageView;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.tvAnimalName);
+            myTextView = itemView.findViewById(R.id.tvRow);
+            myImageView = itemView.findViewById(R.id.ivRow);
             itemView.setOnClickListener(this);
         }
 

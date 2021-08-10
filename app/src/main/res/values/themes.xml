@@ -18,7 +18,9 @@
 
     <style name="txt_heading">
         <item name="android:textSize">20dp</item>
-        <item name="fontFamily">@font/roboto_black</item>    </style>
+        <item name="fontFamily">@font/roboto_black</item>
+    </style>
+
     <style name="txt_body">
         <item name="android:textSize">15dp</item>
     </style>
@@ -28,6 +30,7 @@
         <item name="android:textSize">@dimen/title</item>
         <item name="fontFamily">@font/stylescript_regular</item>
     </style>
+
     <style name="body_list">
         <item name="android:textColor">@color/list_body_txt</item>
         <item name="fontFamily">@font/roboto_regular</item>
@@ -42,5 +45,14 @@
         <item name="android:clickable">true</item>
         <item name="android:padding">5dp</item>
     </style>
+
+    <style name="Theme.MyApplication.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MyApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MyApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

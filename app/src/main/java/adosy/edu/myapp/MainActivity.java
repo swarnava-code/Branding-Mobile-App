@@ -34,20 +34,30 @@ public class MainActivity extends AppCompatActivity {
         Runnable r = new Runnable() {
             @Override
             public void run() {
-/*
+
+                //   /*
                 int resId = getResources().getIdentifier("services", "array", getPackageName());
                 String[] stringArray = getResources().getStringArray(resId);
                 Bundle b = new Bundle();
                 b.putStringArray("key", stringArray);
-                Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
+                Intent i=new Intent(getApplicationContext(), LoginActivity.class);
                 i.putExtras(b);
                 startActivity(i);
                 finish();
 
- */
-                Intent i=new Intent(getApplicationContext(), BlogActivity.class); //LoginActivity
+                //   */
+
+
+
+
+
+    /*
+                Intent i=new Intent(getApplicationContext(), LoginActivity.class); //LoginActivity
                 startActivity(i);
                 finish();
+    */
+
+
             }
         };
         Handler h = new Handler();

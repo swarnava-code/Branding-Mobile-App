@@ -6,40 +6,38 @@ android:layout_height="wrap_content"
 xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <androidx.cardview.widget.CardView
-    android:layout_margin="5dp"
+    android:layout_margin="1dp"
     app:cardCornerRadius="5dp"
-    android:background="#545454"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:background="@drawable/ripple_bg"
-
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:background="@drawable/ripple_bg"
-
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:visibility="invisible"
+                android:id="@+id/ivRow"
+                android:visibility="visible"
                 android:layout_marginTop="20dp"
                 android:layout_margin="15dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="5dp"
                 android:src="@drawable/sample_logo" />
 
             <TextView
-                android:id="@+id/tvAnimalName"
+                android:id="@+id/tvRow"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
+
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
