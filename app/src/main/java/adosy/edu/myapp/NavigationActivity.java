@@ -18,8 +18,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -32,9 +35,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class NavigationActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, MyRecyclerViewAdapter.ItemClickListener {
+public class NavigationActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, MyRecyclerViewAdapter.ItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+
+    //Navigatio drawer
+    //Variables
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+    Menu menu;
+    TextView textView;
+
 
     //SERVICES
     int content_id[] = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.adosy_logo};
@@ -125,6 +138,21 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         setContentView(R.layout.activity_navigation);
 
 
+        //Nav Draw.
+        drawerLayout=findViewById(R.id.drawer_layout);
+        navigationView=findViewById(R.id.nav_view);
+        textView=findViewById(R.id.textView);
+        toolbar=findViewById(R.id.toolbar);
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle=new
+                ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -146,6 +174,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
 
 
         //SERVICES START
@@ -281,6 +311,46 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
 
 
+        //setNavigationViewListener();
+
+
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view); // initiate a Navigation View
+// implement setNavigationSelectedListener event
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_services:
+                        findResourceAndView("services");
+                        break;
+                    case R.id.nav_digital_marketing:
+                        findResourceAndView("digital_marketing");
+                        break;
+                    case R.id.nav_digital_branding:
+                        Toast.makeText(NavigationActivity.this, "branding", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_login:
+                        Toast.makeText(NavigationActivity.this, "login", Toast.LENGTH_SHORT).show();
+                        menu.findItem(R.id.nav_logout).setVisible(true);
+                        menu.findItem(R.id.nav_profile).setVisible(true);
+                        menu.findItem(R.id.nav_login).setVisible(false);
+                        break;
+                    case R.id.nav_logout: menu.findItem(R.id.nav_logout).setVisible(false);
+                        menu.findItem(R.id.nav_profile).setVisible(false);
+                        menu.findItem(R.id.nav_login).setVisible(true);
+                        break;
+                    case R.id.nav_share: Toast.makeText(NavigationActivity.this, "Share", Toast.LENGTH_SHORT).show(); break;
+                }
+                drawerLayout.closeDrawer(GravityCompat.START); return true;
+
+                //Toast.makeText(NavigationActivity.this, "lskrg", Toast.LENGTH_SHORT).show();
+
+// add code here what you need on click of items.
+                //return false;
+            }
+        });
+
 
 
     }
@@ -288,22 +358,67 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
 
     void findResourceAndView(String stringPass){
-        try{
-            int resId = getResources().getIdentifier(stringPass.toLowerCase().replaceAll("\\s", "_"), "array", getPackageName());
-            String[] stringArray = getResources().getStringArray(resId);
-            Bundle b = new Bundle();
-            b.putStringArray("key", stringArray);
-            Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
-            i.putExtras(b);
-            startActivity(i);
+        main_desc.setText("");
+        main_head.setText("");
 
-        }catch (Exception e){
-            String string ="";
-            int resId = getResources().getIdentifier(stringPass.toLowerCase().replaceAll("\\s", "_"), "string", getPackageName());
-            string = getResources().getString(resId);
-            //details.setText(string);
+        try{
+            String name = stringPass.toLowerCase().replaceAll("\\s", "_");
+
+            int resId = getResources().getIdentifier(name, "array", getPackageName());
+            String[] stringArray = getResources().getStringArray(resId);
+
+            main_head.setText(stringPass);
+            main_desc.setText(getResources().getString(getResources().getIdentifier(name+"_main", "string", getPackageName())));
+
+
+            arrList.clear();
+
+
+            for(int i=0; i<stringArray.length; i++)
+                arrList.add(stringArray[i]);
+
+            // set up the RecyclerView
+            recyclerView = findViewById(R.id.rvServices);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            adapter = new MyRecyclerViewAdapter(this, arrList);
+            adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
+            recyclerView.setAdapter(adapter);
+
+
+
+
+
+        } catch (Exception e){
+
+            try{
+                String string ="";
+                String details = stringPass.toLowerCase().replaceAll("\\s", "_");
+
+                String details_head_str = details+"_", details_desc_str = details+"_desc", details_list_str = details+"_list";
+
+                //int resId = getResources().getIdentifier(, "string", getPackageName());
+                //string = getResources().getString(getResources().getIdentifier(, "string", getPackageName()));
+
+                details_desc.setText(getResources().getString(getResources().getIdentifier(details_desc_str, "string", getPackageName())));
+                details_list.setText(getResources().getString(getResources().getIdentifier(details_list_str, "string", getPackageName())));
+                details_head.setText(stringPass);
+                details_imageview.setImageResource(getResources().getIdentifier(details, "drawable", getPackageName()));
+                //main_head, main_desc
+                //.setText(string);
+
+                details_layout.setVisibility(View.VISIBLE);
+            }catch (Exception e1){
+                Toast.makeText(this, "No data in string.xml", Toast.LENGTH_SHORT).show();
+            }
+
+
+
         }
     }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -314,6 +429,11 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
     @Override
     public boolean onSupportNavigateUp() {
+
+        menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_logout).setVisible(false);
+        menu.findItem(R.id.nav_profile).setVisible(false);
+        //it's opening drawer
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
@@ -360,10 +480,41 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 Toast.makeText(getApplicationContext(), "Refund", Toast.LENGTH_LONG).show();
                 return true;
 
+            case R.id.nav_slideshow:
+                Toast.makeText(getApplicationContext(), "slidesh", Toast.LENGTH_LONG).show();
+                return true;
+
+
 
 
         }
 
+        return false;
+    }
+
+
+
+    private void setNavigationViewListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void test(View view) {
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else
+        {super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
     }
 }

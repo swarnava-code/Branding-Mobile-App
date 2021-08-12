@@ -7,7 +7,9 @@
     tools:context=".BlogActivity">
 
     <WebView
-        android:id="@+id/webview"
+        android:keepScreenOn="true"
+        android:gravity="center"
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

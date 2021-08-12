@@ -86,6 +86,8 @@
     <string name="website_development_main">
         We excel in providing the best in class website development services globally. We are experts in making any kind of websites as per your need with a customized budget. We at first understand your business requirement and then act accordingly. For us delivering valuable service is a more important.
     </string>
+    <string name="title_activity_navigation2">NavigationActivity2</string>
+    <string name="title_activity_delete">Delete</string>
 
 
 </resources>

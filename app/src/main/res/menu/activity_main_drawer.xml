@@ -3,35 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+        <group android:title="All Services">
+                <item
+                    android:id="@+id/nav_services"
+                    android:icon="@drawable/ic_baseline_close_24"
+                    android:title="Services" />
+                <item
+                    android:id="@+id/nav_digital_marketing"
+                    android:icon="@drawable/ic_baseline_close_24"
+                    android:title="Digital Marketing" />
 
-        <item
-            android:onClick="digital_marketing"
-            android:id="@+id/nav_home_"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Digital Marketing" />
-        <item
-            android:onClick="digital"
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Digital Branding" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Digital Art" />
+                <item
+                    android:id="@+id/nav_digital_branding"
+                    android:icon="@drawable/ic_baseline_close_24"
+                    android:title="Digital Branding" />
+
+                <item
+                    android:id="@+id/nav_digital_art"
+                    android:icon="@drawable/ic_baseline_close_24"
+                    android:title="Digital Art" />
+
+                <item
+                    android:id="@+id/nav_etc"
+                    android:icon="@drawable/ic_baseline_close_24"
+                    android:title="Etc..." />
+        </group>
 
 
 
-        <item
-            android:id="@+id/nav_slideshow1"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Website Marketing" />
-        <item
-            android:id="@+id/nav_slideshow2"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Application Development" />
-        <item
-            android:id="@+id/nav_slideshow3"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="etc" />
+        <item android:title="Profile">
 
+                <menu>
+
+                        <group android:checkableBehavior="single">
+
+                                <item
+                                    android:id="@+id/nav_login"
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Login" />
+
+                                <item
+                                    android:id="@+id/nav_profile"
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Profile" />
+
+                                <item
+                                    android:id="@+id/nav_logout"
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Logout" />
+                        </group>
+                </menu>
+        </item>
+
+        <item android:title="Communicate">
+
+                <menu>
+
+                        <item
+                            android:id="@+id/nav_share"
+                            android:icon="@drawable/ic_baseline_close_24"
+                            android:title="Share" />
+
+                        <item
+                            android:id="@+id/nav_rate"
+                            android:icon="@drawable/ic_baseline_close_24"
+                            android:title="Rate Us" />
+                </menu>
+        </item>
 </menu>

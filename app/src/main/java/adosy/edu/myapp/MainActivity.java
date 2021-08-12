@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 String[] stringArray = getResources().getStringArray(resId);
                 Bundle b = new Bundle();
                 b.putStringArray("key", stringArray);
-                Intent i=new Intent(getApplicationContext(), LoginActivity.class);
+                Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
                 i.putExtras(b);
                 startActivity(i);
                 finish();
