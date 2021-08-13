@@ -3,39 +3,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-        <group android:title="All Services">
-                <item
-                    android:id="@+id/nav_services"
-                    android:icon="@drawable/ic_baseline_close_24"
-                    android:title="Services" />
-                <item
-                    android:id="@+id/nav_digital_marketing"
-                    android:icon="@drawable/ic_baseline_close_24"
-                    android:title="Digital Marketing" />
+        <group android:id="@+id/gr_services">
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Services" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Digital Marketing" />
 
-                <item
-                    android:id="@+id/nav_digital_branding"
-                    android:icon="@drawable/ic_baseline_close_24"
-                    android:title="Digital Branding" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Digital Branding" />
 
-                <item
-                    android:id="@+id/nav_digital_art"
-                    android:icon="@drawable/ic_baseline_close_24"
-                    android:title="Digital Art" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Digital Art" />
 
-                <item
-                    android:id="@+id/nav_etc"
-                    android:icon="@drawable/ic_baseline_close_24"
-                    android:title="Etc..." />
-        </group>
+
+                        </group>
+
+        <item android:title="Digital Marketing">
+                <menu>
+                        <group android:id="@+id/gr_digital_marketing">
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Website Development" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Application Development" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Social Media Marketing" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Search Engine Optimization" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Paid Per Click Management" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Email Marketing" />
+                        </group>
+                </menu>
+        </item>
+
+        <item android:title="Digital Branding">
+                <menu>
+                        <group android:id="@+id/gr_digital_branding">
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Real Estate Branding" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Educational Branding" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Hospitality Branding" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Industrial Branding" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Retail Branding" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Automobile Branding" />
+                        </group>
+                </menu>
+        </item>
+
+        <item android:title="Digital Art">
+                <menu>
+                        <group android:id="@+id/gr_digital_art">
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Drone Videography" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="3D Animation" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Miniature Models" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Brochure Designing" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Logo Designing" />
+                                <item
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Content Writing" />
+                        </group>
+                </menu>
+        </item>
 
 
 
         <item android:title="Profile">
-
                 <menu>
-
-                        <group android:checkableBehavior="single">
+                        <group android:id="@+id/gr_profile" android:checkableBehavior="single">
 
                                 <item
                                     android:id="@+id/nav_login"
@@ -56,18 +122,18 @@
         </item>
 
         <item android:title="Communicate">
-
                 <menu>
+                        <group android:id="@+id/gr_communicate">
+                                <item
+                                    android:id="@+id/nav_share"
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Share" />
 
-                        <item
-                            android:id="@+id/nav_share"
-                            android:icon="@drawable/ic_baseline_close_24"
-                            android:title="Share" />
-
-                        <item
-                            android:id="@+id/nav_rate"
-                            android:icon="@drawable/ic_baseline_close_24"
-                            android:title="Rate Us" />
+                                <item
+                                    android:id="@+id/nav_rate"
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Rate Us" />
+                        </group>
                 </menu>
         </item>
 </menu>

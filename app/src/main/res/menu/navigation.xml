@@ -2,32 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:onClick="privacy_policy"
         android:orderInCategory="100"
         android:title="Privacy Policy"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_terms"
+        android:onClick="terms_and_condition"
         android:orderInCategory="100"
         android:title="Terms and Condition"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_refund"
+        android:onClick="refund_policy"
         android:orderInCategory="100"
         android:title="Refund Policy"
          />
 
     <item
-        android:onClick="digital_marketing"
-        android:id="@+id/action_payment"
+        android:onClick="payment_process"
         android:orderInCategory="100"
         android:title="Payment Process"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_refferal"
+        android:onClick="referral_policy"
         android:orderInCategory="100"
         android:title="Referral Policy"
         app:showAsAction="never" />

@@ -1,11 +1,16 @@
 package adosy.edu.myapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -20,6 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
@@ -39,7 +45,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
     private AppBarConfiguration mAppBarConfiguration;
 
-
     //Navigatio drawer
     //Variables
     DrawerLayout drawerLayout;
@@ -47,6 +52,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     Toolbar toolbar;
     Menu menu;
     TextView textView;
+    Animation bounce;
 
 
     //SERVICES
@@ -69,9 +75,10 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     public void onItemClick(View view, int position) {
         //findResourceAndView(arrList.get(position));
 
-        main_desc.setText("");
-        main_head.setText("");
 
+
+        findResourceAndView(arrList.get(position));
+/*
         try{
             String name = arrList.get(position).toLowerCase().replaceAll("\\s", "_");
 
@@ -126,6 +133,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
         }
 
+ */
+
     }
 
 
@@ -143,6 +152,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         navigationView=findViewById(R.id.nav_view);
         textView=findViewById(R.id.textView);
         toolbar=findViewById(R.id.toolbar);
+        bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle=new
@@ -320,59 +330,76 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_services:
-                        findResourceAndView("services");
-                        break;
-                    case R.id.nav_digital_marketing:
-                        findResourceAndView("digital_marketing");
-                        break;
-                    case R.id.nav_digital_branding:
-                        Toast.makeText(NavigationActivity.this, "branding", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.nav_login:
-                        Toast.makeText(NavigationActivity.this, "login", Toast.LENGTH_SHORT).show();
-                        menu.findItem(R.id.nav_logout).setVisible(true);
-                        menu.findItem(R.id.nav_profile).setVisible(true);
-                        menu.findItem(R.id.nav_login).setVisible(false);
-                        break;
-                    case R.id.nav_logout: menu.findItem(R.id.nav_logout).setVisible(false);
-                        menu.findItem(R.id.nav_profile).setVisible(false);
-                        menu.findItem(R.id.nav_login).setVisible(true);
-                        break;
-                    case R.id.nav_share: Toast.makeText(NavigationActivity.this, "Share", Toast.LENGTH_SHORT).show(); break;
+                if(menuItem.getGroupId()==R.id.gr_services
+                        || menuItem.getGroupId()==R.id.gr_digital_branding
+                        || menuItem.getGroupId()==R.id.gr_digital_marketing
+                        || menuItem.getGroupId()==R.id.gr_digital_art){
+                    Runnable r = new Runnable() {
+                        @Override
+                        public void run() {
+                            findResourceAndView(menuItem.getTitle().toString());
+                        }
+                    };
+                    Handler h = new Handler();
+                    h.postDelayed(r,500);
+                }
+                else {
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_login:
+                            Toast.makeText(NavigationActivity.this, "login", Toast.LENGTH_SHORT).show();
+                            menu.findItem(R.id.nav_logout).setVisible(true);
+                            menu.findItem(R.id.nav_profile).setVisible(true);
+                            menu.findItem(R.id.nav_login).setVisible(false);
+                            break;
+                        case R.id.nav_logout: menu.findItem(R.id.nav_logout).setVisible(false);
+                            menu.findItem(R.id.nav_profile).setVisible(false);
+                            menu.findItem(R.id.nav_login).setVisible(true);
+                            break;
+                        case R.id.nav_share:
+                            Intent i = new Intent(Intent.ACTION_SEND);
+                            i.setType("text/plain");
+                            i.putExtra(Intent.EXTRA_SUBJECT, "Sharing Adosy App link");
+                            i.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id="+getPackageName());
+                            startActivity(Intent.createChooser(i, "Share URL"));
+                            break;
+                        case R.id.nav_rate:
+                            Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id="+getPackageName()));
+                            startActivity(intent);
+
+                            break;
+                    }
                 }
                 drawerLayout.closeDrawer(GravityCompat.START); return true;
-
-                //Toast.makeText(NavigationActivity.this, "lskrg", Toast.LENGTH_SHORT).show();
-
-// add code here what you need on click of items.
-                //return false;
             }
         });
-
-
-
     }
-
-
 
     void findResourceAndView(String stringPass){
         main_desc.setText("");
         main_head.setText("");
+        main_head.setVisibility(View.GONE);
+        main_desc.setVisibility(View.GONE);
+        details_layout.setVisibility(View.GONE);
+        String main_name = stringPass.toLowerCase().replaceAll("\\s", "_")
+                .replaceAll("-","_")
+                .replaceAll(",","_")
+                .replaceAll("&","_")
+                .replaceAll("3","_")
+                .replaceAll("/","_");
+
+        Toast.makeText(this, "="+main_name, Toast.LENGTH_SHORT).show();
 
         try{
-            String name = stringPass.toLowerCase().replaceAll("\\s", "_");
-
+            String name = main_name;
             int resId = getResources().getIdentifier(name, "array", getPackageName());
             String[] stringArray = getResources().getStringArray(resId);
 
             main_head.setText(stringPass);
             main_desc.setText(getResources().getString(getResources().getIdentifier(name+"_main", "string", getPackageName())));
-
-
+            main_head.setVisibility(View.VISIBLE);
+            main_desc.setVisibility(View.VISIBLE);
+            main_desc.startAnimation(bounce);
             arrList.clear();
-
 
             for(int i=0; i<stringArray.length; i++)
                 arrList.add(stringArray[i]);
@@ -383,16 +410,11 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             adapter = new MyRecyclerViewAdapter(this, arrList);
             adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
             recyclerView.setAdapter(adapter);
-
-
-
-
-
         } catch (Exception e){
 
             try{
-                String string ="";
-                String details = stringPass.toLowerCase().replaceAll("\\s", "_");
+
+                String details = main_name;
 
                 String details_head_str = details+"_", details_desc_str = details+"_desc", details_list_str = details+"_list";
 
@@ -410,14 +432,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             }catch (Exception e1){
                 Toast.makeText(this, "No data in string.xml", Toast.LENGTH_SHORT).show();
             }
-
-
-
         }
     }
-
-
-
 
 
     @Override
@@ -429,7 +445,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
     @Override
     public boolean onSupportNavigateUp() {
-
         menu = navigationView.getMenu();
         menu.findItem(R.id.nav_logout).setVisible(false);
         menu.findItem(R.id.nav_profile).setVisible(false);
@@ -440,9 +455,27 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     }
 
 
-    public void digital_marketing(MenuItem item) {
-        Toast.makeText(this, "MenuItem clicked", Toast.LENGTH_SHORT).show();
+    public void refund_policy(MenuItem item) {
+        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://adosy.in/refund-policy/"));
+        startActivity(intent);
     }
+    public void privacy_policy(MenuItem item) {
+        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://adosy.in/privacy-policy-2/"));
+        startActivity(intent);
+    }
+    public void terms_and_condition(MenuItem item) {
+        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://adosy.in/terms-and-condition/"));
+        startActivity(intent);
+    }
+    public void payment_process(MenuItem item) {
+        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://adosy.in/payment-process/"));
+        startActivity(intent);
+    }
+    public void referral_policy(MenuItem item) {
+        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://adosy.in/referral-policy/"));
+        startActivity(intent);
+    }
+
 
     public void digital(MenuItem item) {
         finish();
@@ -466,28 +499,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-
-            case R.id.nav_gallery:
-                Toast.makeText(getApplicationContext(), "Gallery", Toast.LENGTH_LONG).show();
-                return true;
-
-            case R.id.action_payment:
-                Toast.makeText(getApplicationContext(), "Payment", Toast.LENGTH_LONG).show();
-                return true;
-
-            case R.id.action_refund:
-                Toast.makeText(getApplicationContext(), "Refund", Toast.LENGTH_LONG).show();
-                return true;
-
-            case R.id.nav_slideshow:
-                Toast.makeText(getApplicationContext(), "slidesh", Toast.LENGTH_LONG).show();
-                return true;
-
-
-
-
-        }
 
         return false;
     }
@@ -508,8 +519,24 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
-        else
-        {super.onBackPressed();
+        else {
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)//set icon
+                    .setTitle("Exit")//set title
+                    .setMessage("Are you sure to Exit ?")//set message
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {//set positive button
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {//set negative button
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getApplicationContext(),"Nothing Happened", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .show();
         }
     }
 

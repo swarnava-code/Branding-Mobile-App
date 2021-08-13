@@ -22,11 +22,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:animateLayoutChanges="true"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
                     android:text="Our Digital Services"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto_black"
@@ -34,18 +36,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:padding="10dp"
                     android:text="@string/services_main"
                     android:id="@+id/main_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvServices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvServices"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
 
             <include
                 layout="@layout/details"/>
@@ -81,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <SearchView
-            android:background="#6A000000"
+            android:background="#E0FBFF"
 
             android:id="@+id/search"
             android:layout_width="wrap_content"
