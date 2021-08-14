@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,6 +56,13 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     Animation bounce;
 
 
+    LinearLayout why_choose_us_layout;
+    TextView choose_title_1, choose_title_2, choose_title_3, choose_title_4,
+            choose_body_1, choose_body_2, choose_body_3, choose_body_4;
+    ImageButton choose_btn1, choose_btn2, choose_btn3, choose_btn4;
+
+
+
     //SERVICES
     int content_id[] = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.adosy_logo};
     int noOfContent = 0, loopi=0;
@@ -69,77 +77,14 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     AutoCompleteTextView autoCompleteTextView;
     SearchView searchView;
 
-    //RecyclerView
 
+
+
+    //RecyclerView
     @Override
     public void onItemClick(View view, int position) {
-        //findResourceAndView(arrList.get(position));
-
-
-
         findResourceAndView(arrList.get(position));
-/*
-        try{
-            String name = arrList.get(position).toLowerCase().replaceAll("\\s", "_");
-
-            int resId = getResources().getIdentifier(name, "array", getPackageName());
-            String[] stringArray = getResources().getStringArray(resId);
-
-            main_head.setText(arrList.get(position));
-            main_desc.setText(getResources().getString(getResources().getIdentifier(name+"_main", "string", getPackageName())));
-
-
-            arrList.clear();
-
-
-            for(int i=0; i<stringArray.length; i++)
-                arrList.add(stringArray[i]);
-
-            // set up the RecyclerView
-            recyclerView = findViewById(R.id.rvServices);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            adapter = new MyRecyclerViewAdapter(this, arrList);
-            adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
-            recyclerView.setAdapter(adapter);
-
-
-
-
-
-        } catch (Exception e){
-
-            try{
-                String string ="";
-                String details = arrList.get(position).toLowerCase().replaceAll("\\s", "_");
-
-                String details_head_str = details+"_", details_desc_str = details+"_desc", details_list_str = details+"_list";
-
-                //int resId = getResources().getIdentifier(, "string", getPackageName());
-                //string = getResources().getString(getResources().getIdentifier(, "string", getPackageName()));
-
-                details_desc.setText(getResources().getString(getResources().getIdentifier(details_desc_str, "string", getPackageName())));
-                details_list.setText(getResources().getString(getResources().getIdentifier(details_list_str, "string", getPackageName())));
-                details_head.setText(arrList.get(position));
-                details_imageview.setImageResource(getResources().getIdentifier(details, "drawable", getPackageName()));
-                //main_head, main_desc
-                //.setText(string);
-
-                details_layout.setVisibility(View.VISIBLE);
-            }catch (Exception e1){
-                Toast.makeText(this, "No data in string.xml", Toast.LENGTH_SHORT).show();
-            }
-
-
-
-        }
-
- */
-
     }
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +97,19 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         navigationView=findViewById(R.id.nav_view);
         textView=findViewById(R.id.textView);
         toolbar=findViewById(R.id.toolbar);
+        why_choose_us_layout = findViewById(R.id.why_choose_us);
+        choose_title_1 = findViewById(R.id.choose_title_1);
+        choose_title_2 = findViewById(R.id.choose_title_2);
+        choose_title_3 = findViewById(R.id.choose_title_3);
+        choose_title_4 = findViewById(R.id.choose_title_4);
+        choose_body_1 = findViewById(R.id.choose_body_1);
+        choose_body_2 = findViewById(R.id.choose_body_2);
+        choose_body_3 = findViewById(R.id.choose_body_3);
+        choose_body_4 = findViewById(R.id.choose_body_4);
+        choose_btn1 = findViewById(R.id.choose_ib1);
+        choose_btn2 = findViewById(R.id.choose_ib2);
+        choose_btn3 = findViewById(R.id.choose_ib3);
+        choose_btn4 = findViewById(R.id.choose_ib4);
         bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         navigationView.bringToFront();
@@ -161,7 +119,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -380,6 +337,9 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         main_head.setVisibility(View.GONE);
         main_desc.setVisibility(View.GONE);
         details_layout.setVisibility(View.GONE);
+        why_choose_us_layout.setVisibility(View.GONE);
+        hideAllChooseBody();
+
         String main_name = stringPass.toLowerCase().replaceAll("\\s", "_")
                 .replaceAll("-","_")
                 .replaceAll(",","_")
@@ -387,7 +347,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 .replaceAll("3","_")
                 .replaceAll("/","_");
 
-        Toast.makeText(this, "="+main_name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "="+main_name, Toast.LENGTH_SHORT).show();
 
         try{
             String name = main_name;
@@ -410,24 +370,43 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             adapter = new MyRecyclerViewAdapter(this, arrList);
             adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
             recyclerView.setAdapter(adapter);
-        } catch (Exception e){
+
+
+
+
+            // miniature_models_choose_body
+
 
             try{
+                String [] choose_title = getResources().getStringArray(getResources().getIdentifier(main_name+"_choose_title", "array", getPackageName()));
+                String [] choose_body = getResources().getStringArray(getResources().getIdentifier(main_name+"_choose_body", "array", getPackageName()));
 
+                choose_title_1.setText(choose_title[0]);
+                choose_title_2.setText(choose_title[1]);
+                choose_title_3.setText(choose_title[2]);
+                choose_title_4.setText(choose_title[3]);
+
+                choose_body_1.setText(choose_body[0]);
+                choose_body_2.setText(choose_body[1]);
+                choose_body_3.setText(choose_body[2]);
+                choose_body_4.setText(choose_body[3]);
+
+                why_choose_us_layout.setVisibility(View.VISIBLE);
+            }catch (Exception e){
+
+            }
+
+
+
+
+        } catch (Exception e){
+            try{
                 String details = main_name;
-
                 String details_head_str = details+"_", details_desc_str = details+"_desc", details_list_str = details+"_list";
-
-                //int resId = getResources().getIdentifier(, "string", getPackageName());
-                //string = getResources().getString(getResources().getIdentifier(, "string", getPackageName()));
-
                 details_desc.setText(getResources().getString(getResources().getIdentifier(details_desc_str, "string", getPackageName())));
                 details_list.setText(getResources().getString(getResources().getIdentifier(details_list_str, "string", getPackageName())));
                 details_head.setText(stringPass);
                 details_imageview.setImageResource(getResources().getIdentifier(details, "drawable", getPackageName()));
-                //main_head, main_desc
-                //.setText(string);
-
                 details_layout.setVisibility(View.VISIBLE);
             }catch (Exception e1){
                 Toast.makeText(this, "No data in string.xml", Toast.LENGTH_SHORT).show();
@@ -544,4 +523,75 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
     }
+
+
+    public void choose_title_1(View view) {
+        ImageButton imageButton = (ImageButton) view;
+
+        if(choose_body_1.getVisibility()==View.VISIBLE){
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            choose_body_1.setVisibility(View.GONE);
+        }
+
+        else{
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            choose_body_1.setVisibility(View.VISIBLE);
+        }
+
+    }
+    public void choose_title_2(View view) {
+        ImageButton imageButton = (ImageButton) view;
+
+        if(choose_body_2.getVisibility()==View.VISIBLE){
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            choose_body_2.setVisibility(View.GONE);
+        }
+
+        else{
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            choose_body_2.setVisibility(View.VISIBLE);
+        }
+
+    }
+    public void choose_title_3(View view) {
+
+        ImageButton imageButton = (ImageButton) view;
+
+        if(choose_body_3.getVisibility()==View.VISIBLE){
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            choose_body_3.setVisibility(View.GONE);
+        }
+
+        else{
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            choose_body_3.setVisibility(View.VISIBLE);
+        }
+
+    }
+    public void choose_title_4(View view) {
+        ImageButton imageButton = (ImageButton) view;
+
+        if(choose_body_4.getVisibility()==View.VISIBLE){
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            choose_body_4.setVisibility(View.GONE);
+        }
+
+        else{
+            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            choose_body_4.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    void hideAllChooseBody(){
+        choose_body_1.setVisibility(View.GONE);
+        choose_body_2.setVisibility(View.GONE);
+        choose_body_3.setVisibility(View.GONE);
+        choose_body_4.setVisibility(View.GONE);
+        choose_btn1.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+        choose_btn2.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+        choose_btn3.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+        choose_btn4.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+    }
+
 }

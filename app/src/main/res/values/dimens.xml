@@ -15,5 +15,7 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="choose_margin">6dp</dimen>
+
 
 </resources>
