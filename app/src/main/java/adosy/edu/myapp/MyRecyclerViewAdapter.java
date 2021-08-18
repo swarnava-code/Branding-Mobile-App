@@ -43,7 +43,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         //To load image in each row
         Resources res = holder.itemView.getContext().getResources();
-        String details = animal.toLowerCase().replaceAll("\\s", "_");
+        String details = animal.toLowerCase().replaceAll("\\s", "_")
+                .replaceAll("3", "_");
         holder.myImageView.setImageResource(res.getIdentifier(details, "drawable", context_global.getPackageName()));
 
     }

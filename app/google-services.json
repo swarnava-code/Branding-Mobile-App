@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1079245725646",
+    "project_id": "adosy-561e3",
+    "storage_bucket": "adosy-561e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079245725646:android:a78f8e6fec7ba04e3c559f",
+        "android_client_info": {
+          "package_name": "adosy.edu.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079245725646-reb9s4nvj6vp6jkm7ieg6h0ir4oipjdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYtdaTR2pYVStRcMbzF8_2A3QvizSaZBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079245725646-reb9s4nvj6vp6jkm7ieg6h0ir4oipjdf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

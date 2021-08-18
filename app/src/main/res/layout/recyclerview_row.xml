@@ -34,6 +34,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:src="@drawable/sample_logo" />
 
             <TextView
+                android:padding="20dp"
                 android:id="@+id/tvRow"
                 android:gravity="center"
                 android:layout_gravity="center"

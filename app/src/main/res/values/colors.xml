@@ -23,4 +23,6 @@
 
     <color name="et_contact_bg">#ffffff</color>
 
+    <color name="txt_on_body_bg">#000000</color>
+
 </resources>

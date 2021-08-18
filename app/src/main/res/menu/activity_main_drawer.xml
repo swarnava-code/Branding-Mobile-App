@@ -5,18 +5,18 @@
 
         <group android:id="@+id/gr_services">
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/ic_baseline_home_repair_service_24"
                                     android:title="Services" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/digital_marketing"
                                     android:title="Digital Marketing" />
 
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/digital_branding"
                                     android:title="Digital Branding" />
 
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/digital_art"
                                     android:title="Digital Art" />
 
 
@@ -26,22 +26,22 @@
                 <menu>
                         <group android:id="@+id/gr_digital_marketing">
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/website_development"
                                     android:title="Website Development" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/application_development"
                                     android:title="Application Development" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/social_media_marketing"
                                     android:title="Social Media Marketing" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/search_engine_optimization"
                                     android:title="Search Engine Optimization" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/paid_per_click"
                                     android:title="Paid Per Click Management" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/email_marketing"
                                     android:title="Email Marketing" />
                         </group>
                 </menu>
@@ -51,22 +51,22 @@
                 <menu>
                         <group android:id="@+id/gr_digital_branding">
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/real_estate_branding"
                                     android:title="Real Estate Branding" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/educational_branding"
                                     android:title="Educational Branding" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/hospitality_branding"
                                     android:title="Hospitality Branding" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/industrial_branding"
                                     android:title="Industrial Branding" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/retail_branding"
                                     android:title="Retail Branding" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/automobile_branding"
                                     android:title="Automobile Branding" />
                         </group>
                 </menu>
@@ -76,22 +76,22 @@
                 <menu>
                         <group android:id="@+id/gr_digital_art">
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/drone_videography"
                                     android:title="Drone Videography" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/_d_animation"
                                     android:title="3D Animation" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/miniature_models"
                                     android:title="Miniature Models" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/brochure_designing"
                                     android:title="Brochure Designing" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/logo_designing"
                                     android:title="Logo Designing" />
                                 <item
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/content_writing"
                                     android:title="Content Writing" />
                         </group>
                 </menu>
@@ -126,12 +126,12 @@
                         <group android:id="@+id/gr_communicate">
                                 <item
                                     android:id="@+id/nav_share"
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/ic_baseline_share_24"
                                     android:title="Share" />
 
                                 <item
                                     android:id="@+id/nav_rate"
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/ic_outline_star_rate_24"
                                     android:title="Rate Us" />
                         </group>
                 </menu>

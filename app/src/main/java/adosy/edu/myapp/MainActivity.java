@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 //   /*
-                int resId = getResources().getIdentifier("services", "array", getPackageName());
-                String[] stringArray = getResources().getStringArray(resId);
+                //int resId = getResources().getIdentifier("services", "array", getPackageName());
+                //String[] stringArray = getResources().getStringArray(resId);
                 Bundle b = new Bundle();
-                b.putStringArray("key", stringArray);
+                b.putString("key", "Services");
                 Intent i = new Intent(getApplicationContext(), NavigationActivity.class);
                 i.putExtras(b);
                 startActivity(i);

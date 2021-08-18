@@ -80,6 +80,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
 
 
+    ImageView contact_controller, contact1, contact2, contact3;
+    boolean close = true;
 
     //RecyclerView
     @Override
@@ -165,6 +167,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         //details = findViewById(R.id.details);
 
         Bundle b = this.getIntent().getExtras();
+        findResourceAndView(b.getString("key"));
 
         imageView = findViewById(R.id.header_content);
         autoCompleteTextView = findViewById(R.id.auto);
@@ -174,8 +177,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         digital_marketing_layout = findViewById(R.id.digital_marketing_layout);
 
 
-        for(int i=0; i<b.getStringArray("key").length; i++)
-            arrList.add(b.getStringArray("key")[i]);
+        //for(int i=0; i<b.getStringArray("key").length; i++)
+            //arrList.add(b.getStringArray("key")[i]);
 
 
 
@@ -289,6 +292,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view); // initiate a Navigation View
 // implement setNavigationSelectedListener event
+
+        navigationView.setItemIconTintList(null);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -335,6 +340,56 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 drawerLayout.closeDrawer(GravityCompat.START); return true;
             }
         });
+
+
+
+
+        //######################################################################
+
+
+
+
+
+        contact_controller = findViewById(R.id.contact_controller);
+        contact1 = findViewById(R.id.contact1);
+        contact2 = findViewById(R.id.contact2);
+        contact3 = findViewById(R.id.contact3);
+        close = true;
+
+        contact_controller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(close){
+                    close = false;
+                    contact_controller.setImageResource(R.drawable.ic_baseline_close_24);
+                    contact1.setVisibility(View.VISIBLE);
+                    contact2.setVisibility(View.VISIBLE);
+                    contact3.setVisibility(View.VISIBLE);
+                }
+                else{
+                    close = true;
+                    contact_controller.setImageResource(R.drawable.ic_baseline_contact_phone_24);
+                    contact1.setVisibility(View.GONE);
+                    contact2.setVisibility(View.GONE);
+                    contact3.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     void findResourceAndView(String stringPass){
@@ -604,5 +659,62 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         Intent i=new Intent(getApplicationContext(), ContactActivity.class);
         startActivity(i);
     }
+
+    public void search(View view){
+        Intent i=new Intent(getApplicationContext(), SearchActivity.class);
+        startActivity(i);
+    }
+
+    //#############################################################################################
+
+    public void mail(View view){
+        String[] TO = {"akhilesh.shaw@adosy.in"};
+        String[] CC = {"gourav.kapoor@adosy.in"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            //Log.i("Finished sending email...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(NavigationActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void call(View view){
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "+919038026497", null));
+        startActivity(intent);
+        //Toast.makeText(this, "call", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void map(View view){
+        String map = "https://www.google.com/maps/place/Adosy/@22.5487367,88.3595611,15z/data=!4m5!3m4!1s0x0:0x990e75adfb14ef22!8m2!3d22.5487154!4d88.3596674";
+
+        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+        startActivity(intent);
+
+        //Toast.makeText(this, "map", Toast.LENGTH_SHORT).show();
+
+    }
+
+//firebase firestore
+//https://www.youtube.com/watch?v=RiHGwJ_u27k
+
+
+
+
+
+
+
+
 
 }
