@@ -16,6 +16,10 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="choose_margin">6dp</dimen>
-
+    <dimen name="choose_title_txt">12dp</dimen>
+    <dimen name="choose_body_txt">15dp</dimen>
+    <dimen name="details_body_txt">15dp</dimen>
+    <dimen name="details_list_txt">15dp</dimen>
+    <dimen name="header_body_txt">15dp</dimen>
 
 </resources>

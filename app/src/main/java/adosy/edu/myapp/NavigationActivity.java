@@ -48,6 +48,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
     //Navigatio drawer
     //Variables
+    FloatingActionButton fab;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -91,12 +92,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-
         //Nav Draw.
         drawerLayout=findViewById(R.id.drawer_layout);
         navigationView=findViewById(R.id.nav_view);
         textView=findViewById(R.id.textView);
         toolbar=findViewById(R.id.toolbar);
+        //fab = findViewById(R.id.fab);
         why_choose_us_layout = findViewById(R.id.why_choose_us);
         choose_title_1 = findViewById(R.id.choose_title_1);
         choose_title_2 = findViewById(R.id.choose_title_2);
@@ -122,6 +123,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /*
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +133,9 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 startActivity(i);
             }
         });
+
+         */
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -592,6 +598,11 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         choose_btn2.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
         choose_btn3.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
         choose_btn4.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+    }
+
+    public void contact(View view){
+        Intent i=new Intent(getApplicationContext(), ContactActivity.class);
+        startActivity(i);
     }
 
 }

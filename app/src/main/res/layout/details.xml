@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:gravity="center"
         android:id="@+id/details_head"
@@ -30,6 +31,7 @@
             android:src="@drawable/sample_logo" />
 
         <TextView
+            android:textSize="@dimen/details_body_txt"
             android:id="@+id/details_desc"
             android:padding="5dp"
             android:layout_width="match_parent"
@@ -39,6 +41,7 @@
     </LinearLayout>
 
     <TextView
+        android:textSize="@dimen/details_list_txt"
         android:id="@+id/details_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

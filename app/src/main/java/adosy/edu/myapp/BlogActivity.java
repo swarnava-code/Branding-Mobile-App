@@ -10,26 +10,26 @@ import android.webkit.WebViewClient;
 public class BlogActivity extends AppCompatActivity  {
 
     WebView webView;
-    String url = "https://vaishnavibestdeal.com/";  //"https://adosy.in/category/blogs/";
+    String url = "http://localhost/lms/";  //"https://adosy.in/category/blogs/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog);
 
-        /*
+
         webView = findViewById(R.id.webView);
         webView.loadUrl(url);
-         */
 
 
-/*
+
+
         WebView myView = findViewById(R.id.webView);
         myView.setWebViewClient(new WebViewClient());
         myView.getSettings().setJavaScriptEnabled(true);
-        myView.loadUrl("https://www.stackoverflow.com");
+        myView.loadUrl(url);
 
- */
+
 
 /*
         webView = (WebView)findViewById(R.id.webView);
