@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/why_choose_us"
     android:animateLayoutChanges="true"
-    android:visibility="gone"
+    android:visibility="visible"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,9 +21,7 @@
         android:layout_height="wrap_content"
         android:text="Why Choose Us"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <androidx.cardview.widget.CardView
             app:cardCornerRadius="10dp"
             android:layout_marginBottom="@dimen/choose_margin"
@@ -33,6 +31,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -49,22 +48,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+
                         <ImageButton
                             android:id="@+id/choose_ib1"
                             style="@style/icon_button"
-                            android:layout_marginEnd="@dimen/list_left_margin_text_btn"
-                            android:background="?android:attr/selectableItemBackground"
+                            android:background="?selectableItemBackgroundBorderless"
                             android:onClick="choose_title_1"
                             android:src="@drawable/ic_baseline_arrow_drop_down_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                            android:src="@drawable/sample_logo"
+                            android:src="@drawable/services"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -105,7 +105,7 @@
 
         </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -139,10 +139,9 @@
 
                         <ImageButton
                             android:id="@+id/choose_ib2"
-                            style="@style/icon_button"
-                            android:layout_marginEnd="@dimen/list_left_margin_text_btn"
-                            android:background="?android:attr/selectableItemBackground"
                             android:onClick="choose_title_2"
+                            style="@style/icon_button"
+                            android:background="?selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_arrow_drop_down_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +151,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                            android:src="@drawable/sample_logo"
+                            android:src="@drawable/ic_baseline_dashboard_customize_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -228,20 +227,18 @@
 
                         <ImageButton
                             android:id="@+id/choose_ib3"
-                            style="@style/icon_button"
-                            android:layout_marginEnd="@dimen/list_left_margin_text_btn"
-                            android:background="?android:attr/selectableItemBackground"
                             android:onClick="choose_title_3"
+                            style="@style/icon_button"
+                            android:background="?selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_arrow_drop_down_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                            android:src="@drawable/sample_logo"
+                            android:src="@drawable/ic_baseline_remove_red_eye_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -317,10 +314,9 @@
 
                         <ImageButton
                             android:id="@+id/choose_ib4"
-                            style="@style/icon_button"
-                            android:layout_marginEnd="@dimen/list_left_margin_text_btn"
-                            android:background="?android:attr/selectableItemBackground"
                             android:onClick="choose_title_4"
+                            style="@style/icon_button"
+                            android:background="?selectableItemBackgroundBorderless"
                             android:src="@drawable/ic_baseline_arrow_drop_down_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -330,7 +326,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                            android:src="@drawable/sample_logo"
+                            android:src="@drawable/ic_baseline_self_improvement_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />

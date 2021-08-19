@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -30,6 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -54,7 +56,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     Toolbar toolbar;
     Menu menu;
     TextView textView;
-    Animation bounce;
+    Animation anim_bounce, anim_slide_up_in, anim_slide_left_in, anim_slide_right_in ;
 
 
     LinearLayout why_choose_us_layout;
@@ -67,7 +69,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     //SERVICES
     int content_id[] = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.adosy_logo};
     int noOfContent = 0, loopi=0;
-    ImageView imageView, details_imageview;
+    ImageView imageView, details_imageview, main_image_view;
     TextView details_desc, details_head, details_list, main_head, main_desc;
     LinearLayout digital_marketing_layout, details_layout;
 
@@ -82,6 +84,11 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
     ImageView contact_controller, contact1, contact2, contact3;
     boolean close = true;
+
+
+
+    NestedScrollView nestedScrollView;
+
 
     //RecyclerView
     @Override
@@ -113,7 +120,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         choose_btn2 = findViewById(R.id.choose_ib2);
         choose_btn3 = findViewById(R.id.choose_ib3);
         choose_btn4 = findViewById(R.id.choose_ib4);
-        bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        main_image_view = findViewById(R.id.main_image_view);
+        nestedScrollView = findViewById(R.id.nestedScrollView);
+        anim_bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        anim_slide_up_in = AnimationUtils.loadAnimation(this, R.anim.slide_up_in_);
+        anim_slide_left_in = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
+        anim_slide_right_in = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle=new
@@ -126,17 +138,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(), ContactActivity.class);
-                startActivity(i);
-            }
-        });
-
-         */
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -177,13 +178,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         digital_marketing_layout = findViewById(R.id.digital_marketing_layout);
 
 
-        //for(int i=0; i<b.getStringArray("key").length; i++)
-            //arrList.add(b.getStringArray("key")[i]);
-
-
-
-
-
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvServices);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -191,103 +185,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
         recyclerView.setAdapter(adapter);
 
-
-
-
-        String[] suggestion = {"Digital Marketing", "Website Development", "Dynamic Website", "E-Commerce Website", "Customized Website"};
-        //try{
-
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, suggestion);
-        //autoCompleteTextView.setAdapter(adapter);
-        //searchView.setAppSearchData(bundle);//bundle
-        //searchView.setSuggestionsAdapter(adapter);
-
-
-
-/*
-            String[] columnNames = {"_id","text"};
-            MatrixCursor cursor = new MatrixCursor(columnNames);
-            String[] array = getResources().getStringArray(R.array.services); //if strings are in resources
-            String[] temp = new String[2];
-            int id = 0;
-            for(String item : array){
-                temp[0] = Integer.toString(id++);
-                temp[1] = item;
-                cursor.addRow(temp);
-            }
-            String[] from = {"text"};
-            int[] to = {R.id.name_entry};
-            CursorAdapter busStopCursorAdapter = new SimpleCursorAdapter(getApplicationContext(), R.layout.listentry, cursor, from, to);
-
-            searchView.setSuggestionsAdapter(busStopCursorAdapter);
-
- */
-
-        //android.widget.SearchView search = findViewById(R.id.search);
-
-
-
-
-
-
-/*
-            List<String> items = Lists.newArrayList(new String[] {"aaaaa", "bbbbb", "ccccc", "ddddd"});
-            SearchView searchView = (SearchView) findViewById(R.id.search_view);
-            SearchView.SearchAutoComplete searchSrcTextView = (SearchView.SearchAutoComplete) findViewById(android.support.v7.appcompat.R.id.search_src_text);
-            searchSrcTextView.setThreshold(1);
-            searchSrcTextView.setAdapter(new SuggestionAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, items));
-            searchSrcTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    return;
-                }
-            });
-
- */
-
-/*
-    }
-        catch(
-    Resources.NotFoundException e){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, suggestion);
-        autoCompleteTextView.setAdapter(adapter);
-        //searchView.setSuggestionsAdapter(adapter);
-    }
-
- */
-
-/*
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int p, long l) {
-            //hideKeyboard(OpCodeConvertor.this);
-
-            String itemClicked = autoCompleteTextView.getText().toString();
-            autoCompleteTextView.setText("");
-            findResourceAndView(itemClicked);
-
- */
-
-
-
-        //Toast.makeText(ServicesActivity.this, ":"+itemClicked, Toast.LENGTH_SHORT).show();
-
-
-
-    //}
-    //});
-
-
-
-
-    //loopAnim();
-
-
-        //SERVICES END
-
-
-
-        //setNavigationViewListener();
 
 
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view); // initiate a Navigation View
@@ -326,7 +223,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                         case R.id.nav_share:
                             Intent i = new Intent(Intent.ACTION_SEND);
                             i.setType("text/plain");
-                            i.putExtra(Intent.EXTRA_SUBJECT, "Sharing Adosy App link");
+                            i.putExtra(Intent.EXTRA_SUBJECT, "Adosy App link");
                             i.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id="+getPackageName());
                             startActivity(Intent.createChooser(i, "Share URL"));
                             break;
@@ -356,26 +253,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         contact3 = findViewById(R.id.contact3);
         close = true;
 
-        contact_controller.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(close){
-                    close = false;
-                    contact_controller.setImageResource(R.drawable.ic_baseline_close_24);
-                    contact1.setVisibility(View.VISIBLE);
-                    contact2.setVisibility(View.VISIBLE);
-                    contact3.setVisibility(View.VISIBLE);
-                }
-                else{
-                    close = true;
-                    contact_controller.setImageResource(R.drawable.ic_baseline_contact_phone_24);
-                    contact1.setVisibility(View.GONE);
-                    contact2.setVisibility(View.GONE);
-                    contact3.setVisibility(View.GONE);
-                }
 
-            }
-        });
 
 
 
@@ -393,10 +271,14 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     }
 
     void findResourceAndView(String stringPass){
+        /*
         main_desc.setText("");
         main_head.setText("");
         main_head.setVisibility(View.GONE);
         main_desc.setVisibility(View.GONE);
+
+         */
+
         details_layout.setVisibility(View.GONE);
         why_choose_us_layout.setVisibility(View.GONE);
         hideAllChooseBody();
@@ -408,6 +290,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 .replaceAll("3","_")
                 .replaceAll("/","_");
 
+        if(main_name.equals(""))
+            main_name = "services";
+
+
+        //nestedScrollView.scrollTo(0,0);
+
         //Toast.makeText(this, "="+main_name, Toast.LENGTH_SHORT).show();
 
         try{
@@ -418,9 +306,17 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             main_head.setText(stringPass);
             main_desc.setText(getResources().getString(getResources().getIdentifier(name+"_main", "string", getPackageName())));
             main_head.setVisibility(View.VISIBLE);
+            main_head.startAnimation(anim_slide_right_in);
             main_desc.setVisibility(View.VISIBLE);
-            main_desc.startAnimation(bounce);
+            main_desc.startAnimation(anim_slide_left_in);
             arrList.clear();
+
+            //To load image in each row
+            main_image_view.setImageResource(getResources().getIdentifier(main_name, "drawable", getPackageName()));
+            main_image_view.startAnimation(anim_bounce);
+
+
+
 
             for(int i=0; i<stringArray.length; i++)
                 arrList.add(stringArray[i]);
@@ -431,12 +327,9 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             adapter = new MyRecyclerViewAdapter(this, arrList);
             adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
             recyclerView.setAdapter(adapter);
+            recyclerView.startAnimation(anim_bounce);
 
-
-
-
-            // miniature_models_choose_body
-
+            nestedScrollView.scrollTo(0,0);
 
             try{
                 String [] choose_title = getResources().getStringArray(getResources().getIdentifier(main_name+"_choose_title", "array", getPackageName()));
@@ -453,6 +346,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 choose_body_4.setText(choose_body[3]);
 
                 why_choose_us_layout.setVisibility(View.VISIBLE);
+                why_choose_us_layout.startAnimation(anim_slide_up_in);
             }catch (Exception e){
 
             }
@@ -461,15 +355,23 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
 
         } catch (Exception e){
-            try{
+            try {
                 String details = main_name;
                 String details_head_str = details+"_", details_desc_str = details+"_desc", details_list_str = details+"_list";
-                details_desc.setText(getResources().getString(getResources().getIdentifier(details_desc_str, "string", getPackageName())));
-                details_list.setText(getResources().getString(getResources().getIdentifier(details_list_str, "string", getPackageName())));
-                details_head.setText(stringPass);
-                details_imageview.setImageResource(getResources().getIdentifier(details, "drawable", getPackageName()));
                 details_layout.setVisibility(View.VISIBLE);
-            }catch (Exception e1){
+                details_desc.setText(getResources().getString(getResources().getIdentifier(details_desc_str, "string", getPackageName())));
+                details_desc.startAnimation(anim_slide_right_in);
+                details_list.setText(getString(R.string.list_point)+" "+getResources().getString(getResources().getIdentifier(details_list_str, "string", getPackageName())).replaceAll("\n",getString(R.string.list_point)));
+                details_list.startAnimation(anim_slide_right_in);
+                details_head.setText(stringPass);
+                details_head.startAnimation(anim_slide_up_in);
+                details_imageview.setImageResource(getResources().getIdentifier(details, "drawable", getPackageName()));
+                details_imageview.startAnimation(anim_slide_left_in);
+                why_choose_us_layout.setVisibility(View.VISIBLE);
+                //details_layout.startAnimation(anim_slide_left_in);
+
+
+            } catch (Exception e1){
                 Toast.makeText(this, "No data in string.xml", Toast.LENGTH_SHORT).show();
             }
         }
@@ -573,7 +475,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {//set negative button
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getApplicationContext(),"Nothing Happened", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(),"Nothing Happened", Toast.LENGTH_LONG).show();
                         }
                     })
                     .show();
@@ -590,12 +492,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         ImageButton imageButton = (ImageButton) view;
 
         if(choose_body_1.getVisibility()==View.VISIBLE){
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
             choose_body_1.setVisibility(View.GONE);
         }
 
         else{
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_up_24);
             choose_body_1.setVisibility(View.VISIBLE);
         }
 
@@ -604,12 +506,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         ImageButton imageButton = (ImageButton) view;
 
         if(choose_body_2.getVisibility()==View.VISIBLE){
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
             choose_body_2.setVisibility(View.GONE);
         }
 
         else{
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_up_24);
             choose_body_2.setVisibility(View.VISIBLE);
         }
 
@@ -619,12 +521,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         ImageButton imageButton = (ImageButton) view;
 
         if(choose_body_3.getVisibility()==View.VISIBLE){
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
             choose_body_3.setVisibility(View.GONE);
         }
 
         else{
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_up_24);
             choose_body_3.setVisibility(View.VISIBLE);
         }
 
@@ -633,12 +535,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         ImageButton imageButton = (ImageButton) view;
 
         if(choose_body_4.getVisibility()==View.VISIBLE){
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
             choose_body_4.setVisibility(View.GONE);
         }
 
         else{
-            imageButton.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_up_24);
+            imageButton.setImageResource(R.drawable.ic_baseline_arrow_drop_up_24);
             choose_body_4.setVisibility(View.VISIBLE);
         }
 
@@ -649,10 +551,11 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         choose_body_2.setVisibility(View.GONE);
         choose_body_3.setVisibility(View.GONE);
         choose_body_4.setVisibility(View.GONE);
-        choose_btn1.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
-        choose_btn2.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
-        choose_btn3.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
-        choose_btn4.setBackgroundResource(R.drawable.ic_baseline_arrow_drop_down_24);
+
+        choose_btn1.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
+        choose_btn2.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
+        choose_btn3.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
+        choose_btn4.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24);
     }
 
     public void contact(View view){
@@ -711,10 +614,23 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
 
 
+    public void contact_controller(View view){
+        if(close){
+            close = false;
+            contact_controller.setImageResource(R.drawable.ic_baseline_close_24);
+            contact1.setVisibility(View.VISIBLE);
+            contact2.setVisibility(View.VISIBLE);
+            contact3.setVisibility(View.VISIBLE);
+        }
+        else{
+            close = true;
+            contact_controller.setImageResource(R.drawable.ic_baseline_contact_phone_24);
+            contact1.setVisibility(View.GONE);
+            contact2.setVisibility(View.GONE);
+            contact3.setVisibility(View.GONE);
+        }
 
-
-
-
+    }
 
 
 }

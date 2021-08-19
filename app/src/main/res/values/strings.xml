@@ -14,6 +14,9 @@
         \n gourav.kapoor@adosy.in</string>
     <string name="working_hours">Mon-Fri: 10AM-6PM
             \n Sat : 10AM-3PM</string>
+    <string name="list_point">\n✔️ </string>
+
+
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -878,9 +881,7 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>Our brochure &amp; flyer design services are reasonably priced.</item>
     </string-array>
     <string-array name="logo_designing">
-        <item></item>
-        <item></item>
-        <item></item>
+
     </string-array>
 
 
@@ -899,9 +900,7 @@ Inform your customers about new offerings, sales or special promotions related t
 
 
     <string-array name="content_writing">
-        <item></item>
-        <item></item>
-        <item></item>
+
     </string-array>
     <string-array name="content_writing_choose_title">
         <item>CUSTOMIZED ARTICLE WRITING</item>
@@ -943,10 +942,6 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>Dynamic Website</item>
         <item>E-Commerce Website</item>
         <item>Customized Website</item>
-        <item>FAST AND SECURED WEBSITE</item>
-        <item>SEO OPTIMIZED WEB PAGES</item>
-        <item>DEDICATED SUPPORT</item>
-        <item>FULLY CUSTOMIZED</item>
         <item>Android Application Development</item>
         <item>IOS Application Development</item>
         <item>Hybrid Application Development</item>
@@ -980,6 +975,16 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>Product Catalog Design</item>
         <item>Sales Brochure Design</item>
     </string-array>
+
+    <string name="client1">SUBHAJIT DAS</string>
+    <string name="client2">MITHUN NASKAR</string>
+    <string name="client3">DHIREN PATEL</string>
+    <string name="client4">SUNAINA SINGH</string>
+
+    <string name="client1_says">Adosy has always delivered what it has promised. Service excellence is very assured at this company.</string>
+    <string name="client2_says">All the service assured by Adosy was delivered before the due date. I am very satisfied with the price even.</string>
+    <string name="client3_says">I am very glad and happy because Adosy has helped my company grow in the digital world.</string>
+    <string name="client4_says">I was very unsure of any digital marketing agency but Adosy has showed their hard work when I handed them the project.</string>
 
 
 </resources>

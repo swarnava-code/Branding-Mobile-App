@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
@@ -35,26 +36,29 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int p, long l) {
                 String itemClicked = autoCompleteTextView.getText().toString();
                 autoCompleteTextView.setText("");
-                Bundle b = new Bundle();
-                b.putString("key", itemClicked);
-                Intent i = new Intent(getApplicationContext(), NavigationActivity.class);
-                i.putExtras(b);
-                startActivity(i);
-                finish();
+                go_main_page(itemClicked);
             }
         });
 
+    }
 
-
-
-
-
-
-
+    void go_main_page(String itemClicked){
+        Bundle b = new Bundle();
+        b.putString("key", itemClicked);
+        Intent i = new Intent(getApplicationContext(), NavigationActivity.class);
+        i.putExtras(b);
+        startActivity(i);
+        finish();
     }
 
     public void back(View view) {
         finish();
+    }
+
+    public void search_tv(View view) {
+        TextView tv = (TextView) view;
+        go_main_page(tv.getText().toString());
+
     }
 }
 

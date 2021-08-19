@@ -5,7 +5,7 @@
 
         <group android:id="@+id/gr_services">
                                 <item
-                                    android:icon="@drawable/ic_baseline_home_repair_service_24"
+                                    android:icon="@drawable/services"
                                     android:title="Services" />
                                 <item
                                     android:icon="@drawable/digital_marketing"

@@ -15,30 +15,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.appbar.AppBarLayout
+            android:orientation="vertical"
             android:outlineSpotShadowColor="#0000BCD4"
             android:layout_margin="0dp"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@drawable/header_1"
+            android:layout_height="150dp"
+            android:background="@drawable/header2"
             android:theme="@style/Theme.MyApplication.AppBarOverlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/Theme.MyApplication.PopupOverlay" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/Theme.MyApplication.PopupOverlay" />
+
+                <ImageView
+                    android:layout_marginBottom="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:src="@drawable/banner1"></ImageView>
+
+            </LinearLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
             <LinearLayout
+                android:descendantFocusability="blocksDescendants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -53,28 +69,55 @@
                     android:animateLayoutChanges="true"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/main_head"
+                    <androidx.cardview.widget.CardView
+                        app:cardUseCompatPadding="true"
+                        app:cardCornerRadius="8dp"
+                        android:layout_margin="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto_black"
-                        android:text="Our Digital Services"
-                        android:textColor="@color/txt_on_body_bg"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:background="@drawable/card_bg1"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:padding="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:id="@+id/main_image_view"
+                                    android:src="@drawable/services"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"/>
+                                <TextView
+                                    android:id="@+id/main_head"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/roboto_black"
+                                    android:text="Our Digital Services"
+                                    android:textColor="@color/txt_on_body_bg"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/main_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:padding="10dp"
-                        android:text="@string/services_main"
-                        android:textColor="@color/txt_on_body_bg"
-                        android:textSize="@dimen/header_body_txt" />
+
+                            <TextView
+                                android:id="@+id/main_desc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:padding="10dp"
+                                android:text="@string/services_main"
+                                android:textColor="@color/txt_on_body_bg"
+                                android:textSize="@dimen/header_body_txt" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvServices"
@@ -86,7 +129,13 @@
 
                 <include layout="@layout/details" />
 
+                <!-- this is for white space to read below content of screen -->
                 <include layout="@layout/why_choose_us" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"/>
+
 
             </LinearLayout>
 
@@ -161,7 +210,7 @@
         android:layout_marginBottom="20dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="contact"
+        android:onClick="contact_controller"
         app:cardBackgroundColor="#F5FEFF"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +227,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="?selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:onClick="mail"
                 android:src="@drawable/ic_baseline_attach_email_24"
@@ -189,7 +238,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="?selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:onClick="call"
                 android:src="@drawable/ic_baseline_call_24"
@@ -200,7 +249,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="?selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:onClick="map"
                 android:src="@drawable/ic_baseline_map_24"
@@ -211,8 +260,6 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
                 android:src="@drawable/ic_baseline_contact_phone_24" />
 
 
