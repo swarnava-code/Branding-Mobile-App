@@ -19,8 +19,8 @@
             android:outlineSpotShadowColor="#0000BCD4"
             android:layout_margin="0dp"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/header2"
+            android:layout_height="120dp"
+            android:background="@drawable/header1__"
             android:theme="@style/Theme.MyApplication.AppBarOverlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +38,10 @@
                     app:popupTheme="@style/Theme.MyApplication.PopupOverlay" />
 
                 <ImageView
+                    android:id="@+id/header_content"
                     android:layout_marginBottom="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/banner1"></ImageView>
 
             </LinearLayout>
@@ -70,11 +71,17 @@
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
-                        app:cardUseCompatPadding="true"
-                        app:cardCornerRadius="8dp"
-                        android:layout_margin="10dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_margin="20dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:elevation="8dp"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
+                        app:cardElevation="10dp"
+                        app:cardPreventCornerOverlap="false">
                         <LinearLayout
                             android:background="@drawable/card_bg1"
                             android:orientation="vertical"
@@ -104,6 +111,8 @@
 
 
                             <TextView
+                                android:textStyle="bold"
+                                android:fontFamily="@font/kleeone_regular"
                                 android:id="@+id/main_desc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -118,12 +127,32 @@
                     </androidx.cardview.widget.CardView>
 
 
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvServices"
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="5dp"
+                        android:layout_margin="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp" />
+                        android:elevation="8dp"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
+                        app:cardElevation="10dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:background="@drawable/shape_bg_cardview"
+                            android:id="@+id/rvServices"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp" />
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+
                 </LinearLayout>
 
 
@@ -134,7 +163,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="65dp"/>
+                    android:layout_height="70dp"/>
 
 
             </LinearLayout>

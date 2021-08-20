@@ -65,9 +65,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     ImageButton choose_btn1, choose_btn2, choose_btn3, choose_btn4;
 
 
-
     //SERVICES
-    int content_id[] = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.adosy_logo};
+    int content_id[] = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
     int noOfContent = 0, loopi=0;
     ImageView imageView, details_imageview, main_image_view;
     TextView details_desc, details_head, details_list, main_head, main_desc;
@@ -88,6 +87,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
 
     NestedScrollView nestedScrollView;
+    ImageView header_banner;
+
 
 
     //RecyclerView
@@ -122,10 +123,13 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         choose_btn4 = findViewById(R.id.choose_ib4);
         main_image_view = findViewById(R.id.main_image_view);
         nestedScrollView = findViewById(R.id.nestedScrollView);
+        header_banner = findViewById(R.id.header_content);
         anim_bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
         anim_slide_up_in = AnimationUtils.loadAnimation(this, R.anim.slide_up_in_);
         anim_slide_left_in = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
         anim_slide_right_in = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+        noOfContent = content_id.length;
+        loopAnim();
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle=new
@@ -630,6 +634,30 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             contact3.setVisibility(View.GONE);
         }
 
+    }
+
+    void loopAnim(){
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+
+
+                if(noOfContent-1==loopi)
+                    loopi = 0;
+                else
+                    loopi++;
+
+                header_banner.setImageResource(content_id[loopi]);
+                header_banner.startAnimation(anim_slide_right_in);
+
+                loopAnim();
+
+
+                //body
+            }
+        };
+        Handler h = new Handler();
+        h.postDelayed(r,2500);
     }
 
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-
-    android:visibility="gone"
+    android:visibility="visible"
     android:id="@+id/details"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,11 +9,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="8dp"
-        android:padding="10dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0.0px"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false">
 
         <LinearLayout
             android:background="@drawable/card_bg2"
@@ -47,18 +52,18 @@
                     android:src="@drawable/sample_logo" />
 
                 <TextView
-                    android:textColor="@color/txt_on_body_bg"
+                    android:fontFamily="@font/kleeone_regular"                    android:textColor="@color/txt_on_body_bg"
                     android:textSize="@dimen/details_body_txt"
                     android:id="@+id/details_desc"
                     android:padding="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Description" />
             </LinearLayout>
 
             <TextView
-                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/shadows_into_light_regular"                android:layout_marginBottom="10dp"
                 android:textColor="@color/txt_on_body_bg"
                 android:textSize="@dimen/details_list_txt"
                 android:id="@+id/details_list"
