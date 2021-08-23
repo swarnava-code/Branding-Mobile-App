@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
          */
 
-        int resId = getResources().getIdentifier("services", "array", getPackageName());
+        int resId = getResources().getIdentifier("Services", "array", getPackageName());
         String[] stringArray = getResources().getStringArray(resId);
         Bundle b = new Bundle();
         b.putStringArray("key", stringArray);

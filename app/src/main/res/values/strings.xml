@@ -144,7 +144,9 @@ Are you looking for a professional content writing company? From developing inno
     <string name="dynamic_website_desc">
         We make websites that are actually fast and SEO-Optimized. We make sure that your website is upgraded with the latest technological updates.
     </string>
-
+    <string name="dynamic_website_price">
+        20,000
+    </string>
 
     <string name="e_commerce_website_list">
         Free Domain and Hosting
@@ -153,9 +155,12 @@ Are you looking for a professional content writing company? From developing inno
         \n SEO Optimized
         \n And Many More
     </string>
-    <string name="e_commerce_website_list_desc">
+    <string name="e_commerce_website_desc">
 Start selling your products online with our especially curated E-commerce website  with 100% online payment support. Boost up your revenue to 2X in 90 Days.
 
+    </string>
+    <string name="_price">
+        10,000
     </string>
 
     <string name="customized_website_list">
@@ -165,9 +170,12 @@ Start selling your products online with our especially curated E-commerce websit
         \n 5 Business Email Id
         \n And Many More
     </string>
-    <string name="customized_website_list_desc">
+    <string name="customized_website_desc">
 We understand that you might have specific business requirements which needs to be addressed. We make websites as per your business needs.
 
+    </string>
+    <string name="customized_website_price">
+        21,000
     </string>
 
 
@@ -178,9 +186,12 @@ We understand that you might have specific business requirements which needs to 
         \n Application/Database Framework
         \n And Many More
     </string>
-    <string name="android_pplication_development_desc">
+    <string name="android_application_development_desc">
     We develop apps that can be easily listed in playstore and is super fast and mobile friendly and 100% optimized for better use and clarity.
 
+    </string>
+    <string name="android_application_development_price">
+        22,000
     </string>
 
     <string name="ios_application_development_list">
@@ -193,6 +204,9 @@ We understand that you might have specific business requirements which needs to 
     <string name="ios_application_development_desc">
 We build apps that can be listed easily on IOS platform. For better functionality of applications we tend to build it in such a way that is fast and easy to use by users.
 
+    </string>
+    <string name="ios_application_development_price">
+        23,000
     </string>
 
 
@@ -207,6 +221,9 @@ We build apps that can be listed easily on IOS platform. For better functionalit
 We are solutions for all your requirements. We develop applications on all the platforms specifically keen to your business requirements.
 
     </string>
+    <string name="hybrid_application_development_price">
+        24,000
+    </string>
 
     <string name="facebook_and_instagram_list">
         Identify Business Goals
@@ -217,6 +234,9 @@ We are solutions for all your requirements. We develop applications on all the p
     </string>
     <string name="facebook_and_instagram_desc">
 Facebook and Instagram is one such platform where you can grow continuously and at a good pace if worked out properly.
+    </string>
+    <string name="facebook_and_instagram_price">
+        25,000
     </string>
 
     <string name="twitter_and_linkedin_list">
@@ -229,6 +249,9 @@ Facebook and Instagram is one such platform where you can grow continuously and 
     <string name="twitter_and_linkedin_desc">
 Twitter and LinkedIn have been used with great passion and has been a key achiever for especially professionals who use it continuously.
 
+    </string>
+    <string name="twitter_and_linkedin_price">
+        26,000
     </string>
 
     <string name="pinterest_and_youtube_list">
@@ -243,6 +266,9 @@ Twitter and LinkedIn have been used with great passion and has been a key achiev
 Pinterest and Youtube has been a great source for businesses and brands to achieve there target and reach out to masses in a quick and optimized way.
 
     </string>
+    <string name="pinterest_and_youtube_price">
+        27,000
+    </string>
 
     <string name="on_page_seo_list">
         Keywords Plan
@@ -254,6 +280,9 @@ Pinterest and Youtube has been a great source for businesses and brands to achie
     <string name="on_page_seo_desc">
 On-page SEO is the practice of optimizing individual web pages in order to rank higher and earn more relevant traffic in search engines.
 
+    </string>
+    <string name="on_page_seo_price">
+        28,000
     </string>
 
     <string name="off_page_seo_list">
@@ -267,6 +296,9 @@ On-page SEO is the practice of optimizing individual web pages in order to rank 
 Off-page SEO is about, link building, social media, and local SEO. Off-page SEO is about everything that doesn’t happen directly on your website.
 
     </string>
+    <string name="off_page_seo_price">
+        29,000
+    </string>
 
     <string name="customized_plan_list">
         Pagination Tags Analysis
@@ -278,6 +310,9 @@ Off-page SEO is about, link building, social media, and local SEO. Off-page SEO 
     <string name="customized_plan_desc">
 Get your business ranked in top with our dedicated customized SEO Solutions which can help you reach in top with our dedicated approach.
 
+    </string>
+    <string name="customized_plan_price">
+        20,100
     </string>
 
     <string name="keyword_research_and_analysis_list">
@@ -291,6 +326,9 @@ Get your business ranked in top with our dedicated customized SEO Solutions whic
 We utilizes a myriad of tools to understand your customers’ search behavior and predict which keywords they are likely to type.
 
     </string>
+    <string name="keyword_research_and_analysis_price">
+        20,200
+    </string>
 
     <string name="landing_page_conversion_optimization_list">
         Social Media Advertising
@@ -302,6 +340,9 @@ We utilizes a myriad of tools to understand your customers’ search behavior an
     <string name="landing_page_conversion_optimization_desc">
 We create strong headlines, utilize high-performing keywords, craft engaging content and place clear calls-to-action.
 
+    </string>
+    <string name="landing_page_conversion_optimization_price">
+        20,300
     </string>
 
     <string name="ppc_management_list">
@@ -315,6 +356,9 @@ We create strong headlines, utilize high-performing keywords, craft engaging con
 Partner with our pay per click firm and drive immediate, qualified traffic to your landing pages without the stress and hassle.
 
     </string>
+    <string name="ppc_management_price">
+        20,400
+    </string>
 
     <string name="personalized_email_list">
         Built-in Email Templates
@@ -327,6 +371,9 @@ Partner with our pay per click firm and drive immediate, qualified traffic to yo
 Personalize your email with receiver name, using custom fields such as first name or company name in 2 clicks. It works the same way as a mail merge in Microsoft Word.
 
     </string>
+    <string name="personalized_email_price">
+        20,500
+    </string>
 
     <string name="free__built_in_spam_checking_list">
         Easy, Automatic Unsubscribe
@@ -335,9 +382,12 @@ Personalize your email with receiver name, using custom fields such as first nam
         \n Easy, Automatic Unsubscribe
         \n And Many More
     </string>
-    <string name="free_built_in_spam_checking_desc">
+    <string name="free__built_in_spam_checking_desc">
 Your email is analyzed for known spam keywords and the spam report shows you exactly what needs to be changed, ensuring your email is delivered to as many of your subscriber’s inboxes (and not junk mail folder) as possible.
 
+    </string>
+    <string name="free__built_in_spam_checking_price">
+        20,600
     </string>
 
     <string name="email_open_reporting_list">
@@ -351,6 +401,9 @@ Your email is analyzed for known spam keywords and the spam report shows you exa
 You’ve created and sent the perfect email campaign, but how many people opened it and when? Mail Marketer tells you this and more. View the data as a visually appealing bar chart or as a data table with more detail.
 
     </string>
+    <string name="email_open_reporting_price">
+        20,700
+    </string>
 
     <string name="digital_development_list">
         Website Development
@@ -363,6 +416,9 @@ You’ve created and sent the perfect email campaign, but how many people opened
 We start with our digital development process of making your website and application designed especially for your business.
 
     </string>
+    <string name="digital_development_price">
+        20,800
+    </string>
 
     <string name="digital_marketing_list">
         Facebook and Instagram
@@ -373,6 +429,9 @@ We start with our digital development process of making your website and applica
     <string name="digital_marketing_desc">
 We make sure that you are very listed on all the digital platforms so that you get enough brand promotion to get qualified inquires.
 
+    </string>
+    <string name="digital_marketing_price">
+        20,900
     </string>
 
     <string name="digital_art_list">
@@ -386,6 +445,9 @@ We make sure that you are very listed on all the digital platforms so that you g
 We make super fine digital arts so that you stay updated with the current market trend and stay ahead of your competition.
 
     </string>
+    <string name="digital_art_price">
+        20,010
+    </string>
 
     <string name="corporate_video_list">
         Drone Video
@@ -398,6 +460,9 @@ We make super fine digital arts so that you stay updated with the current market
 We record corporate videos that can create a wow factor among your employees and with a great touch of drone and aerial shots.
 
     </string>
+    <string name="corporate_video_price">
+        20,020
+    </string>
 
     <string name="drone_video_walkthrough_list">
         Drone Video
@@ -409,6 +474,9 @@ We record corporate videos that can create a wow factor among your employees and
 We understand the importance in your business being able to properly demonstrate a property to potential clients.
 
     </string>
+    <string name="drone_video_walkthrough_price">
+        20,030
+    </string>
 
     <string name="industrial_video_list">
         Drone Video
@@ -419,6 +487,9 @@ We understand the importance in your business being able to properly demonstrate
     <string name="industrial_video_desc">
 Present to clients, investors, or potential tenants with compelling aerial imagery. Highlight property locations, popular, and nearby highways.
 
+    </string>
+    <string name="industrial_video_price">
+        20,040
     </string>
 
     <string name="_d_animation_walkthrough_video_list">
@@ -432,6 +503,9 @@ Present to clients, investors, or potential tenants with compelling aerial image
 By the help of 3D walkthrough animations, you can create a virtual world to give your audience the experience of how it would feel like in a real life.
 
     </string>
+    <string name="_d_animation_walkthrough_video_price">
+        20,050
+    </string>
 
     <string name="business_ad_videos_list">
         Voice and sound effects
@@ -443,16 +517,22 @@ By the help of 3D walkthrough animations, you can create a virtual world to give
 Often combined with music, voice and sound effects, these videos can be excellent for advertisements on TV and online platforms like YouTube marketing
 
     </string>
+    <string name="business_ad_videos_price">
+        20,060
+    </string>
 
-    <string name="service_product_explainer_videos_list">
+    <string name="service___product_explainer_videos_list">
         Demonstrate real life situations
         \n Packed with voiceover and music
         \n Capable of keeping your audience firmly hooked
         \n Great way to reach and engage your audience
     </string>
-    <string name="service_product_explainer_videos_desc">
+    <string name="service___product_explainer_videos_desc">
 3D Explainer video animations are a great way to reach and engage your audience when you want to tell a story or intriguingly explain product.
 
+    </string>
+    <string name="service___product_explainer_videos_price">
+        20,070
     </string>
 
     <string name="industrial_plants_list">
@@ -466,16 +546,22 @@ Often combined with music, voice and sound effects, these videos can be excellen
 Our architectural models are produced with high aesthetic sense, which is tailored to each of our client’s personal vision for their project.
 
     </string>
+    <string name="industrial_plants_price">
+        20,080
+    </string>
 
-    <string name="townships_apartments_list">
+    <string name="townships_or_apartments_list">
         For Sales/Marketing
         \n For Trade Shows
         \n For Approval and Permits
         \n For Public Display
     </string>
-    <string name="townships_apartments_desc">
+    <string name="townships_or_apartments_desc">
 With growing competition in the real estate industry, builders and architects are focused on developing innovative designs and building structures.
 
+    </string>
+    <string name="townships_or_apartments_price">
+        20,090
     </string>
 
     <string name="illuminated_models_list">
@@ -487,6 +573,9 @@ With growing competition in the real estate industry, builders and architects ar
     <string name="illuminated_models_desc">
 A 3D printed architectural model helps business and companies to easily communicate their design ideas and vision.
 
+    </string>
+    <string name="illuminated_models_price">
+        21,000
     </string>
 
 
@@ -500,6 +589,9 @@ A 3D printed architectural model helps business and companies to easily communic
 A company brochure serves as an ideal marketing tool to help you create a lasting impression of your brand and improve the visibility of your business in the market.
 
     </string>
+    <string name="company_brochure_design_price">
+        22,000
+    </string>
 
     <string name="product_catalog_design_list">
         Bi-Fold Brochures
@@ -510,6 +602,9 @@ A company brochure serves as an ideal marketing tool to help you create a lastin
     <string name="product_catalog_design_desc">
 Product catalogs help you inform your target audience about your product range and their features in an eye-catchy and unique manner.
 
+    </string>
+    <string name="product_catalog_design_price">
+        23,000
     </string>
 
 
@@ -523,26 +618,50 @@ Product catalogs help you inform your target audience about your product range a
 Inform your customers about new offerings, sales or special promotions related to your products or services.
 
     </string>
+    <string name="sales_brochure_design_price">
+        24,000
+    </string>
 
 
     <string name="choose_title1_">
 
     </string>
+    <string name="content_desc">
+        Best Content Writing
+    </string>
+
+
+    <string name="client1">SUBHAJIT DAS</string>
+    <string name="client2">MITHUN NASKAR</string>
+
+
+    <string name="client3">DHIREN PATEL</string>
+    <string name="client4">SUNAINA SINGH</string>
+
+
+    <string name="client1_says">Adosy has always delivered what it has promised. Service excellence is very assured at this company.</string>
+    <string name="client2_says">All the service assured by Adosy was delivered before the due date. I am very satisfied with the price even.</string>
+
+
+    <string name="client3_says">I am very glad and happy because Adosy has helped my company grow in the digital world.</string>
+    <string name="client4_says">I was very unsure of any digital marketing agency but Adosy has showed their hard work when I handed them the project.</string>
+
+
     <string-array name="services">
         <item>Digital Marketing</item>
         <item>Digital Branding</item>
         <item>Digital Art</item>
     </string-array>
-
-
     <string-array name="digital_marketing">
         <item>Website Development</item>
         <item>Application Development</item>
         <item>Social Media Marketing</item>
         <item>Search Engine Optimization</item>
-        <item>Paid Per Click</item>
+        <item>Paid Per Click Management</item>
         <item>Email Marketing</item>
     </string-array>
+
+
     <string-array name="digital_branding">
         <item>Real Estate Branding</item>
         <item>Educational Branding</item>
@@ -551,8 +670,6 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>Retail Branding</item>
         <item>Automobile Branding</item>
     </string-array>
-
-
     <string-array name="digital_art">
         <item>Drone Videography</item>
         <item>3D Animation</item>
@@ -561,293 +678,293 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>Logo Designing</item>
         <item>Content Writing</item>
     </string-array>
+
+
     <string-array name="website_development">
         <item>Dynamic Website</item>
         <item>E-Commerce Website</item>
         <item>Customized Website</item>
     </string-array>
-
-
     <string-array name="website_development_choose_title">
         <item>FAST AND SECURED WEBSITE</item>
         <item>SEO OPTIMIZED WEB PAGES</item>
         <item>DEDICATED SUPPORT</item>
         <item>FULLY CUSTOMIZED</item>
     </string-array>
+
+
     <string-array name="website_development_choose_body">
         <item>We make websites that are actually super fast and 100% optimized to deliver best in class service.</item>
         <item>Our website is seo optimized so that you don\'t face challenges. Our web pages are designed as per the current market trends.</item>
         <item>Our team of dedicated staff make sure that we answer to your queries and feedback. We make sure that we deliver solution.</item>
         <item>We make websites fully customized as per your business requirements. To enhance your business portfolio we deliver the best service.</item>
     </string-array>
-
-
     <string-array name="application_development">
         <item>Android Application Development</item>
         <item>IOS Application Development</item>
         <item>Hybrid Application Development</item>
     </string-array>
+
+
     <string-array name="application_development_choose_title">
         <item>ONGOING SUPPORT</item>
         <item>TRANSPARENT PROCESS</item>
         <item>CUSTOMIZED BUDGET</item>
         <item>EASE OF USE</item>
     </string-array>
-
-
     <string-array name="application_development_choose_body">
         <item>Our aftercare warranty continuously monitors your software, makes updates, fixes bugs and upgrades it.</item>
         <item>Track, amend and get software support, anytime. You decide how fast you want it delivered. And you’ll know when to expect each stage (from prototype to full build).</item>
         <item>Get a guaranteed price for your app, before you start. You control it – add more features and pay more, remove features and you’ll pay less.</item>
         <item>Convenience and accessibility are keys to helping any business succeed. Consumers want everything right now and to be no further away than their fingertips.</item>
     </string-array>
+
+
     <string-array name="social_media_marketing">
         <item>Facebook and Instagram</item>
         <item>Twitter and LinkedIn</item>
         <item>Pinterest and YouTube</item>
     </string-array>
-
-
     <string-array name="social_media_marketing_choose_title">
         <item>STAY AHEAD OF COMPETITOR</item>
         <item>FUTURE PROOF MARKETING PLAN</item>
         <item>BOOST SALES FIGURE</item>
         <item>BUILD BRAND CREDIBILITY</item>
     </string-array>
+
+
     <string-array name="social_media_marketing_choose_body">
         <item>With Social Media Marketing there are higher chances that businesses have clear strategic goals which is the primary need for every business to become successful.</item>
         <item>Social Media Marketing services is future proof as what you will do today will maximize your chances of success in future.</item>
         <item>With best Social Media Marketing services. Its possible to boost your sales figure &amp; it is a profitable expenditure not financial burden for your business.</item>
         <item>Through Social Media Marketing services you can build trust and credibility of your business for long term.</item>
     </string-array>
-
-
     <string-array name="search_engine_optimization">
         <item>On Page SEO</item>
         <item>Off Page SEO</item>
         <item>Customized Plan</item>
     </string-array>
+
+
     <string-array name="search_engine_optimization_choose_title">
         <item>STAY AHEAD OF COMPETITOR</item>
         <item>FUTURE PROOF MARKETING PLAN</item>
         <item>BOOST SALES FIGURE</item>
         <item>BUILD BRAND CREDIBILITY</item>
     </string-array>
-
-
     <string-array name="search_engine_optimization_choose_body">
         <item>With Search Engine Optimization SEO services there are higher chances that businesses do have clear strategic goals which is the primary need for every business to become successful.</item>
         <item>Search Engine Optimization SEO services is future proof as what you will do today will maximize your chances of success in future.</item>
         <item>With best Search Engine Optimization SEO services Its possible to boost your sales figure &amp; it is a profitable expenditure not financial burden.</item>
         <item>Through Search Engine Optimization SEO services in Kolkata you can build trust and credibility of your business.</item>
     </string-array>
+
+
     <string-array name="paid_per_click_management">
-        <item>Keyword Research &amp;amp; Analysis</item>
+        <item>Keyword Research and Analysis</item>
         <item>Landing Page Conversion Optimization</item>
         <item>PPC Management</item>
     </string-array>
-
-
     <string-array name="paid_per_click_management_choose_title">
         <item>STRESS-FREE PPC SERVICES</item>
         <item>CERTIFIED PPC EXPERTS</item>
         <item>MONTHLY REPORTING</item>
         <item>INCREASED REVENUE</item>
     </string-array>
+
+
     <string-array name="paid_per_click_management_choose_body">
         <item>You can relax knowing we are geeking out in your account every day, making sure it’s running and working to its fullest potential. We do 100% of the PPC work for you.</item>
         <item>We are a Google Certified Partner and darn proud of it. Our team includes Google Certified individuals who really know PPC.</item>
         <item>Each month you’ll get a detailed report showing whether you’re getting more leads, more sales, the number of people coming, how much you’re spending, what people are searching and more.</item>
         <item>Our goal is to make sure that our PPC efforts bring in whatever you need to grow your business.</item>
     </string-array>
-
-
     <string-array name="email_marketing">
         <item>Personalized Email</item>
         <item>Free, Built-In Spam Checking</item>
         <item>Email Open Reporting</item>
     </string-array>
+
+
     <string-array name="email_marketing_choose_title">
         <item>DESIGN ONCE, DELIGHT MANY</item>
         <item>GOOGLE ANALYTICS INTEGRATION</item>
         <item>AUTOMATIC INBOX PREVIEW</item>
         <item>AUTOMATIC BOUNCE HANDLING</item>
     </string-array>
-
-
     <string-array name="email_marketing_choose_body">
         <item>Our email templates have been designed and tested to function in all famous email service (including Yahoo, Hotmail, Gmail and Outlook), meaning your contacts see your email message precisely as you mean it to be seen.</item>
         <item>As you\'re sending an email campaign you can type in your Google Analytics details and a tracking code will be added to all links in your email, giving you full integration for number of visits, goals and e-commerce conversions for that campaign.</item>
         <item>For maximum impact and click through it\'s important that your email looks the same in all of the popular email clients, which isn\'t always easy. Luckily our inbox preview tool shows how your email will look.</item>
         <item>Bounced emails (both soft and hard) are processed and removed from your list for you automatically, meaning your list is always clean. You can also export a list of which email addresses bounced and see both soft and hard bounce details.</item>
     </string-array>
+
+
     <string-array name="real_estate_branding">
         <item>Digital Development</item>
         <item>Digital Marketing</item>
         <item>Digital Art</item>
     </string-array>
-
-
     <string-array name="real_estate_branding_choose_title">
         <item>BEST IN CLASS SERVICE</item>
         <item>GURANTEED RESULTS</item>
         <item>DEDICATED SUPPORT</item>
         <item>360° DIGITAL MANAGEMENT</item>
     </string-array>
+
+
     <string-array name="real_estate_branding_choose_body">
         <item>We make sure that you get best in class service so that you stand out different in the market.</item>
         <item>We make sure that you get results out of the money that you have invested.</item>
         <item>Our team is continuously in constant touch with all your feedback and business inquiries.</item>
         <item>Our 360° approach lets you focus on your business while we take care of the rest.</item>
     </string-array>
-
-
     <string-array name="educational_branding">
         <item>Digital Development</item>
         <item>Digital Marketing</item>
         <item>Digital Art</item>
     </string-array>
+
+
     <string-array name="educational_branding_choose_title">
         <item>BEST IN CLASS SERVICE</item>
         <item>GURANTEED RESULTS</item>
         <item>DEDICATED SUPPORT</item>
         <item>360° DIGITAL MANAGEMENT</item>
     </string-array>
-
-
     <string-array name="educational_branding_choose_body">
         <item>We make sure that you get best in class service so that you stand out different in the market.</item>
         <item>We make sure that you get results out of the money that you have invested.</item>
         <item>Our team is continuously in constant touch with all your feedback and business inquiries.</item>
         <item>Our 360° approach lets you focus on your business while we take care of the rest.</item>
     </string-array>
+
+
     <string-array name="hospitality_branding">
         <item>Digital Development</item>
         <item>Digital Marketing</item>
         <item>Digital Art</item>
     </string-array>
-
-
     <string-array name="hospitality_branding_choose_title">
         <item>BEST IN CLASS SERVICE</item>
         <item>GUARANTEED RESULTS</item>
         <item>DEDICATED SUPPORT</item>
         <item>360° DIGITAL MANAGEMENT</item>
     </string-array>
+
+
     <string-array name="hospitality_branding_choose_body">
         <item>We make sure that you get best in class service so that you stand out different in the market.</item>
         <item>We make sure that you get results out of the money that you have invested.</item>
         <item>Our team is continuously in constant touch with all your feedback and business inquiries.</item>
         <item>Our 360° approach lets you focus on your business while we take care of the rest.</item>
     </string-array>
-
-
     <string-array name="industrial_branding">
         <item>Digital Development</item>
         <item>Digital Marketing</item>
         <item>Digital Art</item>
     </string-array>
+
+
     <string-array name="industrial_branding_choose_title">
         <item>BEST IN CLASS SERVICE</item>
         <item>GUARANTEED RESULTS</item>
         <item>DEDICATED SUPPORT</item>
         <item>360° DIGITAL MANAGEMENT</item>
     </string-array>
-
-
     <string-array name="industrial_branding_choose_body">
         <item>We make sure that you get best in class service so that you stand out different in the market.</item>
         <item>We make sure that you get results out of the money that you have invested.</item>
         <item>Our team is continuously in constant touch with all your feedback and business inquiries.</item>
         <item>Our 360° approach lets you focus on your business while we take care of the rest.</item>
     </string-array>
+
+
     <string-array name="retail_branding">
         <item>Digital Development</item>
         <item>Digital Marketing</item>
         <item>Digital Art</item>
     </string-array>
-
-
     <string-array name="retail_branding_choose_title">
         <item>BEST IN CLASS SERVICE</item>
         <item>GUARANTEED RESULTS</item>
         <item>DEDICATED SUPPORT</item>
         <item>360° DIGITAL MANAGEMENT</item>
     </string-array>
+
+
     <string-array name="retail_branding_choose_body">
         <item>We make sure that you get best in class service so that you stand out different in the market.</item>
         <item>We make sure that you get results out of the money that you have invested.</item>
         <item>Our team is continuously in constant touch with all your feedback and business inquiries.</item>
         <item>Our 360° approach lets you focus on your business while we take care of the rest.</item>
     </string-array>
-
-
     <string-array name="automobile_branding">
         <item>Digital Development</item>
         <item>Digital Marketing</item>
         <item>Digital Art</item>
     </string-array>
+
+
     <string-array name="automobile_branding_choose_title">
         <item>BEST IN CLASS SERVICE</item>
         <item>GUARANTEED RESULTS</item>
         <item>DEDICATED SUPPORT</item>
         <item>360° DIGITAL MANAGEMENT</item>
     </string-array>
-
-
     <string-array name="automobile_branding_choose_body">
         <item>We make sure that you get best in class service so that you stand out different in the market.</item>
         <item>We make sure that you get results out of the money that you have invested.</item>
         <item>Our team is continuously in constant touch with all your feedback and business inquiries.</item>
         <item>Our 360° approach lets you focus on your business while we take care of the rest.</item>
     </string-array>
+
+
     <string-array name="drone_videography">
         <item>Corporate Video</item>
         <item>Drone Video Walkthrough</item>
         <item>Industrial Video</item>
     </string-array>
-
-
     <string-array name="drone_videography_choose_title">
         <item>EASY SCHEDULING</item>
         <item>COMPLETELY CUSTOM</item>
         <item>EXPERIENCED PROFESSIONALS</item>
         <item>NATIONWIDE SERVICE</item>
     </string-array>
+
+
     <string-array name="drone_videography_choose_body">
         <item>Save time scheduling. Let us manage your drone projects while your team focuses on what it does best. Simply tell us about your project and we\'ll take care of the rest.</item>
         <item>We tailor our services for your needs, whatever you need. Let us know what you\'re looking for and how we can help out.</item>
         <item>We understand how aerial imagery elevates your business and will help you determine the best drone service options for your company.</item>
         <item>Get the same great experience and high quality wherever you need your aerial imagery &amp; with zero travel expenses. Our drone pilot network is there when you need it, where you need it.</item>
     </string-array>
-
-
     <string-array name="_d_animation">
         <item>3D Animation Walkthrough Video</item>
         <item>Business Ad Videos</item>
         <item>Service / Product Explainer Videos</item>
     </string-array>
+
+
     <string-array name="_d_animation_choose_title">
         <item>STAND OUT</item>
         <item>DISSECTION</item>
         <item>REAL LIFE</item>
         <item>COMPETITIVE PRICING</item>
     </string-array>
-
-
     <string-array name="_d_animation_choose_body">
         <item>An advertisement or a presentation made using 3D animation services becomes more impressive and informative because 3d animation shows the product in various angles, colors, sizes, and in-depth details.</item>
         <item>With 3D, you can literally show the anatomy of our product to show under-the-hood functionalities. This works excellently with medical videos and product demonstrations.</item>
         <item>3D videos can help you demonstrate your product and scenes with real-life precision. You can create virtual and imaginary scenes that can help understand your product or services better.</item>
         <item>Our explainer video creation process is tried and tested for quality and efficiency. We follow a smooth step-by-step milestone-based process and make it super easy for you to give feedback and stay updated with the progress.</item>
     </string-array>
+
+
     <string-array name="miniature_models">
         <item>Industrial Plants</item>
         <item>Townships or Apartments</item>
         <item>Illuminated Models</item>
     </string-array>
-
-
     <string-array name="miniature_models_choose_title">
         <item>FAST MODEL PRODUCTION</item>
         <item>EXCELLENT SERVICE</item>
@@ -861,12 +978,13 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>We provide high-quality services at reasonable prices and to render excellent services to our customers.We provide services to our customers all over the world.</item>
     </string-array>
 
-
     <string-array name="brochure_designing">
         <item>Company Brochure Design</item>
         <item>Product Catalog Design</item>
         <item>Sales Brochure Design</item>
     </string-array>
+
+
     <string-array name="brochure_designing_choose_title">
         <item>CREATIVE MINDS</item>
         <item>EXTENSIVE EXPERIENCE</item>
@@ -881,11 +999,10 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>We focus on your brand niche to maximise its potential.</item>
         <item>Our brochure &amp; flyer design services are reasonably priced.</item>
     </string-array>
+
     <string-array name="logo_designing">
 
     </string-array>
-
-
     <string-array name="logo_designing_choose_title">
         <item>DETAILED BRAND ANALYSIS</item>
         <item>EXPERIENCED DESIGNERS</item>
@@ -898,10 +1015,12 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>We have many packages to suit various business logo design needs.</item>
         <item>We provide varied and multiple design concepts for our clients to choose from.</item>
     </string-array>
-
-
     <string-array name="content_writing">
+        <item>Content Writing</item>
+    </string-array>
 
+    <string-array name="content_writing_list">
+        <item>Content Writing</item>
     </string-array>
     <string-array name="content_writing_choose_title">
         <item>CUSTOMIZED ARTICLE WRITING</item>
@@ -909,16 +1028,12 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>QUALITY ASSURANCE</item>
         <item>BUDGET-FRIENDLY</item>
     </string-array>
-
-
     <string-array name="content_writing_choose_body">
         <item>We understand that each customer has different tastes when it comes to writing, and this is why, we assign your work to our top content writers who take a long time to understand your requirements, read through all your samples and analyze your competition to gain idea as well as knowledge about your business before writing any articles</item>
         <item>When you are working with experienced content writing companies in India, you can rest assured about the plagiarism issues in your articles. While working with freelance content writers India, many customers complain that those writers don’t take accountability after getting their payment credited.</item>
         <item>With apt formatting, line space, title sizing, alignment adjustments, our content editors help us immensely to offer the best online content writing service in India. There are so many things, that you have to notice while writing an article like using the exact keyword phrase, using the assigned number of keyword density, anchor text, reference webpages, and what not?</item>
         <item>If you are starting up with your business venture and you don’t have enough budget, it will be better for you to check out content writers review first and then according to their market reviews, you can shortlist your favorite content writing agency in India or freelance content writers India</item>
     </string-array>
-
-
     <string-array name="suggestions">
         <item>Digital Marketing</item>
         <item>Digital Branding</item>
@@ -976,16 +1091,6 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>Product Catalog Design</item>
         <item>Sales Brochure Design</item>
     </string-array>
-
-    <string name="client1">SUBHAJIT DAS</string>
-    <string name="client2">MITHUN NASKAR</string>
-    <string name="client3">DHIREN PATEL</string>
-    <string name="client4">SUNAINA SINGH</string>
-
-    <string name="client1_says">Adosy has always delivered what it has promised. Service excellence is very assured at this company.</string>
-    <string name="client2_says">All the service assured by Adosy was delivered before the due date. I am very satisfied with the price even.</string>
-    <string name="client3_says">I am very glad and happy because Adosy has helped my company grow in the digital world.</string>
-    <string name="client4_says">I was very unsure of any digital marketing agency but Adosy has showed their hard work when I handed them the project.</string>
 
 
 </resources>

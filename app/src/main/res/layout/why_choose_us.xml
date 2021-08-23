@@ -272,6 +272,7 @@
 
 
                     <TextView
+                        style="@style/chooseBody"
                         android:textSize="@dimen/choose_body_txt"
                         android:padding="@dimen/choose_margin"
                         android:visibility="gone"

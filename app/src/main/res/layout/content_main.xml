@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_bg2"
     android:padding="0dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
@@ -102,12 +101,18 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="15dp"
                                     android:layout_marginTop="5dp"
-                                    android:fontFamily="@font/roboto_black"
+                                    android:fontFamily="@font/trade_winds_regular"
                                     android:text="Our Digital Services"
                                     android:textColor="@color/txt_on_body_bg"
                                     android:textSize="15dp"
                                     android:textStyle="bold" />
                             </LinearLayout>
+
+                            <TextView
+                                android:layout_margin="5dp"
+                                android:background="#3F51B5"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"/>
 
 
                             <TextView

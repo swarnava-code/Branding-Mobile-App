@@ -26,16 +26,23 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:textColor="@color/txt_on_body_bg"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:id="@+id/details_head"
                 android:text="Title"
-                android:fontFamily="@font/roboto_black"
+                android:fontFamily="@font/trade_winds_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_margin="15dp"
+                android:background="#3F51B5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,7 +59,9 @@
                     android:src="@drawable/sample_logo" />
 
                 <TextView
-                    android:fontFamily="@font/kleeone_regular"                    android:textColor="@color/txt_on_body_bg"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/kleeone_regular"
+                    android:textColor="@color/txt_on_body_bg"
                     android:textSize="@dimen/details_body_txt"
                     android:id="@+id/details_desc"
                     android:padding="5dp"
@@ -63,14 +72,66 @@
             </LinearLayout>
 
             <TextView
-                android:fontFamily="@font/shadows_into_light_regular"                android:layout_marginBottom="10dp"
-                android:textColor="@color/txt_on_body_bg"
-                android:textSize="@dimen/details_list_txt"
-                android:id="@+id/details_list"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#3F51B5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="List" />
+                android:layout_height="2dp"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow>
+                    <TextView
+                        android:layout_weight="2"
+                        android:fontFamily="@font/akaya_kanadaka_regular"                android:layout_marginBottom="10dp"
+                        android:textColor="@color/txt_on_body_bg"
+                        android:textSize="@dimen/details_list_txt"
+                        android:id="@+id/details_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="List" />
+
+
+                    <LinearLayout
+                        android:gravity="center|left"
+                        android:layout_gravity="center|left"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/akaya_kanadaka_regular"                android:layout_marginBottom="10dp"
+                            android:gravity="bottom|center"
+
+                            android:rotation="-5"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            />
+                    </LinearLayout>
+
+                </TableRow>
+            </TableLayout>
+
+
+            <TextView
+                android:textSize="20dp"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/price_tag"
+                android:textColor="@color/black"
+                android:fontFamily="@font/akaya_kanadaka_regular"                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:rotation="0"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:text="₹ 20,000"/>
+
+
 
         </LinearLayout>
 

@@ -136,4 +136,15 @@
                         </group>
                 </menu>
         </item>
+
+        <item android:title="Control">
+                <menu>
+                        <group android:id="@+id/gr_control">
+                                <item
+                                    android:id="@+id/nav_close"
+                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:title="Quit" />
+                        </group>
+                </menu>
+        </item>
 </menu>

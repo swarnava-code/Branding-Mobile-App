@@ -61,7 +61,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
     LinearLayout why_choose_us_layout;
     TextView choose_title_1, choose_title_2, choose_title_3, choose_title_4,
-            choose_body_1, choose_body_2, choose_body_3, choose_body_4;
+            choose_body_1, choose_body_2, choose_body_3, choose_body_4, price_tag;
     ImageButton choose_btn1, choose_btn2, choose_btn3, choose_btn4;
 
 
@@ -124,6 +124,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         main_image_view = findViewById(R.id.main_image_view);
         nestedScrollView = findViewById(R.id.nestedScrollView);
         header_banner = findViewById(R.id.header_content);
+        price_tag = findViewById(R.id.price_tag);
         anim_bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
         anim_slide_up_in = AnimationUtils.loadAnimation(this, R.anim.slide_up_in_);
         anim_slide_left_in = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
@@ -156,10 +157,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-
-
         //SERVICES START
-
 
         details_desc = findViewById(R.id.details_desc);
         details_head = findViewById(R.id.details_head);
@@ -181,15 +179,12 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
         digital_marketing_layout = findViewById(R.id.digital_marketing_layout);
 
-
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvServices);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyRecyclerViewAdapter(this, arrList);
         adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
         recyclerView.setAdapter(adapter);
-
-
 
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view); // initiate a Navigation View
 // implement setNavigationSelectedListener event
@@ -234,7 +229,9 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                         case R.id.nav_rate:
                             Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id="+getPackageName()));
                             startActivity(intent);
-
+                            break;
+                        case R.id.nav_close:
+                            exit();
                             break;
                     }
                 }
@@ -242,35 +239,13 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             }
         });
 
-
-
-
         //######################################################################
-
-
-
-
 
         contact_controller = findViewById(R.id.contact_controller);
         contact1 = findViewById(R.id.contact1);
         contact2 = findViewById(R.id.contact2);
         contact3 = findViewById(R.id.contact3);
         close = true;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -280,8 +255,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         main_head.setText("");
         main_head.setVisibility(View.GONE);
         main_desc.setVisibility(View.GONE);
-
          */
+
 
         details_layout.setVisibility(View.GONE);
         why_choose_us_layout.setVisibility(View.GONE);
@@ -290,7 +265,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         String main_name = stringPass.toLowerCase().replaceAll("\\s", "_")
                 .replaceAll("-","_")
                 .replaceAll(",","_")
-                .replaceAll("&","_")
                 .replaceAll("3","_")
                 .replaceAll("/","_");
 
@@ -318,8 +292,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             //To load image in each row
             main_image_view.setImageResource(getResources().getIdentifier(main_name, "drawable", getPackageName()));
             main_image_view.startAnimation(anim_bounce);
-
-
 
 
             for(int i=0; i<stringArray.length; i++)
@@ -365,7 +337,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 details_layout.setVisibility(View.VISIBLE);
                 details_desc.setText(getResources().getString(getResources().getIdentifier(details_desc_str, "string", getPackageName())));
                 details_desc.startAnimation(anim_slide_right_in);
-                details_list.setText(getString(R.string.list_point)+" "+getResources().getString(getResources().getIdentifier(details_list_str, "string", getPackageName())).replaceAll("\n",getString(R.string.list_point)));
+                details_list.setText(getString(R.string.list_point)+" "+getResources().getString(getResources().getIdentifier(details_list_str, "string", getPackageName())).replaceAll("\n",getString(R.string.list_point)).trim());
                 details_list.startAnimation(anim_slide_right_in);
                 details_head.setText(stringPass);
                 details_head.startAnimation(anim_slide_up_in);
@@ -374,7 +346,14 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 why_choose_us_layout.setVisibility(View.VISIBLE);
                 //details_layout.startAnimation(anim_slide_left_in);
 
+                nestedScrollView.scrollTo(0,1100);
 
+                String price = "₹ "+getResources().getString(getResources().getIdentifier(main_name+"_price", "string", getPackageName()));
+                price_tag.setText(price);
+                price_tag.startAnimation(anim_bounce);
+
+
+                
             } catch (Exception e1){
                 Toast.makeText(this, "No data in string.xml", Toast.LENGTH_SHORT).show();
             }
@@ -466,24 +445,29 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         else {
-            AlertDialog alertDialog = new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)//set icon
-                    .setTitle("Exit")//set title
-                    .setMessage("Are you sure to Exit ?")//set message
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {//set positive button
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {//set negative button
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            //Toast.makeText(getApplicationContext(),"Nothing Happened", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .show();
+            //exit();
+            drawerLayout.openDrawer(GravityCompat.START);
         }
+    }
+    void exit(){
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)//set icon
+                .setTitle("Exit")//set title
+                .setMessage("Are you sure to Exit ?")//set message
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {//set positive button
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        //finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {//set negative button
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Toast.makeText(getApplicationContext(),"Nothing Happened", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -657,7 +641,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
             }
         };
         Handler h = new Handler();
-        h.postDelayed(r,2500);
+        h.postDelayed(r,3500);
     }
 
 
