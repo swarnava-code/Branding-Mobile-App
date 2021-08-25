@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,13 +24,10 @@ public class SearchActivity extends AppCompatActivity {
 
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
 
-
-
         int resId = getResources().getIdentifier("suggestions", "array", getPackageName());
         String[] suggestion = getResources().getStringArray(resId);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, suggestion);
         autoCompleteTextView.setAdapter(adapter);
-
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,6 +57,34 @@ public class SearchActivity extends AppCompatActivity {
         TextView tv = (TextView) view;
         go_main_page(tv.getText().toString());
 
+    }
+
+    int test2 = 0;
+    public void test_client_4(View view) {
+        TextView textView = (TextView) view;
+        test2++;
+        if(test2>4) {
+            textView.setText("Dev. by "+getString(R.string.developer));
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    test2 = 0;
+                    textView.setText(getString(R.string.client4));
+                }
+            };
+            Handler h = new Handler();
+            h.postDelayed(r, 1500);
+        }
+        else{
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    test2 = 0;
+                }
+            };
+            Handler h = new Handler();
+            h.postDelayed(r,1500);
+        }
     }
 }
 

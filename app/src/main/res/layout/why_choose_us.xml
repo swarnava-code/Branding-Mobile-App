@@ -99,7 +99,6 @@
                         <TextView
                             style="@style/chooseTitle"
                             android:id="@+id/choose_title_1"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -180,13 +179,13 @@
 
                         <TextView
                             android:id="@+id/choose_title_2"
+                            style="@style/chooseTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_marginStart="48dp"
-                            style="@style/chooseTitle"                            android:gravity="center"
+                            android:gravity="center"
                             android:text="Why Choose Us 2"
-                            android:textColor="@color/black"
                             android:textSize="@dimen/choose_title_txt"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -255,7 +254,6 @@
                         <TextView
                             style="@style/chooseTitle"
                             android:id="@+id/choose_title_3"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -333,7 +331,6 @@
                         <TextView
                             style="@style/chooseTitle"
                             android:id="@+id/choose_title_4"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"

@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
@@ -58,12 +59,10 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     TextView textView;
     Animation anim_bounce, anim_slide_up_in, anim_slide_left_in, anim_slide_right_in ;
 
-
     LinearLayout why_choose_us_layout;
     TextView choose_title_1, choose_title_2, choose_title_3, choose_title_4,
             choose_body_1, choose_body_2, choose_body_3, choose_body_4, price_tag;
     ImageButton choose_btn1, choose_btn2, choose_btn3, choose_btn4;
-
 
     //SERVICES
     int content_id[] = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
@@ -215,7 +214,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                             menu.findItem(R.id.nav_profile).setVisible(true);
                             menu.findItem(R.id.nav_login).setVisible(false);
                             break;
-                        case R.id.nav_logout: menu.findItem(R.id.nav_logout).setVisible(false);
+                        case R.id.nav_logout:
+                            menu.findItem(R.id.nav_logout).setVisible(false);
                             menu.findItem(R.id.nav_profile).setVisible(false);
                             menu.findItem(R.id.nav_login).setVisible(true);
                             break;
@@ -232,6 +232,18 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                             break;
                         case R.id.nav_close:
                             exit();
+                            break;
+                        case R.id.nav_dark:
+                            if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES)
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            else
+                                Toast.makeText(NavigationActivity.this, "Already Night mode on", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.nav_light:
+                            if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO)
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            else
+                                Toast.makeText(NavigationActivity.this, "Already Light mode on", Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -327,9 +339,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
 
             }
 
-
-
-
         } catch (Exception e){
             try {
                 String details = main_name;
@@ -352,8 +361,6 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 price_tag.setText(price);
                 price_tag.startAnimation(anim_bounce);
 
-
-                
             } catch (Exception e1){
                 Toast.makeText(this, "No data in string.xml", Toast.LENGTH_SHORT).show();
             }
@@ -407,6 +414,7 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         Toast.makeText(this, "MenuItem clicked2", Toast.LENGTH_SHORT).show();
     }
 
+
 /*
     @Override
     public boolean onCreateOptionsMenu() {
@@ -419,8 +427,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         getMenuInflater().inflate(R.menu.navigation, menu);
         return true;
     }
-
  */
+
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {

@@ -23,12 +23,13 @@
 
         <LinearLayout
             android:background="@drawable/card_bg2"
+            style="@style/card_bg"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:textColor="@color/txt_on_body_bg"
+                style="@style/text_color"
                 android:layout_marginTop="15dp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -50,7 +51,7 @@
 
                 <ImageView
                     android:id="@+id/details_imageview"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginTop="20dp"
                     android:layout_margin="15dp"
                     android:layout_width="80dp"
@@ -59,9 +60,9 @@
                     android:src="@drawable/sample_logo" />
 
                 <TextView
+                    style="@style/text_color"
                     android:textStyle="bold"
                     android:fontFamily="@font/kleeone_regular"
-                    android:textColor="@color/txt_on_body_bg"
                     android:textSize="@dimen/details_body_txt"
                     android:id="@+id/details_desc"
                     android:padding="5dp"
@@ -84,9 +85,9 @@
                 android:layout_height="wrap_content">
                 <TableRow>
                     <TextView
+                        style="@style/text_color"
                         android:layout_weight="2"
                         android:fontFamily="@font/akaya_kanadaka_regular"                android:layout_marginBottom="10dp"
-                        android:textColor="@color/txt_on_body_bg"
                         android:textSize="@dimen/details_list_txt"
                         android:id="@+id/details_list"
                         android:layout_width="wrap_content"
@@ -119,11 +120,11 @@
 
 
             <TextView
+                style="@style/text_color"
                 android:textSize="20dp"
                 android:paddingLeft="5dp"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/price_tag"
-                android:textColor="@color/black"
                 android:fontFamily="@font/akaya_kanadaka_regular"                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:rotation="0"

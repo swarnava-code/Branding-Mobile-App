@@ -26,6 +26,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="developer">swarnava415</string>
 
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -159,7 +160,7 @@ Are you looking for a professional content writing company? From developing inno
 Start selling your products online with our especially curated E-commerce website  with 100% online payment support. Boost up your revenue to 2X in 90 Days.
 
     </string>
-    <string name="_price">
+    <string name="e_commerce_website_price">
         10,000
     </string>
 
@@ -208,7 +209,6 @@ We build apps that can be listed easily on IOS platform. For better functionalit
     <string name="ios_application_development_price">
         23,000
     </string>
-
 
     <string name="hybrid_application_development_list">
         Back-end QA Testing
@@ -685,6 +685,7 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>E-Commerce Website</item>
         <item>Customized Website</item>
     </string-array>
+
     <string-array name="website_development_choose_title">
         <item>FAST AND SECURED WEBSITE</item>
         <item>SEO OPTIMIZED WEB PAGES</item>

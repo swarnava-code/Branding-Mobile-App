@@ -24,6 +24,7 @@
     </style>
 
     <style name="chooseTitle">
+        <item name="android:textColor">@color/black</item>
         <item name="fontFamily">@font/roboto_black</item>
     </style>
     <style name="chooseBody">
@@ -60,6 +61,16 @@
         <item name="android:clickable">true</item>
         <item name="android:padding">5dp</item>
     </style>
+
+    <style name="card_bg">
+        <item name="background">@drawable/card_bg2</item>
+    </style>
+
+    <style name="text_color">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
 
     <style name="Theme.MyApplication.NoActionBar">
         <item name="windowActionBar">false</item>

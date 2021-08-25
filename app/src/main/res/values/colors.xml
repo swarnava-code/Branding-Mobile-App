@@ -25,4 +25,6 @@
 
     <color name="txt_on_body_bg">#000000</color>
 
+    <color name="card_night_bg">#1F2230</color>
+
 </resources>

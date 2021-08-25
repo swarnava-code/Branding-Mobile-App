@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int DELAY = 500; //3000
+    int DELAY = 3000; //3000
 
     Animation slide_up_in;
     TextView com;
@@ -44,19 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtras(b);
                 startActivity(i);
                 finish();
-
-                //   */
-
-
-
-
-
-    /*
-                Intent i=new Intent(getApplicationContext(), LoginActivity.class); //LoginActivity
-                startActivity(i);
-                finish();
-    */
-
 
             }
         };

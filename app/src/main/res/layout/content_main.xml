@@ -83,7 +83,7 @@
                         app:cardPreventCornerOverlap="false">
                         <LinearLayout
                             android:background="@drawable/card_bg1"
-                            android:orientation="vertical"
+                            style="@style/card_bg"                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
@@ -96,6 +96,7 @@
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"/>
                                 <TextView
+                                    style="@style/text_color"
                                     android:id="@+id/main_head"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -103,7 +104,6 @@
                                     android:layout_marginTop="5dp"
                                     android:fontFamily="@font/trade_winds_regular"
                                     android:text="Our Digital Services"
-                                    android:textColor="@color/txt_on_body_bg"
                                     android:textSize="15dp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -116,6 +116,7 @@
 
 
                             <TextView
+                                style="@style/text_color"
                                 android:textStyle="bold"
                                 android:fontFamily="@font/kleeone_regular"
                                 android:id="@+id/main_desc"
@@ -125,7 +126,6 @@
                                 android:layout_marginRight="5dp"
                                 android:padding="10dp"
                                 android:text="@string/services_main"
-                                android:textColor="@color/txt_on_body_bg"
                                 android:textSize="@dimen/header_body_txt" />
                         </LinearLayout>
 
@@ -154,12 +154,7 @@
 
                     </androidx.cardview.widget.CardView>
 
-
-
-
-
                 </LinearLayout>
-
 
                 <include layout="@layout/details" />
 
@@ -192,7 +187,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
@@ -202,7 +196,6 @@
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:onClick="search"
-        app:cardBackgroundColor="#F5FEFF"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -245,7 +238,6 @@
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:onClick="contact_controller"
-        app:cardBackgroundColor="#F5FEFF"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
