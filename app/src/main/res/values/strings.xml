@@ -16,6 +16,9 @@
             \n Sat : 10AM-3PM</string>
     <string name="list_point">\n✔️ </string>
 
+    <string name="GPSAlertDialogTitle">Set GPS</string>
+    <string name="GPSAlertDialogMessage">Kindly enable gps</string>
+
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

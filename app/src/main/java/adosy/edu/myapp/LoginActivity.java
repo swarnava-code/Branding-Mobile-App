@@ -2,18 +2,32 @@ package adosy.edu.myapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,6 +54,9 @@ public class LoginActivity extends AppCompatActivity {
         otp_time_disp = findViewById(R.id.otp_time_disp);
     }
 
+
+    String stringLatitude , stringLongitude, country , city,  postalCode , addressLine ;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -52,12 +69,71 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+                onStart();
             }
         })
                 .setPositiveButton("Allow", new DialogInterface.OnClickListener() {//set negative button
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Snackbar.make(findViewById(android.R.id.content), "Thank You to allow Location Access", Snackbar.LENGTH_LONG).show();
+
+                        try {
+                            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                                ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        try{
+                            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                                onStart();
+                            }
+                            else{
+                                //Snackbar.make(findViewById(android.R.id.content), "Thank You to allow Location Access", Snackbar.LENGTH_LONG).show();
+                                GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
+
+                                if (gpsTracker.getIsGPSTrackingEnabled()) {
+
+
+
+
+
+                                     stringLatitude = String.valueOf(gpsTracker.latitude);
+                                     stringLongitude = String.valueOf(gpsTracker.longitude);
+                                     country = gpsTracker.getCountryName(LoginActivity.this);
+                                     city = gpsTracker.getLocality(LoginActivity.this);
+                                     postalCode = gpsTracker.getPostalCode(LoginActivity.this);
+                                     addressLine = gpsTracker.getAddressLine(LoginActivity.this);
+                                }
+                                else {
+                                    gpsTracker.showSettingsAlert();
+                                }
+
+/*
+                                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                double longitude = location.getLongitude();
+                                double latitude = location.getLatitude();
+                                //https://stackoverflow.com/questions/2227292/how-to-get-latitude-and-longitude-of-the-mobile-device-in-android
+ */
+
+
+
+                               // Toast.makeText(LoginActivity.this, longitude+" : "+latitude, Toast.LENGTH_LONG).show();
+
+
+                            }
+                        } catch (Exception e){
+                            Toast.makeText(LoginActivity.this, "location error", Toast.LENGTH_LONG).show();
+
+                        }
+
+
+
+
+
+
+
                         //allow
                     }
                 })
@@ -104,6 +180,21 @@ public class LoginActivity extends AppCompatActivity {
 
          */
 
+
+
+
+        //HttpHandler sh = new HttpHandler();
+        //String str = "Fail";
+        //str = sh.makeServiceCall("https://swarnava.delgradecorporation.in/project1/get_users_details.php");
+
+
+        new LoginActivity.GetApiCall().execute();
+
+
+
+
+
+/*
         int resId = getResources().getIdentifier("Services", "array", getPackageName());
         String[] stringArray = getResources().getStringArray(resId);
         Bundle b = new Bundle();
@@ -113,70 +204,41 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
         finish();
 
+ */
+
     }
 
-    String api_key, message_data, sender_info, ph_number;
 
-    public String postSms() {
-        try {
-            // Construct data
-            String apiKey = "apikey=" + "yourapiKey";
-            String message = "&message=" + "This is your message";
-            String sender = "&sender=" + "TXTLCL";
-            String numbers = "&numbers=" + "918123456789";
+    String url = "https://swarnava.delgradecorporation.in/project2/reg_insert.php?name=adi&phone=3330&email=adi123@gmail.com";
+    String url2 = "https://delgradecorporation.in/swarnava/project1/get_users_details.php";
+    String jsonStr;
+    private class GetApiCall extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
-            // Send data
-            HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
-            String data = apiKey + numbers + message + sender;
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
-            conn.getOutputStream().write(data.getBytes("UTF-8"));
-            final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            final StringBuffer stringBuffer = new StringBuffer();
-            String line;
-            while ((line = rd.readLine()) != null) {
-                stringBuffer.append(line);
-            }
-            rd.close();
+        }
 
-            return stringBuffer.toString();
-        } catch (Exception e) {
-            System.out.println("Error SMS "+e);
-            return "Error "+e;
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+            // Making a request to url and getting response
+            jsonStr = sh.makeServiceCall(url);
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(LoginActivity.this, "msg : "+jsonStr, Toast.LENGTH_LONG).show();
+
+
         }
     }
 
-    public String getSms() {
-        try {
-            // Construct data
-            String apiKey = "apikey=" + URLEncoder.encode("yourapiKey", "UTF-8");
-            String message = "&message=" + URLEncoder.encode("This is your message", "UTF-8");
-            String sender = "&sender=" + URLEncoder.encode("TXTLCL", "UTF-8");
-            String numbers = "&numbers=" + URLEncoder.encode("918123456789", "UTF-8");
-
-            // Send data
-            String data = "https://api.textlocal.in/send/?" + apiKey + numbers + message + sender;
-            URL url = new URL(data);
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-
-            // Get the response
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line;
-            String sResult="";
-            while ((line = rd.readLine()) != null) {
-                // Process line...
-                sResult=sResult+line+" ";
-            }
-            rd.close();
-
-            return sResult;
-        } catch (Exception e) {
-            System.out.println("Error SMS "+e);
-            return "Error "+e;
-        }
-    }
 
 
 }
