@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,8 +17,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,11 +38,11 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
     Button send_otp;
     LinearLayout form1, form2;
     TextView otp_time_disp;
-    int time=30; //30sec
+    int time = 59; //59sec
 
     TextInputEditText edit_text_phone, edit_text_name, edit_text_email;
     String name, phone, email, location;
@@ -53,13 +50,11 @@ public class LoginActivity extends AppCompatActivity {
     HashMap<Character, Character> rule = new HashMap<>();       //encryption table
     HashMap<Character, Character> ruleDe = new HashMap<>();     //decryption table
 
-    Animation anim_bounce;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_registration);
         getSupportActionBar().hide();//2nd way
 
         form1 = findViewById(R.id.form1);
@@ -69,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         edit_text_phone = findViewById(R.id.edit_text_phone);
         edit_text_name = findViewById(R.id.edit_text_name);
         edit_text_email = findViewById(R.id.edit_text_email);
-        anim_bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         //creating rule table for encryption & decryption
         CreateRuleForEncryptionAndDecryption();
@@ -90,6 +84,85 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                requestLocation();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    void requestLocation(){
+        AlertDialog.Builder abuilder = new AlertDialog.Builder(RegistrationActivity.this, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        abuilder.setTitle("Location Access");
+        abuilder.setIcon(R.drawable.adosy_logo);
+        abuilder.setMessage("We need location access for better services !");
+
+        abuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                requestLocation();
+            }
+        })
+                .setPositiveButton("Allow", new DialogInterface.OnClickListener() {//set negative button
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        try {
+                            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                                ActivityCompat.requestPermissions(RegistrationActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        try{
+                            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                                requestLocation();
+                            }
+                            else{
+                                //Snackbar.make(findViewById(android.R.id.content), "Thank You to allow Location Access", Snackbar.LENGTH_LONG).show();
+                                GPSTracker gpsTracker = new GPSTracker(RegistrationActivity.this);
+
+                                if (gpsTracker.getIsGPSTrackingEnabled()) {
+                                    stringLatitude = String.valueOf(gpsTracker.latitude);
+                                    stringLongitude = String.valueOf(gpsTracker.longitude);
+                                    country = gpsTracker.getCountryName(RegistrationActivity.this);
+                                    city = gpsTracker.getLocality(RegistrationActivity.this);
+                                    postalCode = gpsTracker.getPostalCode(RegistrationActivity.this);
+                                    addressLine = gpsTracker.getAddressLine(RegistrationActivity.this);
+                                }
+                                else {
+                                    gpsTracker.showSettingsAlert();
+                                }
+
+/*
+                                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                double longitude = location.getLongitude();
+                                double latitude = location.getLatitude();
+                                //https://stackoverflow.com/questions/2227292/how-to-get-latitude-and-longitude-of-the-mobile-device-in-android
+ */
+                                // Toast.makeText(LoginActivity.this, longitude+" : "+latitude, Toast.LENGTH_LONG).show();
+
+
+                            }
+                        } catch (Exception e){
+                            Toast.makeText(RegistrationActivity.this, "location error", Toast.LENGTH_LONG).show();
+
+                        }
+
+
+
+                        //allow
+                    }
+                })
+                .show();
     }
 
     void loopOtp(){
@@ -109,6 +182,8 @@ public class LoginActivity extends AppCompatActivity {
                     time--;
                     loopOtp();
                 }
+
+
             }
         };
         Handler h = new Handler();
@@ -117,7 +192,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void sendOTP(View view) {
-        new LoginActivity.GetApiCall().execute();
+        send_otp.setEnabled(false);
+        time = 30;
+        loopOtp();
+        form2.setVisibility(View.VISIBLE);
     }
 
     public void submit(View view) {
@@ -128,24 +206,37 @@ public class LoginActivity extends AppCompatActivity {
          */
 
 
+
+
         //HttpHandler sh = new HttpHandler();
         //String str = "Fail";
         //str = sh.makeServiceCall("https://swarnava.delgradecorporation.in/project1/get_users_details.php");
 
 
+        new RegistrationActivity.GetApiCall().execute();
+
+
+
+
+
+/*
+        int resId = getResources().getIdentifier("Services", "array", getPackageName());
+        String[] stringArray = getResources().getStringArray(resId);
         Bundle b = new Bundle();
-        b.putString("key", "Services");
+        b.putStringArray("key", stringArray);
         Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
         i.putExtras(b);
         startActivity(i);
         finish();
+
+ */
 
     }
 
     public void skip(View view) {
         Bundle b = new Bundle();
         b.putString("key", "Services");
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent i = new Intent(getApplicationContext(), NavigationActivity.class);
         i.putExtras(b);
         startActivity(i);
         finish();
@@ -155,24 +246,19 @@ public class LoginActivity extends AppCompatActivity {
     String url2 = "https://delgradecorporation.in/swarnava/project1/get_users_details.php";
     String jsonStr;
 
-    public void register(View view) {
-        Intent i = new Intent(getApplicationContext(), RegistrationActivity.class);
-        startActivity(i);
-    }
-
     private class GetApiCall extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            //name = encrypt(edit_text_name.getText().toString().toLowerCase());
+            name = encrypt(edit_text_name.getText().toString().toLowerCase());
             email = encrypt(edit_text_email.getText().toString().toLowerCase());
-            //phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
-            //location = null;
-            url = "https://swarnava.delgradecorporation.in/project2/log_in.php?apikey=swarnava_login&email="+email;
+            phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
+            location = null;
 
+            url = "https://swarnava.delgradecorporation.in/project2/reg_insert.php?apikey=swarnava_insert&phone="+
+                    phone+"&email="+email+"&location="+location+"&name="+name;
         }
-
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
@@ -180,24 +266,27 @@ public class LoginActivity extends AppCompatActivity {
             jsonStr = jsonStr.trim().replaceAll("\n","").replaceAll("\t","").replaceAll(" ","");
             return null;
         }
-
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
+            if(jsonStr.equals("success")){
+                /*
+                int resId = getResources().getIdentifier("Services", "array", getPackageName());
+                String[] stringArray = getResources().getStringArray(resId);
+                Bundle b = new Bundle();
+                b.putStringArray("key", stringArray);
+                Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
+                i.putExtras(b);
+                startActivity(i);
 
-            if(jsonStr.equals("noaccount")){
-                otp_time_disp.setText("No account found with this email id, Kindly register first if you have no account !");
-                otp_time_disp.setTextColor(Color.RED);
-                otp_time_disp.startAnimation(anim_bounce);
-            }else{
-                send_otp.setEnabled(false);
-                time = 30;
-                loopOtp();
-                form2.setVisibility(View.VISIBLE);
-                otp_time_disp.setTextColor(Color.BLUE);
-                otp_time_disp.startAnimation(anim_bounce);
+                 */
+                finish();
             }
+            else{
+                Toast.makeText(RegistrationActivity.this, "error : "+jsonStr, Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 
@@ -212,6 +301,7 @@ public class LoginActivity extends AppCompatActivity {
         catch(Exception ioe) {
             ioe.printStackTrace();
         }
+
         return Newstr;
     }
     String decrypt(String str){
@@ -220,7 +310,9 @@ public class LoginActivity extends AppCompatActivity {
         try {
             for (int i=0;i<str.length();i++) {
                 char ch = str.charAt(i);
+
                 Newstr += ruleDe.get(ch);
+
             }
         }
         catch(Exception ioe) {
