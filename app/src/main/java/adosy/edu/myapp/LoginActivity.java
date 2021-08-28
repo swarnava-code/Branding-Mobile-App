@@ -45,7 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     Button send_otp;
     LinearLayout form1, form2;
     TextView otp_time_disp;
-    int time=30; //30sec
+    final int fixedTime = 59; // 59 sec
+    int time = fixedTime;
 
     TextInputEditText edit_text_phone, edit_text_name, edit_text_email;
     String name, phone, email, location;
@@ -117,7 +118,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void sendOTP(View view) {
-        new LoginActivity.GetApiCall().execute();
+        if(edit_text_email.getText().toString().length()>0)
+            new LoginActivity.GetApiCall().execute();
+        else
+            Toast.makeText(this, "Enter your email address", Toast.LENGTH_SHORT).show();
     }
 
     public void submit(View view) {
@@ -164,13 +168,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            //name = encrypt(edit_text_name.getText().toString().toLowerCase());
             email = encrypt(edit_text_email.getText().toString().toLowerCase());
-            //phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
-            //location = null;
             url = "https://swarnava.delgradecorporation.in/project2/log_in.php?apikey=swarnava_login&email="+email;
-
         }
 
         @Override
@@ -191,8 +190,9 @@ public class LoginActivity extends AppCompatActivity {
                 otp_time_disp.setTextColor(Color.RED);
                 otp_time_disp.startAnimation(anim_bounce);
             }else{
+                otp_time_disp.setText("success");
                 send_otp.setEnabled(false);
-                time = 30;
+                time = fixedTime;
                 loopOtp();
                 form2.setVisibility(View.VISIBLE);
                 otp_time_disp.setTextColor(Color.BLUE);

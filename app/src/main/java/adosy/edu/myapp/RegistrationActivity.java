@@ -16,12 +16,17 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -38,18 +43,26 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
+
 public class RegistrationActivity extends AppCompatActivity {
     Button send_otp;
     LinearLayout form1, form2;
     TextView otp_time_disp;
-    int time = 59; //59sec
+    final int fixedTime = 59; //59sec
+    int time = fixedTime;
 
     TextInputEditText edit_text_phone, edit_text_name, edit_text_email;
-    String name, phone, email, location;
+    String name="", phone="", email="", locationStr = "";
 
     HashMap<Character, Character> rule = new HashMap<>();       //encryption table
     HashMap<Character, Character> ruleDe = new HashMap<>();     //decryption table
 
+    FusedLocationProviderClient fusedLocationProviderClient;
+    LocationRequest locationRequest;
+    public static final int DEFAULT_UPDATE_INTERVAL = 30;
+    public static final int FAST_UPDATE_INTERVAL = 5;
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,40 +88,99 @@ public class RegistrationActivity extends AppCompatActivity {
 
  */
 
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(1000 * DEFAULT_UPDATE_INTERVAL);
+        locationRequest.setFastestInterval(1000 * FAST_UPDATE_INTERVAL);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(RegistrationActivity.this);
+
     }
 
-
-    String stringLatitude , stringLongitude, country , city,  postalCode , addressLine ;
+    //String stringLatitude , stringLongitude, country , city,  postalCode , addressLine ;
 
     @Override
     protected void onStart() {
         super.onStart();
 
-
         try {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestLocation();
+            } else {
+
+                locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                try{
+                                    locationStr = location.getLatitude() + ", " + location.getLongitude();
+                                    //otp_time_disp.setText("onStart()=" + locationStr);
+                                }catch (Exception e){
+                                    //Toast.makeText(RegistrationActivity.this, "ccc", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+                } else {
+                    loopGps();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void loopGps() {
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(RegistrationActivity.this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        locationStr = location.getLatitude() + ", " + location.getLongitude();
+                        //otp_time_disp.setText("loopGps()=" + locationStr);
+                    }
+                });
+                return;
+            }
+            else{
                 requestLocation();
             }
-        } catch (Exception e){
-            e.printStackTrace();
+        }else{
+
+
+            AlertDialog.Builder abuilder = new AlertDialog.Builder(RegistrationActivity.this, R.style.Widget_AppCompat_ActionBar_Solid);
+            abuilder.setTitle("Enable GPS");
+            abuilder.setIcon(R.drawable.adosy_logo);
+            abuilder.setMessage("Kindly enable your location gps and try again later");
+
+            abuilder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    loopGps();
+                }
+            }).setIcon(R.drawable.ic_baseline_location_on_24);
+            AlertDialog mydialog = abuilder.create();
+            mydialog.show();
+            //loopGps();
         }
 
 
+
+        //Toast.makeText(this, "Enabled your GPS", Toast.LENGTH_SHORT).show();
     }
 
+
+
     void requestLocation(){
-        AlertDialog.Builder abuilder = new AlertDialog.Builder(RegistrationActivity.this, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        AlertDialog.Builder abuilder = new AlertDialog.Builder(RegistrationActivity.this, R.style.Widget_AppCompat_ActionBar_Solid );//R.style.Theme_MaterialComponents_Light_Dialog_Alert
         abuilder.setTitle("Location Access");
         abuilder.setIcon(R.drawable.adosy_logo);
         abuilder.setMessage("We need location access for better services !");
 
-        abuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                requestLocation();
-            }
-        })
+        abuilder
                 .setPositiveButton("Allow", new DialogInterface.OnClickListener() {//set negative button
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -126,35 +198,36 @@ public class RegistrationActivity extends AppCompatActivity {
                                 requestLocation();
                             }
                             else{
-                                //Snackbar.make(findViewById(android.R.id.content), "Thank You to allow Location Access", Snackbar.LENGTH_LONG).show();
-                                GPSTracker gpsTracker = new GPSTracker(RegistrationActivity.this);
 
-                                if (gpsTracker.getIsGPSTrackingEnabled()) {
-                                    stringLatitude = String.valueOf(gpsTracker.latitude);
-                                    stringLongitude = String.valueOf(gpsTracker.longitude);
-                                    country = gpsTracker.getCountryName(RegistrationActivity.this);
-                                    city = gpsTracker.getLocality(RegistrationActivity.this);
-                                    postalCode = gpsTracker.getPostalCode(RegistrationActivity.this);
-                                    addressLine = gpsTracker.getAddressLine(RegistrationActivity.this);
+                                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                                    try{
+                                        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(RegistrationActivity.this, new OnSuccessListener<Location>() {
+                                            @Override
+                                            public void onSuccess(Location location) {
+
+                                                try{
+                                                    locationStr = location.getLatitude()+", "+location.getLongitude();
+                                                }catch (Exception e){
+                                                    Log.d(TAG, "fail to get location");
+                                                }
+
+
+                                                //otp_time_disp.setText("requestLocation()="+locationStr);
+                                            }
+                                        });
+                                    }catch (Exception e){
+                                        loopGps();
+                                    }
                                 }
-                                else {
-                                    gpsTracker.showSettingsAlert();
+                                else{
+                                    loopGps();
                                 }
-
-/*
-                                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-                                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                                double longitude = location.getLongitude();
-                                double latitude = location.getLatitude();
-                                //https://stackoverflow.com/questions/2227292/how-to-get-latitude-and-longitude-of-the-mobile-device-in-android
- */
-                                // Toast.makeText(LoginActivity.this, longitude+" : "+latitude, Toast.LENGTH_LONG).show();
-
-
                             }
                         } catch (Exception e){
-                            Toast.makeText(RegistrationActivity.this, "location error", Toast.LENGTH_LONG).show();
-
+                            Intent intent = new Intent(RegistrationActivity.this, RegistrationActivity.class);
+                            startActivity(intent);
+                            finish();
+                            //Toast.makeText(RegistrationActivity.this, "location error", Toast.LENGTH_LONG).show();
                         }
 
 
@@ -192,10 +265,18 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     public void sendOTP(View view) {
-        send_otp.setEnabled(false);
-        time = 30;
-        loopOtp();
-        form2.setVisibility(View.VISIBLE);
+        email = edit_text_email.getText().toString();
+        phone = edit_text_phone.getText().toString();
+        name = edit_text_name.getText().toString();
+
+        if(  email.length()>0 && phone.length()>0 && name.length()>0  ){
+            send_otp.setEnabled(false);
+            time = fixedTime;
+            loopOtp();
+            form2.setVisibility(View.VISIBLE);
+        }else{
+            Toast.makeText(this, "* All fields are mandatory", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void submit(View view) {
@@ -242,10 +323,11 @@ public class RegistrationActivity extends AppCompatActivity {
         finish();
     }
 
-    String url = "https://swarnava.delgradecorporation.in/project2/reg_insert.php?apikey=4556&name=adi&phone=2330&email=adi123@gmail.com&location=19.162704,%202072.995057";
+    String url = "";
     String url2 = "https://delgradecorporation.in/swarnava/project1/get_users_details.php";
     String jsonStr;
 
+    boolean SuccessGetApiCall = true;
     private class GetApiCall extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -254,23 +336,34 @@ public class RegistrationActivity extends AppCompatActivity {
             name = encrypt(edit_text_name.getText().toString().toLowerCase());
             email = encrypt(edit_text_email.getText().toString().toLowerCase());
             phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
-            location = null;
+            //location = null;
 
             url = "https://swarnava.delgradecorporation.in/project2/reg_insert.php?apikey=swarnava_insert&phone="+
-                    phone+"&email="+email+"&location="+location+"&name="+name;
+                    phone+"&email="+email+"&location="+locationStr+"&name="+name;
         }
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-            jsonStr = sh.makeServiceCall(url);
-            jsonStr = jsonStr.trim().replaceAll("\n","").replaceAll("\t","").replaceAll(" ","");
+
+            try{
+                SuccessGetApiCall = true;
+                jsonStr = sh.makeServiceCall(url);
+                jsonStr = jsonStr.trim().replaceAll("\n","").replaceAll("\t","").replaceAll(" ","");
+
+            }catch (Exception e){
+                SuccessGetApiCall = false;
+            }
+
+
+
             return null;
         }
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            if(jsonStr.equals("success")){
+            if(SuccessGetApiCall){
+                if(jsonStr.equals("success")){
                 /*
                 int resId = getResources().getIdentifier("Services", "array", getPackageName());
                 String[] stringArray = getResources().getStringArray(resId);
@@ -279,19 +372,23 @@ public class RegistrationActivity extends AppCompatActivity {
                 Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
                 i.putExtras(b);
                 startActivity(i);
-
                  */
-                finish();
+
+                    finish();
+                }
+                else{
+                    Toast.makeText(RegistrationActivity.this, "error : "+jsonStr, Toast.LENGTH_LONG).show();
+                }
             }
             else{
-                Toast.makeText(RegistrationActivity.this, "error : "+jsonStr, Toast.LENGTH_LONG).show();
-            }
+                Toast.makeText(RegistrationActivity.this, "Something Wrong ! Check your internet connection and try again later !", Toast.LENGTH_SHORT).show();
 
+            }
         }
     }
 
     String encrypt(String str){
-        String Newstr="";
+        String Newstr = "";
         try {
             for (int i=0;i<str.length();i++) {
                 char ch = Character.toLowerCase(str.charAt(i));
@@ -364,10 +461,15 @@ public class RegistrationActivity extends AppCompatActivity {
         rule.put('7','@');
         rule.put('8','7');
         rule.put('9','.');
+        rule.put('+','^');
 
         for ( Character key : rule.keySet() ) {
             ruleDe.put(rule.get(key), key);
         }
+    }
+
+    public void signin(View view){
+        finish();
     }
 
 }
