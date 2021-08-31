@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Random;
 
 import static android.content.ContentValues.TAG;
 
@@ -49,7 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Button send_otp;
     LinearLayout form1, form2;
     TextView otp_time_disp;
-    final int fixedTime = 59; //59sec
+    final int fixedTime = 59, timer_expire_phone_otp_int = 180000; //59sec , 3min
     int time = fixedTime;
 
     TextInputEditText edit_text_phone, edit_text_name, edit_text_email;
@@ -57,12 +59,16 @@ public class RegistrationActivity extends AppCompatActivity {
 
     HashMap<Character, Character> rule = new HashMap<>();       //encryption table
     HashMap<Character, Character> ruleDe = new HashMap<>();     //decryption table
+    HashMap<Character, Character> rule2 = new HashMap<>();       //encryption table2
+    HashMap<Character, Character> ruleDe2 = new HashMap<>();     //decryption table2
 
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
     public static final int DEFAULT_UPDATE_INTERVAL = 30;
     public static final int FAST_UPDATE_INTERVAL = 5;
     LocationManager locationManager;
+
+    EditText otp_et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +83,11 @@ public class RegistrationActivity extends AppCompatActivity {
         edit_text_phone = findViewById(R.id.edit_text_phone);
         edit_text_name = findViewById(R.id.edit_text_name);
         edit_text_email = findViewById(R.id.edit_text_email);
+        otp_et = findViewById(R.id.otp_et);
 
         //creating rule table for encryption & decryption
         CreateRuleForEncryptionAndDecryption();
+        Create2ndRuleForEncryptionAndDecryption();
 
 /*
         String en = encrypt("Swarnava415@gmail.com");
@@ -166,8 +174,6 @@ public class RegistrationActivity extends AppCompatActivity {
             mydialog.show();
             //loopGps();
         }
-
-
 
         //Toast.makeText(this, "Enabled your GPS", Toast.LENGTH_SHORT).show();
     }
@@ -269,49 +275,33 @@ public class RegistrationActivity extends AppCompatActivity {
         phone = edit_text_phone.getText().toString();
         name = edit_text_name.getText().toString();
 
-        if(  email.length()>0 && phone.length()>0 && name.length()>0  ){
+        if( email.length()>0 && phone.length()>0 && name.length()>0  ){
             send_otp.setEnabled(false);
             time = fixedTime;
             loopOtp();
             form2.setVisibility(View.VISIBLE);
+            new RegistrationActivity.sendOtp().execute();
         }else{
             Toast.makeText(this, "* All fields are mandatory", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void submit(View view) {
-        /*
-        Intent i=new Intent(getApplicationContext(), ServicesActivity.class);
-        startActivity(i);
-
-         */
-
-
-
-
-        //HttpHandler sh = new HttpHandler();
-        //String str = "Fail";
-        //str = sh.makeServiceCall("https://swarnava.delgradecorporation.in/project1/get_users_details.php");
-
-
-        new RegistrationActivity.GetApiCall().execute();
-
-
-
-
-
-/*
-        int resId = getResources().getIdentifier("Services", "array", getPackageName());
-        String[] stringArray = getResources().getStringArray(resId);
-        Bundle b = new Bundle();
-        b.putStringArray("key", stringArray);
-        Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
-        i.putExtras(b);
-        startActivity(i);
-        finish();
-
- */
-
+        String otp_et_str = otp_et.getText().toString();
+        if(otp_et_str.equals("")){
+            Toast.makeText(this, "Kindly enter 4 digit OTP", Toast.LENGTH_SHORT).show();
+        }else{
+            if(otp_et_str.equals(otp_str)){
+                if(!time_otp_phone_expire){
+                    new RegistrationActivity.insertIntoDb().execute();
+                }else{
+                    Toast.makeText(this, "Sorry, Your OTP expired !", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(this, "Wrong OTP or expired", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void skip(View view) {
@@ -325,15 +315,105 @@ public class RegistrationActivity extends AppCompatActivity {
 
     String url = "";
     String url2 = "https://delgradecorporation.in/swarnava/project1/get_users_details.php";
-    String jsonStr;
+    String jsonStr, otp_str;
 
-    boolean SuccessGetApiCall = true;
-    private class GetApiCall extends AsyncTask<Void, Void, Void> {
+    boolean SuccessGetApiCall = true, successSms=true;
+    private class sendOtp extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            name = encrypt(edit_text_name.getText().toString().toLowerCase());
+            name = edit_text_name.getText().toString().toLowerCase();
+            email = edit_text_email.getText().toString().toLowerCase();
+            phone = edit_text_phone.getText().toString().toLowerCase();
+            //location = null;
+
+            otp_str = "";
+            Random randomGenerator=new Random();
+            for (int i = 0; i < 4; i++) { //4digit
+                otp_str += randomGenerator.nextInt(10);
+            }
+
+            url = "https://www.fast2sms.com/dev/bulkV2?authorization=FQIElkrSVLjzR2wAtD357qCovYxOMyTfpbBiGWmn98PKJ6e0Ug2r7S0hcnRmuYdVTD1HOP5bGNxpfFMX&route=v3&sender_id=TXTIND&message=Your%20OTP%20to%20register/access%20ADOSY%20is%20" +
+                    otp_str +
+                    "&language=english&flash=0" +
+                    "&numbers=" +
+                    phone;
+            //Log.d("Adosy", url);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+
+            try{
+                successSms = true;
+                jsonStr = sh.makeServiceCall(url);
+                jsonStr = jsonStr.trim().replaceAll("\n","").replaceAll("\t","").replaceAll(" ","");
+
+                try {
+
+                    JSONObject object = new JSONObject(jsonStr);
+                    String getStr = object.getString("return");
+                    if(getStr.equals("true")){
+                        successSms = true;
+                    }
+                    else{
+                        successSms = false;
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+            }catch (Exception e){
+                successSms = false;
+            }
+
+
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+                if(successSms){
+                    Toast.makeText(RegistrationActivity.this, "Kindly check phone number, OTP expire in <3 minute", Toast.LENGTH_LONG).show();
+                    time_otp = timer_expire_phone_otp_int;
+                    timer_expire_phone_otp();
+                }
+                else{
+                    Toast.makeText(RegistrationActivity.this, "error : sms fail ", Toast.LENGTH_LONG).show();
+                }
+        }
+    }
+
+    int time_otp;
+    boolean time_otp_phone_expire = true;
+    void timer_expire_phone_otp(){
+        if(time_otp>0){
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    time_otp--;
+                    time_otp_phone_expire = false;
+                    timer_expire_phone_otp();
+                }
+            };
+            Handler h = new Handler();
+            h.postDelayed(r, 1000);
+        }else{
+            time_otp_phone_expire = true;
+        }
+    }
+
+    private class insertIntoDb extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            name = encrypt2(edit_text_name.getText().toString().toLowerCase());
             email = encrypt(edit_text_email.getText().toString().toLowerCase());
             phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
             //location = null;
@@ -364,16 +444,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
             if(SuccessGetApiCall){
                 if(jsonStr.equals("success")){
-                /*
-                int resId = getResources().getIdentifier("Services", "array", getPackageName());
-                String[] stringArray = getResources().getStringArray(resId);
-                Bundle b = new Bundle();
-                b.putStringArray("key", stringArray);
-                Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
-                i.putExtras(b);
-                startActivity(i);
-                 */
-
+                    Bundle b = new Bundle();
+                    b.putString("key", "Services");
+                    Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
+                    i.putExtras(b);
+                    startActivity(i);
                     finish();
                 }
                 else{
@@ -386,6 +461,9 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 
     String encrypt(String str){
         String Newstr = "";
@@ -418,6 +496,36 @@ public class RegistrationActivity extends AppCompatActivity {
         return Newstr;
     }
 
+    String encrypt2(String str){
+        String Newstr = "";
+        try {
+            for (int i=0;i<str.length();i++) {
+                char ch = Character.toLowerCase(str.charAt(i));
+                Newstr += rule2.get(ch);
+            }
+        }
+        catch(Exception ioe) {
+            ioe.printStackTrace();
+        }
+
+        return Newstr;
+    }
+    String decrypt2(String str){
+        String Newstr="";
+        //System.out.print("Enter the String you want to Decrypt: ");
+        try {
+            for (int i=0;i<str.length();i++) {
+                char ch = str.charAt(i);
+
+                Newstr += ruleDe2.get(ch);
+
+            }
+        }
+        catch(Exception ioe) {
+            ioe.printStackTrace();
+        }
+        return Newstr;
+    }
 
 
     //creating rule for encryption
@@ -465,6 +573,41 @@ public class RegistrationActivity extends AppCompatActivity {
 
         for ( Character key : rule.keySet() ) {
             ruleDe.put(rule.get(key), key);
+        }
+    }
+
+    //creating encryption rule for user name
+    void Create2ndRuleForEncryptionAndDecryption(){
+        rule2.put(' ','0');
+        rule2.put('a','f');
+        rule2.put('b','p');
+        rule2.put('c','a');
+        rule2.put('d','1');
+        rule2.put('e','q');
+        rule2.put('f','9');
+        rule2.put('g','i');
+        rule2.put('h','7');
+        rule2.put('i','o');
+        rule2.put('j','g');
+        rule2.put('k','6');
+        rule2.put('l','c');
+        rule2.put('m','n');
+        rule2.put('n','h');
+        rule2.put('o','b');
+        rule2.put('p','2');
+        rule2.put('q','j');
+        rule2.put('r','l');
+        rule2.put('s','5');
+        rule2.put('t','k');
+        rule2.put('u','4');
+        rule2.put('v','d');
+        rule2.put('w','8');
+        rule2.put('x','3');
+        rule2.put('y','m');
+        rule2.put('z','e');
+
+        for ( Character key : rule2.keySet() ) {
+            ruleDe2.put(rule2.get(key), key);
         }
     }
 

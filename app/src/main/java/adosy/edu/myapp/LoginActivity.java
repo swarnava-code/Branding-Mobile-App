@@ -17,10 +17,13 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +43,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Random;
 
 public class LoginActivity extends AppCompatActivity {
     Button send_otp;
@@ -56,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
 
     Animation anim_bounce;
 
+    EditText otp_et;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         edit_text_phone = findViewById(R.id.edit_text_phone);
         edit_text_name = findViewById(R.id.edit_text_name);
         edit_text_email = findViewById(R.id.edit_text_email);
+        otp_et = findViewById(R.id.otp_et);
         anim_bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         //creating rule table for encryption & decryption
@@ -118,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void sendOTP(View view) {
-        if(edit_text_email.getText().toString().length()>0)
+        if(edit_text_phone.getText().toString().length()>0)
             new LoginActivity.GetApiCall().execute();
         else
             Toast.makeText(this, "Enter your email address", Toast.LENGTH_SHORT).show();
@@ -136,13 +143,25 @@ public class LoginActivity extends AppCompatActivity {
         //String str = "Fail";
         //str = sh.makeServiceCall("https://swarnava.delgradecorporation.in/project1/get_users_details.php");
 
+        if(successSms){
+            if(otp_et.getText().toString().equals(otp_str)){
+                Bundle b = new Bundle();
+                b.putString("key", "Services");
+                Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
+                i.putExtras(b);
+                startActivity(i);
+                finish();
+            }
+            else{
+                Toast.makeText(this, "OTP not matched", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(this, "send failed", Toast.LENGTH_SHORT).show();
+        }
 
-        Bundle b = new Bundle();
-        b.putString("key", "Services");
-        Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
-        i.putExtras(b);
-        startActivity(i);
-        finish();
+
+
+
 
     }
 
@@ -168,8 +187,9 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            email = encrypt(edit_text_email.getText().toString().toLowerCase());
-            url = "https://swarnava.delgradecorporation.in/project2/log_in.php?apikey=swarnava_login&email="+email;
+            phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
+            url = "https://swarnava.delgradecorporation.in/project2/log_in.php?apikey=swarnava_login&id="+phone;
+            Log.d("Adosy", url);
         }
 
         @Override
@@ -197,7 +217,80 @@ public class LoginActivity extends AppCompatActivity {
                 form2.setVisibility(View.VISIBLE);
                 otp_time_disp.setTextColor(Color.BLUE);
                 otp_time_disp.startAnimation(anim_bounce);
+                new LoginActivity.sendOtp().execute();
             }
+        }
+    }
+
+    String otp_str;
+    boolean successSms = false;
+    private class sendOtp extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //name = edit_text_name.getText().toString().toLowerCase();
+            //email = edit_text_email.getText().toString().toLowerCase();
+            phone = edit_text_phone.getText().toString().toLowerCase();
+            //location = null;
+
+            otp_str = "";
+            Random randomGenerator=new Random();
+            for (int i = 0; i < 4; i++) { //4digit
+                otp_str += randomGenerator.nextInt(10);
+            }
+
+            url = "https://www.fast2sms.com/dev/bulkV2?authorization=FQIElkrSVLjzR2wAtD357qCovYxOMyTfpbBiGWmn98PKJ6e0Ug2r7S0hcnRmuYdVTD1HOP5bGNxpfFMX&route=v3&sender_id=TXTIND&message=Your%20OTP%20to%20register/access%20ADOSY%20is%20" +
+                    otp_str +
+                    "&language=english&flash=0" +
+                    "&numbers=" +
+                    phone;
+            //Log.d("Adosy", url);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+
+            try{
+                successSms = true;
+                jsonStr = sh.makeServiceCall(url);
+                jsonStr = jsonStr.trim().replaceAll("\n","").replaceAll("\t","").replaceAll(" ","");
+
+
+                try {
+
+                    JSONObject object = new JSONObject(jsonStr);
+                    String getStr = object.getString("return");
+                    if(getStr.equals("true")){
+                        successSms = true;
+                    }
+                    else{
+                        successSms = false;
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+            }catch (Exception e){
+                successSms = false;
+            }
+
+
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(successSms){
+                Toast.makeText(LoginActivity.this, "OTP send in your mobile, expire in 3 min.", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(LoginActivity.this, "fail to send sms", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

@@ -36,15 +36,16 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Email">
+                android:hint="Enter Phone">
+
                 <!--this is the actual edit text which takes the input-->
                 <com.google.android.material.textfield.TextInputEditText
-
-                    android:id="@+id/edit_text_email"
+                    android:id="@+id/edit_text_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/otp_button"
@@ -86,36 +87,14 @@
                 android:gravity="center">
 
                 <EditText
-                    android:layout_width="50dp"
+                    android:id="@+id/otp_et"
+                    android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:hint="4"
+                    android:hint="1234"
                     android:inputType="numberDecimal"
-                    android:maxLength="1" />
+                    android:maxLength="4" />
 
-                <EditText
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:hint="5"
-                    android:inputType="numberDecimal"
-                    android:maxLength="1" />
-
-                <EditText
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:hint="6"
-                    android:inputType="numberDecimal"
-                    android:maxLength="1" />
-
-                <EditText
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:hint="7"
-                    android:inputType="numberDecimal"
-                    android:maxLength="1" />
             </LinearLayout>
 
             <TextView
