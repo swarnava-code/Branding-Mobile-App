@@ -17,6 +17,7 @@ public class dbHelper extends SQLiteOpenHelper {
     private static final String COL0="id";
     private static final String COL1="verified";    //after installation verified or not
     private static final String COL2="theme";       //night or day
+    private static final String COL3="phone";
 
 
 

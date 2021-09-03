@@ -189,10 +189,6 @@ public class LoginActivity extends AppCompatActivity {
     String url2 = "https://delgradecorporation.in/swarnava/project1/get_users_details.php";
     String jsonStr;
 
-    public void register(View view) {
-        Intent i = new Intent(getApplicationContext(), RegistrationActivity.class);
-        startActivity(i);
-    }
 
     private class GetApiCall extends AsyncTask<Void, Void, Void> {
         @Override
@@ -385,5 +381,34 @@ public class LoginActivity extends AppCompatActivity {
             ruleDe.put(rule.get(key), key);
         }
     }
+
+    public void register(View view) {
+        Intent i = new Intent(getApplicationContext(), RegistrationActivity.class);
+        startActivity(i);
+    }
+
+    public void hidden_admin_login(View view) {
+        Intent i = new Intent(getApplicationContext(), AdminLogin.class);
+        startActivity(i);
+        /*
+        test2++;
+        if(test2>4) {
+            Intent i = new Intent(getApplicationContext(), AdminLogin.class);
+            startActivity(i);
+        }
+        else{
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    test2 = 0;
+                }
+            };
+            Handler h = new Handler();
+            h.postDelayed(r,2500);
+        }
+
+         */
+    }
+    int test2 = 0;
 
 }

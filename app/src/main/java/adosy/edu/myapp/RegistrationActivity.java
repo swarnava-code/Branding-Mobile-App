@@ -239,16 +239,13 @@ public class RegistrationActivity extends AppCompatActivity {
                             finish();
                             //Toast.makeText(RegistrationActivity.this, "location error", Toast.LENGTH_LONG).show();
                         }
-
-
-
                         //allow
                     }
                 })
                 .show();
     }
 
-    void loopOtp(){
+    void loopOtp() {
         Runnable r = new Runnable() {
             @Override
             public void run() {
