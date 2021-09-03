@@ -2,6 +2,7 @@ package adosy.edu.myapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -61,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     Animation anim_bounce;
 
     EditText otp_et;
+    CardView skip;
 
 
     @Override
@@ -77,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         edit_text_name = findViewById(R.id.edit_text_name);
         edit_text_email = findViewById(R.id.edit_text_email);
         otp_et = findViewById(R.id.otp_et);
+        skip = findViewById(R.id.skip);
         anim_bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
         //creating rule table for encryption & decryption
@@ -145,6 +149,12 @@ public class LoginActivity extends AppCompatActivity {
 
         if(successSms){
             if(otp_et.getText().toString().equals(otp_str)){
+
+                //for update
+                dbHelper user = new dbHelper(LoginActivity.this);
+                SQLiteDatabase dbW = user.getWritableDatabase();
+                user.updateVerifiedData("yes",dbW);
+
                 Bundle b = new Bundle();
                 b.putString("key", "Services");
                 Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
@@ -156,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "OTP not matched", Toast.LENGTH_SHORT).show();
             }
         }else{
+            skip.setVisibility(View.VISIBLE);
             Toast.makeText(this, "send failed", Toast.LENGTH_SHORT).show();
         }
 
@@ -189,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onPreExecute();
             phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
             url = "https://swarnava.delgradecorporation.in/project2/log_in.php?apikey=swarnava_login&id="+phone;
-            Log.d("Adosy", url);
+            //Log.d("Adosy", url);
         }
 
         @Override
@@ -245,6 +256,9 @@ public class LoginActivity extends AppCompatActivity {
                     "&language=english&flash=0" +
                     "&numbers=" +
                     phone;
+
+
+
             //Log.d("Adosy", url);
 
         }
@@ -288,6 +302,7 @@ public class LoginActivity extends AppCompatActivity {
             if(successSms){
                 Toast.makeText(LoginActivity.this, "OTP send in your mobile, expire in 3 min.", Toast.LENGTH_SHORT).show();
             }else{
+                skip.setVisibility(View.VISIBLE);
                 Toast.makeText(LoginActivity.this, "fail to send sms", Toast.LENGTH_SHORT).show();
             }
 

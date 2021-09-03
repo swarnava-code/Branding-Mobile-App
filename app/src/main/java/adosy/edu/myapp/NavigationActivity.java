@@ -3,6 +3,7 @@ package adosy.edu.myapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -234,14 +235,26 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                             exit();
                             break;
                         case R.id.nav_dark:
-                            if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES)
+                            if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES){
+                                dbHelper user = new dbHelper(NavigationActivity.this);
+                                SQLiteDatabase dbW = user.getWritableDatabase();
+                                user.updateThemeData("dark",dbW);
+
                                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            }
                             else
                                 Toast.makeText(NavigationActivity.this, "Already Night mode on", Toast.LENGTH_SHORT).show();
                             break;
                         case R.id.nav_light:
-                            if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO)
+                            if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO){
+
+                                dbHelper user = new dbHelper(NavigationActivity.this);
+                                SQLiteDatabase dbW = user.getWritableDatabase();
+                                user.updateThemeData("light",dbW);
+
                                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            }
+
                             else
                                 Toast.makeText(NavigationActivity.this, "Already Light mode on", Toast.LENGTH_SHORT).show();
                             break;

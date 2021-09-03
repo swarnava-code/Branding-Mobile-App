@@ -1,8 +1,11 @@
 package adosy.edu.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     TextView com;
     ImageView logo;
 
+    String theme="light", verified="no";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,26 +36,63 @@ public class MainActivity extends AppCompatActivity {
         com = findViewById(R.id.textView);
         logo = findViewById(R.id.imageView);
 
+        check_db(); //checking db, getting value
+
+        if(theme.equals("dark")){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
         Runnable r = new Runnable() {
             @Override
             public void run() {
+/*
+//for update
+                dbHelper user = new dbHelper(MainActivity.this);
+                SQLiteDatabase dbW = user.getWritableDatabase();
+                user.updateVerifiedData("yes",dbW);
 
-                //   /*
-                //int resId = getResources().getIdentifier("services", "array", getPackageName());
-                //String[] stringArray = getResources().getStringArray(resId);
-                Bundle b = new Bundle();
-                b.putString("key", "Services");
-                Intent i = new Intent(getApplicationContext(), LoginActivity.class);//LoginActivity
-                i.putExtras(b);
-                startActivity(i);
-                finish();
-
+ */
+                if(verified.equals("yes")){
+                    Bundle b = new Bundle();
+                    b.putString("key", "Services");
+                    Intent i = new Intent(getApplicationContext(), NavigationActivity.class);//LoginActivity
+                    i.putExtras(b);
+                    startActivity(i);
+                    finish();
+                }
+                else{
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);//LoginActivity
+                    startActivity(i);
+                    finish();
+                }
             }
         };
         Handler h = new Handler();
         h.postDelayed(r, DELAY);
 
     }
+
+    public void check_db(){
+        dbHelper user= new dbHelper(MainActivity.this);
+        SQLiteDatabase dbR= user.getReadableDatabase();
+        Cursor c = user.viewData(dbR);
+
+        if(c.getCount() == 0){
+            SQLiteDatabase dbW = user.getWritableDatabase();
+            user.insertData("","", dbW);
+           user.updateThemeData("light",dbW);
+           user.updateVerifiedData("no",dbW);
+        }
+        else{
+            c.moveToFirst();
+            if( (c.getString(1).length()!=0) & (c.getString(2).length()!=0) ){
+                verified = c.getString(1);
+                theme = c.getString(2);
+            }
+        }
+    }
+
+
 
     @Override
     protected void onStart() {

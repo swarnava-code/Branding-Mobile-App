@@ -2,6 +2,7 @@ package adosy.edu.myapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -69,6 +71,7 @@ public class RegistrationActivity extends AppCompatActivity {
     LocationManager locationManager;
 
     EditText otp_et;
+    CardView skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,7 @@ public class RegistrationActivity extends AppCompatActivity {
         edit_text_name = findViewById(R.id.edit_text_name);
         edit_text_email = findViewById(R.id.edit_text_email);
         otp_et = findViewById(R.id.otp_et);
+        skip = findViewById(R.id.skip);
 
         //creating rule table for encryption & decryption
         CreateRuleForEncryptionAndDecryption();
@@ -313,11 +317,11 @@ public class RegistrationActivity extends AppCompatActivity {
         finish();
     }
 
-    String url = "";
-    String url2 = "https://delgradecorporation.in/swarnava/project1/get_users_details.php";
+    String url = "";//phone
+    String url2 = "";//mail
     String jsonStr, otp_str;
 
-    boolean SuccessGetApiCall = true, successSms=true;
+    boolean SuccessGetApiCall = true, successSms=true, successMail=true;
     private class sendOtp extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -339,6 +343,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     "&language=english&flash=0" +
                     "&numbers=" +
                     phone;
+
+            url2 = "https://swarnava.delgradecorporation.in/project2/mail.php?apikey=swarnava_mail&email=" +
+                    email +
+                    "&otp=" +
+                    otp_str;
+
             //Log.d("Adosy", url);
 
         }
@@ -347,13 +357,12 @@ public class RegistrationActivity extends AppCompatActivity {
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
 
+            //for sms
             try{
                 successSms = true;
                 jsonStr = sh.makeServiceCall(url);
                 jsonStr = jsonStr.trim().replaceAll("\n","").replaceAll("\t","").replaceAll(" ","");
-
                 try {
-
                     JSONObject object = new JSONObject(jsonStr);
                     String getStr = object.getString("return");
                     if(getStr.equals("true")){
@@ -362,13 +371,27 @@ public class RegistrationActivity extends AppCompatActivity {
                     else{
                         successSms = false;
                     }
-
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-
             }catch (Exception e){
                 successSms = false;
+            }
+
+
+            //For mail
+            try{
+                successMail = true;
+                jsonStr = sh.makeServiceCall(url2);
+                jsonStr = jsonStr.trim().replaceAll("\n","").replaceAll("\t","").replaceAll(" ","");
+                if(jsonStr.equals("success")){
+                    successMail = true;
+                }
+                else{
+                    successMail = false;
+                }
+            }catch (Exception e){
+                successMail = false;
             }
 
 
@@ -378,14 +401,25 @@ public class RegistrationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-                if(successSms){
-                    Toast.makeText(RegistrationActivity.this, "Kindly check phone number, OTP expire in <3 minute", Toast.LENGTH_LONG).show();
-                    time_otp = timer_expire_phone_otp_int;
-                    timer_expire_phone_otp();
-                }
-                else{
-                    Toast.makeText(RegistrationActivity.this, "error : sms fail ", Toast.LENGTH_LONG).show();
-                }
+            if(successMail & successSms){
+                Toast.makeText(RegistrationActivity.this, "OTP sent, it expire in 3 minute", Toast.LENGTH_LONG).show();
+                time_otp = timer_expire_phone_otp_int;
+                timer_expire_phone_otp();
+            }
+            else if(successSms){
+                Toast.makeText(RegistrationActivity.this, "OTP sent through SMS, it expire in 3 minute", Toast.LENGTH_LONG).show();
+                time_otp = timer_expire_phone_otp_int;
+                timer_expire_phone_otp();
+            }
+            else if(successMail){
+                Toast.makeText(RegistrationActivity.this, "OTP sent through Mail, it expire in 3 minute", Toast.LENGTH_LONG).show();
+                time_otp = timer_expire_phone_otp_int;
+                timer_expire_phone_otp();
+            }
+            else{
+                skip.setVisibility(View.VISIBLE);
+                Toast.makeText(RegistrationActivity.this, "error : sending otp failed !", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -413,9 +447,9 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            name = encrypt2(edit_text_name.getText().toString().toLowerCase());
-            email = encrypt(edit_text_email.getText().toString().toLowerCase());
-            phone = encrypt(edit_text_phone.getText().toString().toLowerCase());
+            name = encrypt2(name.toLowerCase());
+            email = encrypt(email.toLowerCase());
+            phone = encrypt(phone.toLowerCase());
             //location = null;
 
             url = "https://swarnava.delgradecorporation.in/project2/reg_insert.php?apikey=swarnava_insert&phone="+
@@ -434,8 +468,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 SuccessGetApiCall = false;
             }
 
-
-
             return null;
         }
         @Override
@@ -444,6 +476,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
             if(SuccessGetApiCall){
                 if(jsonStr.equals("success")){
+
+                    //for update
+                    dbHelper user = new dbHelper(RegistrationActivity.this);
+                    SQLiteDatabase dbW = user.getWritableDatabase();
+                    user.updateVerifiedData("yes",dbW);
+
+
                     Bundle b = new Bundle();
                     b.putString("key", "Services");
                     Intent i=new Intent(getApplicationContext(), NavigationActivity.class);
@@ -461,9 +500,6 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
 
     String encrypt(String str){
         String Newstr = "";
@@ -485,9 +521,7 @@ public class RegistrationActivity extends AppCompatActivity {
         try {
             for (int i=0;i<str.length();i++) {
                 char ch = str.charAt(i);
-
                 Newstr += ruleDe.get(ch);
-
             }
         }
         catch(Exception ioe) {
