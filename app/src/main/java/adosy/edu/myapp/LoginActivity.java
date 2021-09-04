@@ -388,8 +388,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void hidden_admin_login(View view) {
-        Intent i = new Intent(getApplicationContext(), AdminLogin.class);
+        Intent i = new Intent(getApplicationContext(), AdminLogin.class);//AdminLogin
         startActivity(i);
+
         /*
         test2++;
         if(test2>4) {

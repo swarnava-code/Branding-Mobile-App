@@ -97,7 +97,6 @@ public class RegistrationActivity extends AppCompatActivity {
         String en = encrypt("Swarnava415@gmail.com");
         String de = decrypt(en);
         otp_time_disp.setText(en+"\n===\n"+de);
-
  */
 
         locationRequest = new LocationRequest();
@@ -512,6 +511,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         return Newstr;
     }
+
     String decrypt(String str){
         String Newstr="";
         System.out.print("Enter the String you want to Decrypt: ");
@@ -541,6 +541,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         return Newstr;
     }
+
     String decrypt2(String str){
         String Newstr="";
         //System.out.print("Enter the String you want to Decrypt: ");

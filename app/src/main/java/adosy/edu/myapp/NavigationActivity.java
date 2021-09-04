@@ -209,16 +209,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 }
                 else {
                     switch (menuItem.getItemId()) {
-                        case R.id.nav_login:
-                            Toast.makeText(NavigationActivity.this, "login", Toast.LENGTH_SHORT).show();
-                            menu.findItem(R.id.nav_logout).setVisible(true);
-                            menu.findItem(R.id.nav_profile).setVisible(true);
-                            menu.findItem(R.id.nav_login).setVisible(false);
-                            break;
                         case R.id.nav_logout:
-                            menu.findItem(R.id.nav_logout).setVisible(false);
-                            menu.findItem(R.id.nav_profile).setVisible(false);
-                            menu.findItem(R.id.nav_login).setVisible(true);
+                            logout();
                             break;
                         case R.id.nav_share:
                             Intent i = new Intent(Intent.ACTION_SEND);
@@ -391,8 +383,8 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
     @Override
     public boolean onSupportNavigateUp() {
         menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_logout).setVisible(false);
-        menu.findItem(R.id.nav_profile).setVisible(false);
+        //menu.findItem(R.id.nav_logout).setVisible(false);
+        //menu.findItem(R.id.nav_profile).setVisible(false);
         //it's opening drawer
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -663,6 +655,30 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
         };
         Handler h = new Handler();
         h.postDelayed(r,3500);
+    }
+
+    public void logout() {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)//set icon
+                .setTitle("Logout ?")//set title
+                .setMessage("You have to login again later to access the app if you logout now !")//set message
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {//set positive button
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dbHelper user= new dbHelper(NavigationActivity.this);
+                        SQLiteDatabase dbW = user.getWritableDatabase();
+                        user.updateVerifiedData("no",dbW);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {//set negative button
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Toast.makeText(getApplicationContext(),"Nothing Happened", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .show();
     }
 
 

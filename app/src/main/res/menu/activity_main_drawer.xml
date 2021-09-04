@@ -97,21 +97,10 @@
 
         <item android:title="Profile">
                 <menu>
-                        <group android:id="@+id/gr_profile" android:checkableBehavior="single">
-
-                                <item
-                                    android:id="@+id/nav_login"
-                                    android:icon="@drawable/ic_baseline_close_24"
-                                    android:title="Login" />
-
-                                <item
-                                    android:id="@+id/nav_profile"
-                                    android:icon="@drawable/ic_baseline_close_24"
-                                    android:title="Profile" />
-
+                        <group android:id="@+id/gr_profile" >
                                 <item
                                     android:id="@+id/nav_logout"
-                                    android:icon="@drawable/ic_baseline_close_24"
+                                    android:icon="@drawable/ic_baseline_logout_24"
                                     android:title="Logout" />
                         </group>
                 </menu>

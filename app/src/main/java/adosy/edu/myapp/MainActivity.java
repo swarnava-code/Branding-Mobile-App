@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView com;
     ImageView logo;
 
-    String theme="light", verified="no";
+    String theme="light", verified="no", admin_verified="no";
 
 
     @Override
@@ -35,6 +35,40 @@ public class MainActivity extends AppCompatActivity {
         slide_up_in = AnimationUtils.loadAnimation(this, R.anim.slide_up_in_);
         com = findViewById(R.id.textView);
         logo = findViewById(R.id.imageView);
+
+
+
+    }
+
+
+
+    public void check_db(){
+        dbHelper user= new dbHelper(MainActivity.this);
+        SQLiteDatabase dbR= user.getReadableDatabase();
+        Cursor c = user.viewData(dbR);
+
+        if(c.getCount() == 0) {
+            SQLiteDatabase dbW = user.getWritableDatabase();
+            user.insertData("no", "light", "no", dbW);
+            //user.updateThemeData("light",dbW);
+            //user.updateVerifiedData("no",dbW);
+            //user.updateAdminVerifiedData("no",dbW);
+        }
+        else {
+            c.moveToFirst();
+            if( (c.getString(1).length()!=0) & (c.getString(2).length()!=0) ){
+                verified = c.getString(1);
+                theme = c.getString(2);
+                admin_verified = c.getString(3);
+            }
+        }
+    }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         check_db(); //checking db, getting value
 
@@ -50,18 +84,22 @@ public class MainActivity extends AppCompatActivity {
                 dbHelper user = new dbHelper(MainActivity.this);
                 SQLiteDatabase dbW = user.getWritableDatabase();
                 user.updateVerifiedData("yes",dbW);
-
  */
+
                 if(verified.equals("yes")){
                     Bundle b = new Bundle();
                     b.putString("key", "Services");
-                    Intent i = new Intent(getApplicationContext(), NavigationActivity.class);//LoginActivity
+                    Intent i = new Intent(getApplicationContext(), NavigationActivity.class);
                     i.putExtras(b);
                     startActivity(i);
                     finish();
                 }
+                else if(admin_verified.equals("yes")){
+                    Intent i = new Intent(getApplicationContext(), AdminUsersList.class);
+                    startActivity(i);
+                }
                 else{
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);//LoginActivity
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
                     finish();
                 }
@@ -70,33 +108,12 @@ public class MainActivity extends AppCompatActivity {
         Handler h = new Handler();
         h.postDelayed(r, DELAY);
 
-    }
-
-    public void check_db(){
-        dbHelper user= new dbHelper(MainActivity.this);
-        SQLiteDatabase dbR= user.getReadableDatabase();
-        Cursor c = user.viewData(dbR);
-
-        if(c.getCount() == 0){
-            SQLiteDatabase dbW = user.getWritableDatabase();
-            user.insertData("","", dbW);
-           user.updateThemeData("light",dbW);
-           user.updateVerifiedData("no",dbW);
-        }
-        else{
-            c.moveToFirst();
-            if( (c.getString(1).length()!=0) & (c.getString(2).length()!=0) ){
-                verified = c.getString(1);
-                theme = c.getString(2);
-            }
-        }
-    }
 
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+
+
+
         com.startAnimation(slide_up_in);
         logo.startAnimation(slide_up_in);
     }

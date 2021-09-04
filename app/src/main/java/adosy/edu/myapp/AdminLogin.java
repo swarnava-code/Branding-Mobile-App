@@ -2,6 +2,9 @@ package adosy.edu.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,7 +27,7 @@ public class AdminLogin extends AppCompatActivity {
     TextInputEditText fullname_et, email_et, phone_et, otp_et;
     Button submit_btn, send_otp_btn;
     String fullname_str, email_str, phone_str, otp_str="X", email="", url, jsonStr;
-    final int timer_expire_phone_otp_int = 180000; //3min
+    final int timer_expire_phone_otp_int = 180000; // 3min
     boolean successMail;
 
     @Override
@@ -40,7 +43,6 @@ public class AdminLogin extends AppCompatActivity {
         send_otp_btn = findViewById(R.id.send_otp);
         credintials_layout = findViewById(R.id.credential_layout);
         otp_layout = findViewById(R.id.otp_layout);
-
 
 
         send_otp_btn.setOnClickListener(new View.OnClickListener() {
@@ -86,9 +88,22 @@ public class AdminLogin extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(otp_et.getText().toString().equals(otp_str)  ){
+                if(otp_et.getText().toString().equals(otp_str)  ) {
                     //go to NEXT activity :)
+
+                    dbHelper user= new dbHelper(AdminLogin.this);
+                    SQLiteDatabase dbR= user.getReadableDatabase();
+                    Cursor c = user.viewData(dbR);
+
+                    if(c.getCount() == 1){
+                        SQLiteDatabase dbW = user.getWritableDatabase();
+                        user.updateAdminVerifiedData("yes", dbW);
+                    }
+
                     Toast.makeText(AdminLogin.this, "Welcome ADMIN "+fullname_str, Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(getApplicationContext(), AdminUsersList.class);
+                    startActivity(i);
                 }
             }
         });
