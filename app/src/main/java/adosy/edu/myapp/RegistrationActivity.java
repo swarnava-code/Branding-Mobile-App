@@ -323,7 +323,7 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            name = edit_text_name.getText().toString().toLowerCase();
+            name = edit_text_name.getText().toString();
             email = edit_text_email.getText().toString().toLowerCase();
             phone = edit_text_phone.getText().toString().toLowerCase();
             //location = null;
@@ -334,11 +334,14 @@ public class RegistrationActivity extends AppCompatActivity {
                 otp_str += randomGenerator.nextInt(10);
             }
 
+/*              //disable personal sms api
             url = "https://www.fast2sms.com/dev/bulkV2?authorization=FQIElkrSVLjzR2wAtD357qCovYxOMyTfpbBiGWmn98PKJ6e0Ug2r7S0hcnRmuYdVTD1HOP5bGNxpfFMX&route=v3&sender_id=TXTIND&message=Your%20OTP%20to%20register/access%20ADOSY%20is%20" +
                     otp_str +
                     "&language=english&flash=0" +
                     "&numbers=" +
                     phone;
+
+ */
 
             url2 = "https://swarnava.delgradecorporation.in/project2/mail.php?apikey=swarnava_mail&email=" +
                     email +
@@ -443,7 +446,7 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            name = encrypt2(name.toLowerCase());
+            name = encrypt2(name);
             email = encrypt(email.toLowerCase());
             phone = encrypt(phone.toLowerCase());
             //location = null;
@@ -531,7 +534,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String Newstr = "";
         try {
             for (int i=0;i<str.length();i++) {
-                char ch = Character.toLowerCase(str.charAt(i));
+                char ch = str.charAt(i);
                 Newstr += rule2.get(ch);
             }
         }
@@ -637,6 +640,33 @@ public class RegistrationActivity extends AppCompatActivity {
         rule2.put('x','3');
         rule2.put('y','m');
         rule2.put('z','e');
+
+        rule2.put('A','I');
+        rule2.put('B','G');
+        rule2.put('C','P');
+        rule2.put('D','W');
+        rule2.put('E','J');
+        rule2.put('F','B');
+        rule2.put('G','X');
+        rule2.put('H','A');
+        rule2.put('I','V');
+        rule2.put('J','D');
+        rule2.put('K','S');
+        rule2.put('L','R');
+        rule2.put('M','F');
+        rule2.put('N','O');
+        rule2.put('O','C');
+        rule2.put('P','K');
+        rule2.put('Q','Z');
+        rule2.put('R','E');
+        rule2.put('S','H');
+        rule2.put('T','U');
+        rule2.put('U','M');
+        rule2.put('V','Y');
+        rule2.put('W','Q');
+        rule2.put('X','N');
+        rule2.put('Y','T');
+        rule2.put('Z','L');
 
         for ( Character key : rule2.keySet() ) {
             ruleDe2.put(rule2.get(key), key);

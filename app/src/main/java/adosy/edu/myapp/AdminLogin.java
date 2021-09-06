@@ -104,6 +104,7 @@ public class AdminLogin extends AppCompatActivity {
 
                     Intent i = new Intent(getApplicationContext(), AdminUsersList.class);
                     startActivity(i);
+                    finish();
                 }
             }
         });

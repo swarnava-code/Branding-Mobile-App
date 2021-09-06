@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -112,12 +114,6 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
                     arrListLocation.add((temp.getString("location")));
                     arrListDate.add((temp.getString("created")));
 
-                    //nameArr[i] = decrypt2(temp.getString("name"));
-                    //phoneArr[i] = decrypt(temp.getString("phone"));
-                    //emailArr[i] = decrypt(temp.getString("email"));
-                    //locationArr[i] = (temp.getString("location"));
-                    //createdArr[i] = (temp.getString("created"));
-
                 }
             }catch (JSONException e){
                 e.printStackTrace();
@@ -139,8 +135,62 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
     //RecyclerView click listener
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, ""+arrListName.get(position), Toast.LENGTH_LONG).show();
+       // Toast.makeText(this, ""+arrListName.get(position), Toast.LENGTH_LONG).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdminUsersList.this);
+        builder.setTitle("Contact");
+        builder.setMessage("Want to contact with "+arrListName.get(position)+" ?");
+        builder.setPositiveButton("Call", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "+91"+arrListPhone.get(position), null));
+                startActivity(intent);
+                dialog.cancel();
+                //Toast.makeText(AdminUsersList.this, "Yes button Clicked!", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("Send Mail", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String[] TO = {arrListMail.get(position)};
+                String[] CC = {"gourav.kapoor@adosy.in", "akhilesh.shaw@adosy.in"};
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Adosy");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello "+arrListName.get(position)+",\n");
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                    finish();
+                    //Log.i("Finished sending email...", "");
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(AdminUsersList.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNeutralButton("Location", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String locationMap="";
+                if(arrListLocation.get(position).length()>14){
+                    locationMap = "https://www.google.com/maps/search/" +
+                            arrListLocation.get(position);
+                }
+                else{
+                    locationMap = "http://ip-api.com/json/" +
+                            arrListLocation.get(position);
+                }
+                Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(locationMap));
+                startActivity(intent);
+                //Toast.makeText(AdminUsersList.this, "Neutral button Clicked!", Toast.LENGTH_LONG).show();
+                dialog.cancel();
+            }
+        });
+        AlertDialog diag = builder.create();
+        diag.show();
         //findResourceAndView(arrList.get(position));
+
     }
 
     String decrypt(String str){
@@ -224,7 +274,8 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
     }
 
     //creating encryption rule for user name
-    void Create2ndRuleForEncryptionAndDecryption(){
+    void Create2ndRuleForEncryptionAndDecryption() {
+
         rule2.put(' ','0');
         rule2.put('a','f');
         rule2.put('b','p');
@@ -253,10 +304,59 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
         rule2.put('y','m');
         rule2.put('z','e');
 
+        rule2.put('A','I');
+        rule2.put('B','G');
+        rule2.put('C','P');
+        rule2.put('D','W');
+        rule2.put('E','J');
+        rule2.put('F','B');
+        rule2.put('G','X');
+        rule2.put('H','A');
+        rule2.put('I','V');
+        rule2.put('J','D');
+        rule2.put('K','S');
+        rule2.put('L','R');
+        rule2.put('M','F');
+        rule2.put('N','O');
+        rule2.put('O','C');
+        rule2.put('P','K');
+        rule2.put('Q','Z');
+        rule2.put('R','E');
+        rule2.put('S','H');
+        rule2.put('T','U');
+        rule2.put('U','M');
+        rule2.put('V','Y');
+        rule2.put('W','Q');
+        rule2.put('X','N');
+        rule2.put('Y','T');
+        rule2.put('Z','L');
+
         for ( Character key : rule2.keySet() ) {
             ruleDe2.put(rule2.get(key), key);
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
 
+        //Exit Alert Dialog
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)//set icon
+                .setTitle("Exit")//set title
+                .setMessage("Are you sure to Exit ?")//set message
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {//set positive button
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {//set negative button
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Toast.makeText(getApplicationContext(),"Nothing Happened", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .show();
+    }
 }
