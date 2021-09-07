@@ -669,6 +669,9 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                         dbHelper user= new dbHelper(NavigationActivity.this);
                         SQLiteDatabase dbW = user.getWritableDatabase();
                         user.updateVerifiedData("no",dbW);
+
+                        Intent intent = new Intent(NavigationActivity.this, LoginActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                 })
@@ -680,6 +683,5 @@ public class NavigationActivity extends AppCompatActivity implements PopupMenu.O
                 })
                 .show();
     }
-
 
 }

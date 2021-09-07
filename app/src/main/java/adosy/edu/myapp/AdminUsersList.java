@@ -2,6 +2,8 @@ package adosy.edu.myapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,7 +14,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +32,6 @@ import java.util.HashMap;
 
 public class AdminUsersList extends AppCompatActivity implements AdminRecyclerViewAdapter.ItemClickListener {
 
-    ListView lv;
-    TextView nameTv, mobileTv, emailTv, addressTv, genderTv, imageTv;
-
     String jsonStr="";
     int length;
 
@@ -39,12 +42,15 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
 
     RecyclerView recyclerView;
     AdminRecyclerViewAdapter adminRecyclerViewAdapter;
+    AdminRecyclerViewAdapter adminRecyclerViewAdapter2;
     ArrayList<String> arrListName = new ArrayList<>();
     ArrayList<String> arrListPhone = new ArrayList<>();
     ArrayList<String> arrListMail = new ArrayList<>();
     ArrayList<String> arrListLocation = new ArrayList<>();
     ArrayList<String> arrListDate = new ArrayList<>();
 
+    AutoCompleteTextView autoCompleteTextView;
+    CardView showAllUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +58,21 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
         setContentView(R.layout.activity_admin_users_list);
         getSupportActionBar().hide();
 
-        //connecting frontend
-        //textView = findViewById(R.id.textView);
         recyclerView = findViewById(R.id.rvUsersList);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(AdminUsersList.this));
+        autoCompleteTextView = findViewById(R.id.autotv);
+        showAllUsers = findViewById(R.id.SHOW_ALL_USERS);
+
+        //Auto Complete TextView Listener
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int p, long l) {
+                itemClicked = autoCompleteTextView.getText().toString();
+                autoCompleteTextView.setText("");
+                new AdminUsersList.SearchByName().execute();
+            }
+        });
 
 
         //creating rule table for decryption
@@ -67,7 +84,6 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
     }
 
     public void logout(View view) {
-
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)//set icon
                 .setTitle("Logout ?")//set title
@@ -78,6 +94,9 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
                         dbHelper user= new dbHelper(AdminUsersList.this);
                         SQLiteDatabase dbW = user.getWritableDatabase();
                         user.updateAdminVerifiedData("no",dbW);
+
+                        Intent intent = new Intent(AdminUsersList.this, LoginActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                 })
@@ -90,6 +109,16 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
                 .show();
     }
 
+    public void showAll(View view) {
+        searchByNameTypeListenerFlag = false;
+        //setting user details in recyclerview
+        adminRecyclerViewAdapter = new AdminRecyclerViewAdapter
+                (AdminUsersList.this, arrListName, arrListPhone, arrListMail, arrListLocation, arrListDate);
+        adminRecyclerViewAdapter.setClickListener( (AdminRecyclerViewAdapter.ItemClickListener) AdminUsersList.this);
+        recyclerView.setAdapter(adminRecyclerViewAdapter);
+        showAllUsers.setVisibility(View.GONE);
+    }
+
     private class GetApiCall extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -98,6 +127,7 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
 
         @Override
         protected Void doInBackground(Void... arg0) {
+            searchByNameTypeListenerFlag = false;
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
             jsonStr = sh.makeServiceCall("https://swarnava.delgradecorporation.in/project2/get_users_details.php?apikey=swarnava_get");
@@ -120,6 +150,7 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
@@ -129,6 +160,97 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
                     (AdminUsersList.this, arrListName, arrListPhone, arrListMail, arrListLocation, arrListDate);
             adminRecyclerViewAdapter.setClickListener( (AdminRecyclerViewAdapter.ItemClickListener) AdminUsersList.this);
             recyclerView.setAdapter(adminRecyclerViewAdapter);
+
+            //Auto Complete TextView
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(AdminUsersList.this, android.R.layout.simple_spinner_dropdown_item, arrListName);
+            autoCompleteTextView.setAdapter(adapter);//android.R.layout.select_dialog_item
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
+        }
+    }
+
+
+
+
+    String itemClicked;
+    ArrayList<String> arrListNameTemp = new ArrayList<>();
+    ArrayList<String> arrListPhoneTemp = new ArrayList<>();
+    ArrayList<String> arrListMailTemp = new ArrayList<>();
+    ArrayList<String> arrListLocationTemp = new ArrayList<>();
+    ArrayList<String> arrListDateTemp = new ArrayList<>();
+
+    ArrayList<String> arrListNameSearch = new ArrayList<>();
+    ArrayList<String> arrListPhoneSearch = new ArrayList<>();
+    ArrayList<String> arrListMailSearch = new ArrayList<>();
+    ArrayList<String> arrListLocationSearch = new ArrayList<>();
+    ArrayList<String> arrListDateSearch = new ArrayList<>();
+    boolean searchByNameTypeListenerFlag = false;
+
+
+
+    private class SearchByName extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            showAllUsers.setVisibility(View.VISIBLE);
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            //clearing
+            arrListNameSearch.clear();
+            arrListPhoneSearch.clear();
+            arrListMailSearch.clear();
+            arrListLocationSearch.clear();
+            arrListDateSearch.clear();
+            arrListNameTemp.clear();
+            arrListPhoneTemp.clear();
+            arrListMailTemp.clear();
+            arrListLocationTemp.clear();
+            arrListDateTemp.clear();
+
+            //declare and assigning
+            searchByNameTypeListenerFlag = true;
+            int pos;
+
+            //cloning
+            arrListNameTemp = (ArrayList)arrListName.clone();
+            arrListPhoneTemp = (ArrayList)arrListPhone.clone();
+            arrListMailTemp = (ArrayList)arrListMail.clone();
+            arrListLocationTemp = (ArrayList)arrListLocation.clone();
+            arrListDateTemp = (ArrayList)arrListDate.clone();
+
+            while (arrListNameTemp.contains(itemClicked)){
+                    pos = arrListNameTemp.indexOf(itemClicked);
+
+                    //getting temp value
+                    arrListNameSearch.add (arrListName.get(pos));
+                    arrListPhoneSearch.add (arrListPhone.get(pos));
+                    arrListMailSearch.add (arrListMail.get(pos));
+                    arrListLocationSearch.add (arrListLocation.get(pos));
+                    arrListDateSearch.add (arrListDate.get(pos));
+
+                    //remove old value
+                    arrListNameTemp.remove (pos);
+                    arrListPhoneTemp.remove (pos);
+                    arrListMailTemp.remove (pos);
+                    arrListLocationTemp.remove (pos);
+                    arrListDateTemp.remove (pos);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            //setting 1 or some user details in recyclerview
+            adminRecyclerViewAdapter2 = new AdminRecyclerViewAdapter
+                    (AdminUsersList.this, arrListNameSearch, arrListPhoneSearch, arrListMailSearch, arrListLocationSearch, arrListDateSearch);
+            adminRecyclerViewAdapter2.setClickListener( (AdminRecyclerViewAdapter.ItemClickListener) AdminUsersList.this);
+            recyclerView.setAdapter(adminRecyclerViewAdapter2);
         }
     }
 
@@ -136,59 +258,125 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
     @Override
     public void onItemClick(View view, int position) {
        // Toast.makeText(this, ""+arrListName.get(position), Toast.LENGTH_LONG).show();
-        AlertDialog.Builder builder = new AlertDialog.Builder(AdminUsersList.this);
-        builder.setTitle("Contact");
-        builder.setMessage("Want to contact with "+arrListName.get(position)+" ?");
-        builder.setPositiveButton("Call", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "+91"+arrListPhone.get(position), null));
-                startActivity(intent);
-                dialog.cancel();
-                //Toast.makeText(AdminUsersList.this, "Yes button Clicked!", Toast.LENGTH_LONG).show();
-            }
-        });
-        builder.setNegativeButton("Send Mail", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String[] TO = {arrListMail.get(position)};
-                String[] CC = {"gourav.kapoor@adosy.in", "akhilesh.shaw@adosy.in"};
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.setData(Uri.parse("mailto:"));
-                emailIntent.setType("text/plain");
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-                emailIntent.putExtra(Intent.EXTRA_CC, CC);
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Adosy");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello "+arrListName.get(position)+",\n");
-                try {
-                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                    finish();
-                    //Log.i("Finished sending email...", "");
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(AdminUsersList.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+
+
+        if(searchByNameTypeListenerFlag) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(AdminUsersList.this);
+            builder.setTitle("Contact");
+            builder.setMessage("Want to contact with "+arrListNameTemp.get(position)+" ?");
+            builder.setPositiveButton("Call", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "+91"+arrListPhoneTemp.get(position), null));
+                    startActivity(intent);
+                    dialog.cancel();
+                    //Toast.makeText(AdminUsersList.this, "Yes button Clicked!", Toast.LENGTH_LONG).show();
                 }
-            }
-        });
-        builder.setNeutralButton("Location", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String locationMap="";
-                if(arrListLocation.get(position).length()>14){
-                    locationMap = "https://www.google.com/maps/search/" +
-                            arrListLocation.get(position);
+            });
+            builder.setNegativeButton("Send Mail", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String[] TO = {arrListMailTemp.get(position)};
+                    String[] CC = {"gourav.kapoor@adosy.in", "akhilesh.shaw@adosy.in"};
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.setData(Uri.parse("mailto:"));
+                    emailIntent.setType("text/plain");
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                    emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Adosy");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello "+arrListNameTemp.get(position)+",\n");
+                    try {
+                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        finish();
+                        //Log.i("Finished sending email...", "");
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(AdminUsersList.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else{
-                    locationMap = "http://ip-api.com/json/" +
-                            arrListLocation.get(position);
+            });
+            builder.setNeutralButton("Location", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String locationMap="";
+                    if(arrListLocation.get(position).length()>14){
+                        locationMap = "https://www.google.com/maps/search/" +
+                                arrListLocation.get(position);
+                    }
+                    else{
+                        locationMap = "http://ip-api.com/json/" +
+                                arrListLocation.get(position);
+                    }
+                    Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(locationMap));
+                    startActivity(intent);
+                    //Toast.makeText(AdminUsersList.this, "Neutral button Clicked!", Toast.LENGTH_LONG).show();
+                    dialog.cancel();
                 }
-                Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(locationMap));
-                startActivity(intent);
-                //Toast.makeText(AdminUsersList.this, "Neutral button Clicked!", Toast.LENGTH_LONG).show();
-                dialog.cancel();
-            }
-        });
-        AlertDialog diag = builder.create();
-        diag.show();
+            });
+            AlertDialog diag = builder.create();
+            diag.show();
+
+
+
+
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(AdminUsersList.this);
+            builder.setTitle("Contact");
+            builder.setMessage("Want to contact with "+arrListName.get(position)+" ?");
+            builder.setPositiveButton("Call", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "+91"+arrListPhone.get(position), null));
+                    startActivity(intent);
+                    dialog.cancel();
+                    //Toast.makeText(AdminUsersList.this, "Yes button Clicked!", Toast.LENGTH_LONG).show();
+                }
+            });
+            builder.setNegativeButton("Send Mail", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String[] TO = {arrListMail.get(position)};
+                    String[] CC = {"gourav.kapoor@adosy.in", "akhilesh.shaw@adosy.in"};
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.setData(Uri.parse("mailto:"));
+                    emailIntent.setType("text/plain");
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                    emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Adosy");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello "+arrListName.get(position)+",\n");
+                    try {
+                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        finish();
+                        //Log.i("Finished sending email...", "");
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(AdminUsersList.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            builder.setNeutralButton("Location", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String locationMap="";
+                    if(arrListLocation.get(position).length()>14){
+                        locationMap = "https://www.google.com/maps/search/" +
+                                arrListLocation.get(position);
+                    }
+                    else{
+                        locationMap = "http://ip-api.com/json/" +
+                                arrListLocation.get(position);
+                    }
+                    Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(locationMap));
+                    startActivity(intent);
+                    //Toast.makeText(AdminUsersList.this, "Neutral button Clicked!", Toast.LENGTH_LONG).show();
+                    dialog.cancel();
+                }
+            });
+            AlertDialog diag = builder.create();
+            diag.show();
+        }
+
+
+
         //findResourceAndView(arrList.get(position));
 
     }
@@ -348,7 +536,7 @@ public class AdminUsersList extends AppCompatActivity implements AdminRecyclerVi
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {//set positive button
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {//set negative button

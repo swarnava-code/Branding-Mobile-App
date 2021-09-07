@@ -6,14 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".AdminUsersList">
 
-
-
     <LinearLayout
         android:layout_margin="0dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <com.google.android.material.appbar.AppBarLayout
             android:orientation="vertical"
@@ -21,15 +18,16 @@
             android:layout_margin="0dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/header1__"
+            android:background="#ffffff"
             android:theme="@style/Theme.MyApplication.AppBarOverlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageButton
                     android:onClick="logout"
@@ -39,8 +37,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+                <AutoCompleteTextView
+                    android:background="@null"
+                    android:layout_marginRight="15dp"
+                    android:paddingLeft="15dp"
+                    android:textColorHint="#808080"
+                    android:textColor="#000000"
+                    android:hint="Search by name"
+                    android:id="@+id/autotv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
+            </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -69,16 +77,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp" />
-
                 </LinearLayout>
-
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
-
     </LinearLayout>
-
-
 
     <fragment
         android:visibility="gone"
@@ -93,14 +95,15 @@
         app:navGraph="@navigation/mobile_navigation" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:visibility="gone"
+        android:id="@+id/SHOW_ALL_USERS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-
+        android:onClick="showAll"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -109,7 +112,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_baseline_search_24" />
+            android:src="@drawable/ic_baseline_list_24" />
     </androidx.cardview.widget.CardView>
 
 

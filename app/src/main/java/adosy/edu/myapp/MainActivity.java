@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 else if(admin_verified.equals("yes")){
                     Intent i = new Intent(getApplicationContext(), AdminUsersList.class);
                     startActivity(i);
+                    finish();
                 }
                 else{
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
