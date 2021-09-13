@@ -38,6 +38,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <AutoCompleteTextView
+                    android:popupBackground="#ffffff"
                     android:background="@null"
                     android:layout_marginRight="15dp"
                     android:paddingLeft="15dp"
@@ -47,8 +48,8 @@
                     android:id="@+id/autotv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-
             </LinearLayout>
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -71,7 +72,6 @@
                     android:layout_height="wrap_content"
                     android:animateLayoutChanges="true"
                     android:orientation="vertical">
-
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvUsersList"
                             android:layout_width="match_parent"
@@ -95,18 +95,18 @@
         app:navGraph="@navigation/mobile_navigation" />
 
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
         android:id="@+id/SHOW_ALL_USERS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:onClick="showAll"
+        android:visibility="gone"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:layout_width="40dp"
@@ -114,8 +114,5 @@
             android:layout_margin="10dp"
             android:src="@drawable/ic_baseline_list_24" />
     </androidx.cardview.widget.CardView>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

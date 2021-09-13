@@ -996,7 +996,6 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>REASONABLE COSTS</item>
     </string-array>
 
-
     <string-array name="brochure_designing_choose_body">
         <item>A team of experienced, creative and innovative design experts.</item>
         <item>Delivering bespoke promotional materials for over a decade.</item>
@@ -1005,7 +1004,8 @@ Inform your customers about new offerings, sales or special promotions related t
     </string-array>
 
     <string-array name="logo_designing">
-
+        <item>Simple Logo Design</item>
+        <item>Pro Logo Design</item>
     </string-array>
     <string-array name="logo_designing_choose_title">
         <item>DETAILED BRAND ANALYSIS</item>
@@ -1019,12 +1019,36 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>We have many packages to suit various business logo design needs.</item>
         <item>We provide varied and multiple design concepts for our clients to choose from.</item>
     </string-array>
-    <string-array name="content_writing">
-        <item>Content Writing</item>
-    </string-array>
+    <string name="simple_logo_design_list">
+        Tri-Fold design
+        \n Z-Fold design
+        \n Insert and Folder design
+        \n Bi-Fold design
+    </string>
+    <string name="simple_logo_design_desc">
+A company brochure serves as an ideal design tool to help you create a lasting impression of your brand and improve the visibility of your business in the market.
 
-    <string-array name="content_writing_list">
-        <item>Content Writing</item>
+    </string>
+    <string name="simple_logo_design_price">
+        21,000
+    </string>
+    <string name="pro_logo_design_list">
+        Tri-Fold design
+        \n Z-Fold design
+        \n Insert and Folderdesign
+        \n Bi-Fold design
+    </string>
+    <string name="pro_logo_design_desc">
+A company brochure serves as an ideal design tool to help you create a lasting impression of your brand and improve the visibility of your business in the market.
+
+    </string>
+    <string name="pro_logo_design_price">
+        20,000
+    </string>
+
+    <string-array name="content_writing">
+        <item>Simple Writing</item>
+        <item>Pro Writing</item>
     </string-array>
     <string-array name="content_writing_choose_title">
         <item>CUSTOMIZED ARTICLE WRITING</item>
@@ -1038,6 +1062,40 @@ Inform your customers about new offerings, sales or special promotions related t
         <item>With apt formatting, line space, title sizing, alignment adjustments, our content editors help us immensely to offer the best online content writing service in India. There are so many things, that you have to notice while writing an article like using the exact keyword phrase, using the assigned number of keyword density, anchor text, reference webpages, and what not?</item>
         <item>If you are starting up with your business venture and you don’t have enough budget, it will be better for you to check out content writers review first and then according to their market reviews, you can shortlist your favorite content writing agency in India or freelance content writers India</item>
     </string-array>
+    <string name="simple_writing_list">
+        Tri-Fold writing
+        \n Z-Fold writing
+        \n Insert and Folder writing
+        \n Bi-Fold writing
+    </string>
+    <string name="simple_writing_desc">
+A company brochure serves as an ideal writing tool to help you create a lasting impression of your brand and improve the visibility of your business in the market.
+
+    </string>
+    <string name="pro_writing_price">
+        22,000
+    </string>
+    <string name="pro_writing_list">
+        Tri-Fold writing
+        \n Z-Fold writing
+        \n Insert and Folder writing
+        \n Bi-Fold writing
+    </string>
+    <string name="pro_writing_desc">
+A company brochure serves as an ideal writing tool to help you create a lasting impression of your brand and improve the visibility of your business in the market.
+
+    </string>
+    <string name="simple_writing_price">
+        21,000
+    </string>
+
+
+    <string-array name="pro_writing_list">
+        <item>Pro Writing1</item>
+        <item>Pro Writing2</item>
+        <item>Pro Writing3</item>
+    </string-array>
+
     <string-array name="suggestions">
         <item>Digital Marketing</item>
         <item>Digital Branding</item>

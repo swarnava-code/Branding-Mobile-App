@@ -17,7 +17,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/header_h"
-            android:background="@drawable/header1"
+            android:background="@drawable/header1__"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -304,7 +304,7 @@
                                     android:layout_width="24dp"
                                     android:layout_height="24dp"
                                     android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                                    android:src="@drawable/sample_logo"
+                                    android:src="@drawable/adosy_logo"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -346,7 +346,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_marginStart="@dimen/list_left_margin_text_logo"
-                                android:src="@drawable/sample_logo"
+                                android:src="@drawable/adosy_logo"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />

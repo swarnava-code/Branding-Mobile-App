@@ -57,7 +57,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginStart="5dp"
-                    android:src="@drawable/sample_logo" />
+                    android:src="@drawable/adosy_logo" />
 
                 <TextView
                     style="@style/text_color"

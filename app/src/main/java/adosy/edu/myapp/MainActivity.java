@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,11 +18,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int DELAY = 500; //3000
+    int DELAY = 3000; //3000
 
     Animation slide_up_in;
-    TextView com;
-    ImageView logo;
+    TextView the_power_of_marketing;
+    ImageView a, dosy;
 
     String theme="light", verified="no", admin_verified="no";
 
@@ -33,11 +35,40 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();//2nd way
 
         slide_up_in = AnimationUtils.loadAnimation(this, R.anim.slide_up_in_);
-        com = findViewById(R.id.textView);
-        logo = findViewById(R.id.imageView);
+        the_power_of_marketing = findViewById(R.id.textView);
+        //logo = findViewById(R.id.imageView);
+        a = findViewById(R.id.a);
+        dosy = findViewById(R.id.dosy);
+        
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                dosy.setVisibility(View.VISIBLE);
+            }
+        };
+        Handler h = new Handler();
+        h.postDelayed(r, 1000);
+
+    }
 
 
-
+    String print = "THE POWER OF MARKETING", update="";
+    char temp;
+    void typing_anim(){
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                if(print.length()>0){
+                    temp = print.charAt(0);
+                    print = print.substring(1);
+                    update += temp;
+                    the_power_of_marketing.setText(update);
+                    typing_anim();
+                }
+            }
+        };
+        Handler h = new Handler();
+        h.postDelayed(r, 100);
     }
 
 
@@ -50,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
         if(c.getCount() == 0) {
             SQLiteDatabase dbW = user.getWritableDatabase();
             user.insertData("no", "light", "no", dbW);
-            //user.updateThemeData("light",dbW);
-            //user.updateVerifiedData("no",dbW);
-            //user.updateAdminVerifiedData("no",dbW);
         }
         else {
             c.moveToFirst();
@@ -76,15 +104,11 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
+
+
         Runnable r = new Runnable() {
             @Override
             public void run() {
-/*
-//for update
-                dbHelper user = new dbHelper(MainActivity.this);
-                SQLiteDatabase dbW = user.getWritableDatabase();
-                user.updateVerifiedData("yes",dbW);
- */
 
                 if(verified.equals("yes")){
                     Bundle b = new Bundle();
@@ -112,10 +136,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-        com.startAnimation(slide_up_in);
-        logo.startAnimation(slide_up_in);
+        the_power_of_marketing.startAnimation(slide_up_in);
+        a.startAnimation(slide_up_in);
+        typing_anim();
     }
 }

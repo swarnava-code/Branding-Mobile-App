@@ -31,7 +31,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/sample_logo" />
+                android:src="@drawable/adosy_logo" />
 
             <TextView
                 style="@style/RecyclerView"
